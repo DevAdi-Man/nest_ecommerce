@@ -15,12 +15,20 @@ import { RolesModule } from './roles/roles.module';
 import { AuthModule } from './auth/auth.module';
 import { OtpModule } from './otp/otp.module';
 import { MailModule } from './mail/mail.module';
+import { ThrottlerGuard, ThrottlerModule } from '@nestjs/throttler';
+import { APP_GUARD } from '@nestjs/core';
 
 @Module({
   imports: [
     ConfigModule.forRoot({
       isGlobal: true
     }),
+    ThrottlerModule.forRoot([
+      {
+        ttl: 60_000,
+        limit: 10,
+      }
+    ]),
     SequelizeModule.forRootAsync({
       inject: [ConfigService],
       useFactory: (config: ConfigService) => {
@@ -41,6 +49,12 @@ import { MailModule } from './mail/mail.module';
       },
     }),
     AuthModule, UsersModule, RolesModule, ProductsModule, CategoriesModule, OrdersModule, CartModule, WishlistModule, CouponsModule, PaymentsModule, ReviewsModule, AddressesModule, OtpModule, MailModule],
+  providers: [
+    {
+      provide: APP_GUARD,
+      useClass: ThrottlerGuard
+    }
+  ]
 
 })
 export class AppModule { }
