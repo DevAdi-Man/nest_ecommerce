@@ -2,11 +2,15 @@ import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import { ValidationPipe } from '@nestjs/common'
+import { HttpExceptionFilters } from './common/filters/http-exception.filter';
 
 declare const module: any;
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
+  app.useGlobalFilters(
+    new HttpExceptionFilters()
+  )
   app.enableCors();
   app.useGlobalPipes(
     new ValidationPipe({
