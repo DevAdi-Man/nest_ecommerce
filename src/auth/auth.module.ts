@@ -12,6 +12,7 @@ import { RefreshStrategy } from './strategies/refresh.strategy/refresh.strategy'
 import { UsersModule } from 'src/users/users.module';
 import { OtpModule } from 'src/otp/otp.module';
 import { MailModule } from 'src/mail/mail.module';
+import { RolesGuard } from './guards/roles/roles.guard';
 
 @Module({
   imports: [SequelizeModule.forFeature([User, Role]),
@@ -41,7 +42,7 @@ import { MailModule } from 'src/mail/mail.module';
     MailModule
   ],
   controllers: [AuthController],
-  providers: [AuthService, JwtStrategy, RefreshStrategy],
+  providers: [AuthService, JwtStrategy, RefreshStrategy, RolesGuard],
   exports: [JwtModule]
 })
 export class AuthModule { }
