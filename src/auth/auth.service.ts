@@ -13,6 +13,11 @@ import { MailService } from 'src/mail/mail.service';
 import { OtpService } from 'src/otp/otp.service';
 import { OtpType } from 'src/otp/otp.interface';
 import { VerifyEmailDto } from './dto/verify-email.dto';
+import { ForgotPasswordDto } from './dto/forgot-password.dto';
+import { ResetPasswordDto } from './dto/reset-password.dto';
+import { ResendVerificationDto } from './dto/resend-verification.dto';
+import { ChangePasswordDto } from './dto/change-password.dto';
+import passport from 'passport';
 
 @Injectable()
 export class AuthService {
@@ -137,21 +142,6 @@ export class AuthService {
     }
   }
 
-  async testMail() {
-    await this.mailService.sendEmail(
-      'test@example.com',
-      'Test Email',
-      `
-      <h1>Hello 👋</h1>
-      <p>This email was sent from your NestJS application.</p>
-    `,
-    );
-
-    return {
-      message: 'Email sent successfully.',
-    };
-  }
-
   async verifyEmail(
     verifyEmailDto: VerifyEmailDto
   ): Promise<{ message: string }> {
@@ -179,6 +169,170 @@ export class AuthService {
     }
   }
 
+  async forgotPassword(forgotPasswordDto: ForgotPasswordDto): Promise<{ message: string }> {
+    const user = await this.userModel.findOne({
+      where: {
+        email: forgotPasswordDto.email
+      }
+    })
+
+    if (!user) {
+      return {
+        message:
+          'If an account exists with this email, a password reset email has been sent.',
+      };
+    }
+
+    if (!user.isVerifiedEmail) throw new UnauthorizedException('Please verify email first.')
+
+    const otp = await this.otpService.createOtp(user.id, OtpType.FORGOT_PASSWORD)
+    await this.mailService.sendEmail(
+      user.email,
+      'Reset your Password',
+      `
+      <h2>Password Reset</h2>
+
+      <p>Your OTP is:</p>
+
+      <h1>${otp}</h1>
+
+      <p>This OTP expires in 5 minutes.</p>
+      `
+    )
+    return { message: 'Password reset OTP has been sent to your email.', }
+  }
+
+  async resetPassword(resetpasswordDto: ResetPasswordDto): Promise<{ message: string }> {
+    const user = await this.userModel.findOne({
+      where: {
+        email: resetpasswordDto.email
+      }
+    })
+
+    if (!user) {
+      return {
+        message:
+          'If an account exists with this email, a password reset email has been sent.',
+      };
+    }
+    if (!user.isVerifiedEmail) throw new UnauthorizedException('Please verify email first.')
+
+    const isSamePassword = await this.comparePassword(
+      resetpasswordDto.newPassword,
+      user.password,
+    );
+
+    if (isSamePassword) {
+      throw new ConflictException(
+        'New password must be different from the current password.',
+      );
+    }
+
+    await this.otpService.verifyOtp(
+      user.id,
+      resetpasswordDto.otp,
+      OtpType.FORGOT_PASSWORD,
+    )
+
+    const hashedPassword = await this.hashPassword(resetpasswordDto.newPassword)
+    await user.update({
+      password: hashedPassword,
+      refreshToken: null
+    })
+
+    return {
+      message: "Password reset successfully."
+    }
+  }
+
+  async logOut(userId: number): Promise<{ message: string }> {
+    const user = await this.userModel.findByPk(userId)
+    if (!user) {
+      throw new UnauthorizedException('User not found.');
+    }
+
+    await user.update({
+      refreshToken: null,
+    });
+
+    return {
+      message: 'Logged out successfully.',
+    };
+  }
+
+  async resendVerificationEmail(resendVerificationDto: ResendVerificationDto): Promise<{ message: string }> {
+    const user = await this.userModel.findOne({
+      where: {
+        email: resendVerificationDto.email
+      }
+    })
+
+    if (!user) {
+      return {
+        message:
+          'If an account exists with this email, a password reset email has been sent.',
+      };
+    }
+    if (!user.isVerifiedEmail) throw new UnauthorizedException('Please verify email first.')
+
+    const otp = await this.otpService.createOtp(
+      user.id,
+      OtpType.VERIFY_EMAIL,
+    );
+
+    await this.mailService.sendEmail(
+      user.email,
+      'Verify your email',
+      `
+      <h2>Email Verification</h2>
+
+      <p>Your verification code is:</p>
+
+      <h1>${otp}</h1>
+
+      <p>This code expires in 5 minutes.</p>
+    `,
+    );
+
+    return {
+      message:
+        'Verification email sent successfully.',
+    };
+  }
+
+  async me(userId: number): Promise<Partial<User>> {
+    const user = await this.userModel.findByPk(userId, {
+      include: [{ model: Role, attributes: ['id', 'name'] }],
+      attributes: { exclude: ['password', 'refreshToken'] }
+    })
+    if (!user) throw new NotFoundException("User not found.")
+    if (!user.isVerifiedEmail) throw new UnauthorizedException('Please verify email first.')
+
+    return user
+  }
+
+  async changePassword(userId: number, changePasswordDto: ChangePasswordDto) {
+    const user = await this.userModel.findByPk(userId);
+    if (!user) throw new NotFoundException('User not found.')
+    if (!user.isVerifiedEmail) throw new UnauthorizedException('Please verifi email first.')
+
+    const isOldPasswordCorrect = await this.comparePassword(changePasswordDto.oldPassword, user.password);
+    if (!isOldPasswordCorrect) throw new UnauthorizedException('Current password is incorrect.');
+
+
+    const isSamePassword = await this.comparePassword(changePasswordDto.newPassword, user.password);
+    if (isSamePassword) {
+      throw new ConflictException('New password must be different from the current password.');
+    }
+
+    const hashPassword = await this.hashPassword(changePasswordDto.newPassword)
+    await user.update({
+      passport: hashPassword,
+      refreshToken: null
+    })
+    return { message: 'Password changed successfully.' };
+  }
+
   private async comparePassword(inputPassword: string, dataBasePassword: string): Promise<boolean> {
     return await bcrypt.compare(
       inputPassword, dataBasePassword
@@ -189,6 +343,7 @@ export class AuthService {
     return bcrypt.hash(password, 10)
   }
   private async generateAccessToken(user: User): Promise<string> {
+    if (!user.role) throw new UnauthorizedException('User role not found.');
     const payload: JwtPayload = {
       sub: user.id,
       email: user.email,
@@ -198,6 +353,7 @@ export class AuthService {
   }
 
   private async generateRefreshToken(user: User): Promise<string> {
+    if (!user.role) throw new UnauthorizedException('User role not found.');
     const payload: JwtPayload = {
       sub: user.id,
       email: user.email,

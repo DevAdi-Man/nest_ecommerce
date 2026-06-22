@@ -95,6 +95,7 @@ export class UsersService {
       totalPages: Math.ceil(count / limit),
     };
   }
+
   async findOne(id: number) {
     const user = await this.userModel.findByPk(id, {
       include: [
