@@ -1,4 +1,4 @@
-import { ConflictException, Injectable, NotFoundException } from '@nestjs/common';
+import { ConflictException, Injectable, NotFoundException, OnModuleInit } from '@nestjs/common';
 import { CreateUserDto } from './dto/create-user.dto';
 import { User } from './entities/user.entity';
 import { Role } from 'src/roles/entities/role.entity';
@@ -7,9 +7,10 @@ import * as bcrypt from 'bcrypt'
 import { CreationAttributes, Op, WhereOptions } from 'sequelize';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { UserQueryDto } from './dto/user-query.dto';
+import { Role as RoleEnum } from 'src/auth/enums/role.enum';
 
 @Injectable()
-export class UsersService {
+export class UsersService implements OnModuleInit {
   constructor(
     @InjectModel(User)
     private readonly userModel: typeof User,
@@ -17,6 +18,28 @@ export class UsersService {
     @InjectModel(Role)
     private readonly roleModel: typeof Role,
   ) { }
+
+  async onModuleInit() {
+    const adminRole = await this.roleModel.findOne({ where: { name: RoleEnum.Admin } });
+    if (!adminRole) return;
+
+    const adminExists = await this.userModel.findOne({ where: { roleId: adminRole.id } });
+    if (adminExists) return;
+
+    const hashedPassword = await this.hashPassword(
+      process.env.ADMIN_PASSWORD ?? 'Admin@123',
+    );
+
+    await this.userModel.create({
+      firstName: process.env.ADMIN_FIRST_NAME ?? 'Admin',
+      lastName: process.env.ADMIN_LAST_NAME ?? 'User',
+      dateOfBirth: process.env.ADMIN_DATE_OF_BIRTH ?? '2000-01-01',
+      email: process.env.ADMIN_EMAIL ?? 'admin@example.com',
+      password: hashedPassword,
+      roleId: adminRole.id,
+      isVerifiedEmail: true,
+    } as CreationAttributes<User>);
+  }
 
   async create(createUserDto: CreateUserDto) {
     const existingUser = await this.userModel.findOne({

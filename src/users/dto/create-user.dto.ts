@@ -21,7 +21,7 @@ export class CreateUserDto {
   @IsString({ message: 'Avatar must be a string.' })
   avatar?: string;
 
-  @ApiProperty({ example: 'Aditya' })
+  @ApiProperty({ example: 'Prachi' })
   @IsString({ message: 'First name must be a string.' })
   @IsNotEmpty({ message: 'First name is required.' })
   @MinLength(3, { message: 'First name must be at least 3 characters long.' })
@@ -31,7 +31,7 @@ export class CreateUserDto {
   })
   firstName: string;
 
-  @ApiPropertyOptional({ example: 'Raj' })
+  @ApiPropertyOptional({ example: 'Singh' })
   @IsOptional()
   @IsString({ message: 'Middle name must be a string.' })
   @MaxLength(50, { message: 'Middle name cannot be longer than 50 characters.' })
@@ -55,7 +55,7 @@ export class CreateUserDto {
   @IsNotEmpty({ message: 'Date of birth is required.' })
   dateOfBirth: string;
 
-  @ApiProperty({ example: 'aditya@example.com' })
+  @ApiProperty({ example: 'prachi@example.com' })
   @IsNotEmpty({ message: 'Email is required.' })
   @IsEmail({}, { message: 'Please provide a valid email address.' })
   email: string;
