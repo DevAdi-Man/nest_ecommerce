@@ -17,7 +17,6 @@ import { ForgotPasswordDto } from './dto/forgot-password.dto';
 import { ResetPasswordDto } from './dto/reset-password.dto';
 import { ResendVerificationDto } from './dto/resend-verification.dto';
 import { ChangePasswordDto } from './dto/change-password.dto';
-import passport from 'passport';
 
 @Injectable()
 export class AuthService {
@@ -342,6 +341,7 @@ export class AuthService {
   private async hashPassword(password: string): Promise<string> {
     return bcrypt.hash(password, 10)
   }
+
   private async generateAccessToken(user: User): Promise<string> {
     if (!user.role) throw new UnauthorizedException('User role not found.');
     const payload: JwtPayload = {

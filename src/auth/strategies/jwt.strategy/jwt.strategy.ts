@@ -10,7 +10,7 @@ import { Role } from "src/roles/entities/role.entity";
 @Injectable()
 export class JwtStrategy extends PassportStrategy(Strategy) {
     constructor(
-        private readonly configServices: ConfigService,
+        configServices: ConfigService,
         @InjectModel(User)
         private readonly userModel: typeof User
     ) {

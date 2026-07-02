@@ -17,18 +17,26 @@ import { OtpModule } from './otp/otp.module';
 import { MailModule } from './mail/mail.module';
 import { ThrottlerGuard, ThrottlerModule } from '@nestjs/throttler';
 import { APP_GUARD } from '@nestjs/core';
+import { envValidationSchema } from './config/env.validation';
 
 @Module({
   imports: [
     ConfigModule.forRoot({
-      isGlobal: true
+      isGlobal: true,
+      expandVariables: true,
+      validationSchema: envValidationSchema
     }),
-    ThrottlerModule.forRoot([
-      {
-        ttl: 60_000,
-        limit: 10,
-      }
-    ]),
+    ThrottlerModule.forRootAsync({
+      inject: [ConfigService],
+      useFactory: (config: ConfigService) => ({
+        throttlers: [
+          {
+            ttl: config.get<number>('THROTTLE_TTL')!,
+            limit: config.get<number>('THROTTLE_LIMIT')!,
+          }
+        ]
+      })
+    }),
     SequelizeModule.forRootAsync({
       inject: [ConfigService],
       useFactory: (config: ConfigService) => {
