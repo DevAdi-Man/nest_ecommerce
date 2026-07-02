@@ -9,7 +9,7 @@ export class VerifyOtpDto {
   email: string;
 
   @ApiProperty({
-    example: '123456',
+    example: '482913',
   })
   @IsString()
   @Length(6, 6)

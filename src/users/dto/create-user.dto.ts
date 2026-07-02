@@ -1,3 +1,4 @@
+import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
 import {
   IsDateString,
   IsEmail,
@@ -12,10 +13,15 @@ import {
 } from 'class-validator';
 
 export class CreateUserDto {
+  @ApiPropertyOptional({
+    example: 'https://example.com/avatar.jpg',
+    description: 'Profile picture URL',
+  })
   @IsOptional()
   @IsString({ message: 'Avatar must be a string.' })
   avatar?: string;
 
+  @ApiProperty({ example: 'Aditya' })
   @IsString({ message: 'First name must be a string.' })
   @IsNotEmpty({ message: 'First name is required.' })
   @MinLength(3, { message: 'First name must be at least 3 characters long.' })
@@ -25,6 +31,7 @@ export class CreateUserDto {
   })
   firstName: string;
 
+  @ApiPropertyOptional({ example: 'Raj' })
   @IsOptional()
   @IsString({ message: 'Middle name must be a string.' })
   @MaxLength(50, { message: 'Middle name cannot be longer than 50 characters.' })
@@ -33,6 +40,7 @@ export class CreateUserDto {
   })
   middleName?: string;
 
+  @ApiProperty({ example: 'Sharma' })
   @IsString({ message: 'Last name must be a string.' })
   @IsNotEmpty({ message: 'Last name is required.' })
   @MinLength(2, { message: 'Last name must be at least 2 characters long.' })
@@ -42,14 +50,17 @@ export class CreateUserDto {
   })
   lastName: string;
 
+  @ApiProperty({ example: '2002-05-11' })
   @IsDateString({}, { message: 'Date of birth must be a valid ISO date.' })
   @IsNotEmpty({ message: 'Date of birth is required.' })
   dateOfBirth: string;
 
+  @ApiProperty({ example: 'aditya@example.com' })
   @IsNotEmpty({ message: 'Email is required.' })
   @IsEmail({}, { message: 'Please provide a valid email address.' })
   email: string;
 
+  @ApiProperty({ example: 'Admin@123' })
   @IsNotEmpty({ message: 'Password is required.' })
   @IsString({ message: 'Password must be a string.' })
   @MinLength(8, { message: 'Password must be at least 8 characters long.' })
@@ -63,6 +74,7 @@ export class CreateUserDto {
   )
   password: string;
 
+  @ApiProperty({ example: 1, description: 'Role ID to assign to the user' })
   @IsNotEmpty({ message: 'Role ID is required.' })
   @IsInt({ message: 'Role ID must be an integer.' })
   @Min(1, { message: 'Role ID must be greater than 0.' })

@@ -7,7 +7,7 @@ import {
 
 export class LoginDto {
   @ApiProperty({
-    example: 'aditya@gmail.com',
+    example: 'aditya@example.com',
   })
   @IsEmail()
   @IsNotEmpty()

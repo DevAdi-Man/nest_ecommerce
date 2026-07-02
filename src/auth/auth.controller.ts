@@ -1,6 +1,6 @@
 import { Controller, Post, Body, UseGuards, Request, Get, Patch } from '@nestjs/common';
 import { AuthService } from './auth.service';
-import { ApiBearerAuth, ApiOperation, ApiResponse } from '@nestjs/swagger';
+import { ApiBearerAuth, ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { RegisterDto } from './dto/register.dto';
 import { LoginDto } from './dto/login.dto';
 import { RefreshAuthGuard } from './guards/refresh-auth/refresh-auth.guard';
@@ -17,6 +17,7 @@ interface AuthenticatedRequest extends ExpressRequest {
   user: JwtPayload;
 }
 
+@ApiTags('Auth')
 @Controller('auth')
 export class AuthController {
   constructor(private readonly authService: AuthService) { }
@@ -41,7 +42,7 @@ export class AuthController {
     summary: 'Login a user',
   })
   @ApiResponse({
-    status: 201,
+    status: 200,
     description: 'User login successfully.',
   })
   login(
