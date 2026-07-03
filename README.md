@@ -1,98 +1,176 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="120" alt="Nest Logo" /></a>
-</p>
+# 🛒 Ecommerce Backend API
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+A production-ready, fully-featured ecommerce REST API built with **NestJS**, **Sequelize**, and **PostgreSQL**. Includes authentication, role-based access control, product management, orders, payments, coupons, inventory, reviews, and more.
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg" alt="Donate us"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow" alt="Follow us on Twitter"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+---
 
-## Description
+## Tech Stack
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+- **Framework** — NestJS 11 (Node.js + TypeScript)
+- **Database** — PostgreSQL + Sequelize ORM
+- **Auth** — JWT (access + refresh tokens), Passport.js
+- **Mail** — Nodemailer + MJML templates (Mailpit for local dev)
+- **Storage** — MinIO (S3-compatible object storage)
+- **Validation** — class-validator, class-transformer, Joi
+- **Docs** — Swagger / OpenAPI
+- **Testing** — Jest
 
-## Project setup
+---
 
-```bash
-$ npm install
-```
+## Modules
 
-## Compile and run the project
+| Module | Description |
+|---|---|
+| `auth` | JWT login, register, refresh token, OTP email verification |
+| `users` | User profile management |
+| `roles` | Role-based access control (Admin / User) |
+| `products` | Product CRUD with slugs and image upload |
+| `categories` | Hierarchical categories with tree structure and soft delete |
+| `orders` | Order creation and management |
+| `payments` | Payment processing |
+| `coupons` | Discount coupon management |
+| `inventory` | Stock tracking |
+| `reviews` | Product reviews and ratings |
+| `carts` | Shopping cart |
+| `wishlists` | User wishlists |
+| `addresses` | User address book |
+| `otp` | One-time password service |
+| `mail` | Email service with MJML templates |
 
-```bash
-# development
-$ npm run start
+---
 
-# watch mode
-$ npm run start:dev
+## Getting Started
 
-# production mode
-$ npm run start:prod
-```
+### Prerequisites
 
-## Run tests
+- Node.js 22+
+- PostgreSQL
+- Docker (recommended for local services)
 
-```bash
-# unit tests
-$ npm run test
-
-# e2e tests
-$ npm run test:e2e
-
-# test coverage
-$ npm run test:cov
-```
-
-## Deployment
-
-When you're ready to deploy your NestJS application to production, there are some key steps you can take to ensure it runs as efficiently as possible. Check out the [deployment documentation](https://docs.nestjs.com/deployment) for more information.
-
-If you are looking for a cloud-based platform to deploy your NestJS application, check out [Mau](https://mau.nestjs.com), our official platform for deploying NestJS applications on AWS. Mau makes deployment straightforward and fast, requiring just a few simple steps:
+### 1. Clone the repository
 
 ```bash
-$ npm install -g @nestjs/mau
-$ mau deploy
+git clone https://github.com/DevAdi-Man/nest_ecommerce.git
+cd nest_ecommerce
 ```
 
-With Mau, you can deploy your application in just a few clicks, allowing you to focus on building features rather than managing infrastructure.
+### 2. Install dependencies
 
-## Resources
+```bash
+npm install
+```
 
-Check out a few resources that may come in handy when working with NestJS:
+### 3. Set up environment variables
 
-- Visit the [NestJS Documentation](https://docs.nestjs.com) to learn more about the framework.
-- For questions and support, please visit our [Discord channel](https://discord.gg/G7Qnnhy).
-- To dive deeper and get more hands-on experience, check out our official video [courses](https://courses.nestjs.com/).
-- Deploy your application to AWS with the help of [NestJS Mau](https://mau.nestjs.com) in just a few clicks.
-- Visualize your application graph and interact with the NestJS application in real-time using [NestJS Devtools](https://devtools.nestjs.com).
-- Need help with your project (part-time to full-time)? Check out our official [enterprise support](https://enterprise.nestjs.com).
-- To stay in the loop and get updates, follow us on [X](https://x.com/nestframework) and [LinkedIn](https://linkedin.com/company/nestjs).
-- Looking for a job, or have a job to offer? Check out our official [Jobs board](https://jobs.nestjs.com).
+```bash
+cp .env.example .env
+```
 
-## Support
+Fill in the values in `.env`:
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+```env
+# Database
+DB_HOST=localhost
+DB_PORT=5432
+DB_USER=postgres
+DB_PASSWORD=your_password
+DB_NAME=ecommerce
 
-## Stay in touch
+# JWT
+JWT_ACCESS_SECRET=your_access_secret
+JWT_REFRESH_SECRET=your_refresh_secret
+JWT_ACCESS_EXPIRES_IN=15m
+JWT_REFRESH_EXPIRES_IN=7d
 
-- Author - [Kamil Myśliwiec](https://twitter.com/kammysliwiec)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+# Mail (Mailpit for local dev)
+MAIL_HOST=localhost
+MAIL_PORT=1025
+MAIL_FROM="Ecommerce <no-reply@ecommerce.local>"
+
+# MinIO (S3 Storage)
+MINIO_ENDPOINT=localhost
+MINIO_PORT=9000
+MINIO_USE_SSL=false
+MINIO_ACCESS_KEY=your_access_key
+MINIO_SECRET_KEY=your_secret_key
+MINIO_BUCKET=ecommerce
+
+# Default Admin Seed
+ADMIN_EMAIL=admin@example.com
+ADMIN_PASSWORD=Admin@123
+```
+
+### 4. Start local services (PostgreSQL + MinIO + Mailpit)
+
+```bash
+docker-compose up -d
+```
+
+### 5. Run the application
+
+```bash
+# Development (with hot reload)
+npm run start:dev
+
+# Production
+npm run start:prod
+```
+
+The API will be running at `http://localhost:3000`
+
+Swagger docs available at `http://localhost:3000/api`
+
+---
+
+## Scripts
+
+```bash
+npm run start:dev     # development with hot reload (webpack HMR)
+npm run start:debug   # debug mode
+npm run start:prod    # production
+
+npm run build         # compile TypeScript
+npm run format        # format with Prettier
+npm run lint          # lint with ESLint
+
+npm run test          # unit tests
+npm run test:watch    # unit tests in watch mode
+npm run test:cov      # test coverage report
+npm run test:e2e      # end-to-end tests
+```
+
+---
+
+## API Documentation
+
+Swagger UI is available at `/api` when the server is running.
+
+All endpoints are documented with:
+- Request/response schemas
+- Auth requirements (Bearer token)
+- Query parameters for pagination, search, filter, and sorting
+
+---
+
+## Contributing
+
+This is an open source project. Contributions are welcome!
+
+Please read [CONTRIBUTING.md](./CONTRIBUTING.md) before opening a PR. Key points:
+
+- Branch from `develop`, not `main`
+- Use conventional commit messages: `feat(scope): description`
+- Open PRs against `develop`
+- Follow the PR checklist in CONTRIBUTING.md
+
+---
+
+## Changelog
+
+See [CHANGELOG.md](./CHANGELOG.md) for release history.
+
+---
 
 ## License
 
-Nest is [MIT licensed](https://github.com/nestjs/nest/blob/master/LICENSE).
+This project is [MIT licensed](./LICENSE).
