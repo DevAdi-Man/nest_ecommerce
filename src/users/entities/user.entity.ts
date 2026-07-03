@@ -1,78 +1,82 @@
-
-import { Table, Column, Model, DataType, ForeignKey, BelongsTo, } from 'sequelize-typescript'
-import { Role } from 'src/roles/entities/role.entity'
+import {
+  Table,
+  Column,
+  Model,
+  DataType,
+  ForeignKey,
+  BelongsTo,
+} from 'sequelize-typescript';
+import { Role } from 'src/roles/entities/role.entity';
 
 @Table({
   tableName: 'users',
-  timestamps: true
+  timestamps: true,
 })
 export class User extends Model {
   @Column({
     type: DataType.INTEGER,
     autoIncrement: true,
-    primaryKey: true
+    primaryKey: true,
   })
-  declare id: number
+  declare id: number;
 
   @Column({
     type: DataType.STRING,
     allowNull: true,
   })
-  declare avatar?: string
+  declare avatar?: string;
 
   @Column({
     type: DataType.STRING,
-    allowNull: false
+    allowNull: false,
   })
-  declare firstName: string
+  declare firstName: string;
 
   @Column({
     type: DataType.STRING,
-    allowNull: true
+    allowNull: true,
   })
-  declare middleName?: string
+  declare middleName?: string;
 
   @Column({
     type: DataType.STRING,
-    allowNull: false
+    allowNull: false,
   })
-  declare lastName: string
-
+  declare lastName: string;
 
   @Column({
     type: DataType.DATEONLY,
-    allowNull: false
+    allowNull: false,
   })
-  declare dateOfBirth: Date
-
+  declare dateOfBirth: Date;
 
   @Column({
     type: DataType.STRING,
     unique: true,
     allowNull: false,
     validate: {
-      isEmail: true
-    }
+      isEmail: true,
+    },
   })
-  declare email: string
+  declare email: string;
 
   @Column({
     type: DataType.BOOLEAN,
-    defaultValue: false
+    defaultValue: false,
   })
-  declare isVerifiedEmail: boolean
+  declare isVerifiedEmail: boolean;
 
   @Column({
     type: DataType.STRING,
-    allowNull: false
+    allowNull: false,
   })
-  declare password: string
+  declare password: string;
 
   @Column({
     type: DataType.STRING,
     allowNull: true,
   })
-  declare refreshToken?: string
+  declare refreshToken?: string;
 
   @ForeignKey(() => Role)
   @Column({

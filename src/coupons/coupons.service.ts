@@ -4,7 +4,7 @@ import { UpdateCouponDto } from './dto/update-coupon.dto';
 
 @Injectable()
 export class CouponsService {
-  create(createCouponDto: CreateCouponDto) {
+  create(_createCouponDto: CreateCouponDto) {
     return 'This action adds a new coupon';
   }
 
@@ -16,7 +16,7 @@ export class CouponsService {
     return `This action returns a #${id} coupon`;
   }
 
-  update(id: number, updateCouponDto: UpdateCouponDto) {
+  update(id: number, _updateCouponDto: UpdateCouponDto) {
     return `This action updates a #${id} coupon`;
   }
 

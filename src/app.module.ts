@@ -24,7 +24,7 @@ import { envValidationSchema } from './config/env.validation';
     ConfigModule.forRoot({
       isGlobal: true,
       expandVariables: true,
-      validationSchema: envValidationSchema
+      validationSchema: envValidationSchema,
     }),
     ThrottlerModule.forRootAsync({
       inject: [ConfigService],
@@ -33,9 +33,9 @@ import { envValidationSchema } from './config/env.validation';
           {
             ttl: config.get<number>('THROTTLE_TTL')!,
             limit: config.get<number>('THROTTLE_LIMIT')!,
-          }
-        ]
-      })
+          },
+        ],
+      }),
     }),
     SequelizeModule.forRootAsync({
       inject: [ConfigService],
@@ -56,13 +56,26 @@ import { envValidationSchema } from './config/env.validation';
         };
       },
     }),
-    AuthModule, UsersModule, RolesModule, ProductsModule, CategoriesModule, OrdersModule, CartModule, WishlistModule, CouponsModule, PaymentsModule, ReviewsModule, AddressesModule, OtpModule, MailModule],
+    AuthModule,
+    UsersModule,
+    RolesModule,
+    ProductsModule,
+    CategoriesModule,
+    OrdersModule,
+    CartModule,
+    WishlistModule,
+    CouponsModule,
+    PaymentsModule,
+    ReviewsModule,
+    AddressesModule,
+    OtpModule,
+    MailModule,
+  ],
   providers: [
     {
       provide: APP_GUARD,
-      useClass: ThrottlerGuard
-    }
-  ]
-
+      useClass: ThrottlerGuard,
+    },
+  ],
 })
-export class AppModule { }
+export class AppModule {}

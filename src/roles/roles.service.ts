@@ -1,4 +1,9 @@
-import { ConflictException, Injectable, NotFoundException, OnModuleInit } from '@nestjs/common';
+import {
+  ConflictException,
+  Injectable,
+  NotFoundException,
+  OnModuleInit,
+} from '@nestjs/common';
 import { InjectModel } from '@nestjs/sequelize';
 import { Role } from './entities/role.entity';
 import { CreateRoleDto } from './dto/create-role.dto';
@@ -22,12 +27,17 @@ export class RolesService implements OnModuleInit {
     ];
 
     for (const role of defaultRoles) {
-      await this.roleModel.findOrCreate({ where: { name: role.name }, defaults: role });
+      await this.roleModel.findOrCreate({
+        where: { name: role.name },
+        defaults: role,
+      });
     }
   }
 
   async create(createRoleDto: CreateRoleDto) {
-    const existing = await this.roleModel.findOne({ where: { name: createRoleDto.name } });
+    const existing = await this.roleModel.findOne({
+      where: { name: createRoleDto.name },
+    });
     if (existing) throw new ConflictException('Role already exists.');
     return this.roleModel.create(createRoleDto as any);
   }

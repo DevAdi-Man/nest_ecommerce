@@ -1,9 +1,14 @@
-import { ConflictException, Injectable, NotFoundException, OnModuleInit } from '@nestjs/common';
+import {
+  ConflictException,
+  Injectable,
+  NotFoundException,
+  OnModuleInit,
+} from '@nestjs/common';
 import { CreateUserDto } from './dto/create-user.dto';
 import { User } from './entities/user.entity';
 import { Role } from 'src/roles/entities/role.entity';
 import { InjectModel } from '@nestjs/sequelize';
-import * as bcrypt from 'bcrypt'
+import * as bcrypt from 'bcrypt';
 import { CreationAttributes, Op, WhereOptions } from 'sequelize';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { UserQueryDto } from './dto/user-query.dto';
@@ -17,13 +22,17 @@ export class UsersService implements OnModuleInit {
 
     @InjectModel(Role)
     private readonly roleModel: typeof Role,
-  ) { }
+  ) {}
 
   async onModuleInit() {
-    const adminRole = await this.roleModel.findOne({ where: { name: RoleEnum.Admin } });
+    const adminRole = await this.roleModel.findOne({
+      where: { name: RoleEnum.Admin },
+    });
     if (!adminRole) return;
 
-    const adminExists = await this.userModel.findOne({ where: { roleId: adminRole.id } });
+    const adminExists = await this.userModel.findOne({
+      where: { roleId: adminRole.id },
+    });
     if (adminExists) return;
 
     const hashedPassword = await this.hashPassword(
@@ -44,38 +53,40 @@ export class UsersService implements OnModuleInit {
   async create(createUserDto: CreateUserDto) {
     const existingUser = await this.userModel.findOne({
       where: {
-        email: createUserDto.email
-      }
+        email: createUserDto.email,
+      },
     });
 
     if (existingUser) {
-      throw new ConflictException("Email already exists.")
+      throw new ConflictException('Email already exists.');
     }
 
-    const role = await this.roleModel.findByPk(
-      createUserDto.roleId
-    )
+    const role = await this.roleModel.findByPk(createUserDto.roleId);
     if (!role) {
-      throw new NotFoundException("Role not found.")
+      throw new NotFoundException('Role not found.');
     }
 
-    const hashedPassword = await this.hashPassword(createUserDto.password)
+    const hashedPassword = await this.hashPassword(createUserDto.password);
 
     const newlyCreateUser: CreationAttributes<User> = {
       ...createUserDto,
-      password: hashedPassword
-    }
+      password: hashedPassword,
+    };
 
-    const saveUser = await this.userModel.create(newlyCreateUser)
+    const saveUser = await this.userModel.create(newlyCreateUser);
 
-    const { password, refreshToken, ...safeUser } = saveUser.toJSON();
+    const {
+      password: _password,
+      refreshToken: _refreshToken,
+      ...safeUser
+    } = saveUser.toJSON();
 
     return safeUser;
   }
 
-
   async findAll(query: UserQueryDto) {
-    const { page, limit, search, roleId, isVerifiedEmail, order, sortBy } = query;
+    const { page, limit, search, roleId, isVerifiedEmail, order, sortBy } =
+      query;
     const offset = (page - 1) * limit;
 
     const andConditions: WhereOptions<User>[] = [];
@@ -87,7 +98,7 @@ export class UsersService implements OnModuleInit {
           { lastName: { [Op.iLike]: `%${search}%` } },
           { email: { [Op.iLike]: `%${search}%` } },
         ],
-      } as WhereOptions<User>);
+      });
     }
 
     if (roleId !== undefined) {
@@ -130,7 +141,7 @@ export class UsersService implements OnModuleInit {
       attributes: {
         exclude: ['password', 'refreshToken'],
       },
-    })
+    });
     if (!user) {
       throw new NotFoundException('User not found');
     }
@@ -138,41 +149,42 @@ export class UsersService implements OnModuleInit {
     return user;
   }
 
-
   async update(id: number, updateUserDto: UpdateUserDto) {
-    const user = await this.userModel.findByPk(id)
+    const user = await this.userModel.findByPk(id);
     if (!user) {
-      throw new NotFoundException('User does not exists.')
+      throw new NotFoundException('User does not exists.');
     }
 
     if (updateUserDto.password) {
-      updateUserDto.password = await this.hashPassword(
-        updateUserDto.password,
-      )
+      updateUserDto.password = await this.hashPassword(updateUserDto.password);
     }
 
     await user.update(updateUserDto);
 
-    const { password, refreshToken, ...safeUser } = user.toJSON()
+    const {
+      password: _password,
+      refreshToken: _refreshToken,
+      ...safeUser
+    } = user.toJSON();
 
     return safeUser;
   }
 
   async remove(id: number) {
-    const user = await this.userModel.findByPk(id)
+    const user = await this.userModel.findByPk(id);
 
     if (!user) {
-      throw new NotFoundException('User does not exists.')
+      throw new NotFoundException('User does not exists.');
     }
 
     await user.destroy();
 
     return {
-      message: 'User deleted successfully.'
-    }
+      message: 'User deleted successfully.',
+    };
   }
 
   private async hashPassword(password: string): Promise<string> {
-    return bcrypt.hash(password, 10)
+    return bcrypt.hash(password, 10);
   }
 }

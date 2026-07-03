@@ -1,7 +1,7 @@
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
-import { ValidationPipe } from '@nestjs/common'
+import { ValidationPipe } from '@nestjs/common';
 import { HttpExceptionFilters } from './common/filters/http-exception.filter';
 import { LoggingInterceptor } from './common/interceptors/logging.interceptor';
 import { TransformInterceptor } from './common/interceptors/transform.interceptor';
@@ -12,22 +12,22 @@ async function bootstrap() {
   const app = await NestFactory.create(AppModule);
   app.useGlobalInterceptors(
     new LoggingInterceptor(),
-    new TransformInterceptor()
-  )
-  app.useGlobalFilters(
-    new HttpExceptionFilters()
-  )
+    new TransformInterceptor(),
+  );
+  app.useGlobalFilters(new HttpExceptionFilters());
   app.enableCors();
   app.useGlobalPipes(
     new ValidationPipe({
       whitelist: true,
       forbidNonWhitelisted: true,
-      transform: true
-    })
-  )
+      transform: true,
+    }),
+  );
   const config = new DocumentBuilder()
     .setTitle('Ecommerce')
-    .setDescription('e-commerce for clothing brand a free and open source project.')
+    .setDescription(
+      'e-commerce for clothing brand a free and open source project.',
+    )
     .setVersion('1.0')
     .addBearerAuth(
       {

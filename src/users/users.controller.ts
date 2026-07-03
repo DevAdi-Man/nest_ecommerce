@@ -34,7 +34,7 @@ import { Role } from 'src/auth/enums/role.enum';
 @UseGuards(JwtAuthGuard, RolesGuard)
 @ApiBearerAuth('access-token')
 export class UsersController {
-  constructor(private readonly usersService: UsersService) { }
+  constructor(private readonly usersService: UsersService) {}
 
   @Roles(Role.Admin)
   @Post()
@@ -59,9 +59,19 @@ export class UsersController {
   })
   @ApiQuery({ name: 'page', required: false, type: Number, example: 1 })
   @ApiQuery({ name: 'limit', required: false, type: Number, example: 10 })
-  @ApiQuery({ name: 'search', required: false, type: String, example: 'aditya' })
+  @ApiQuery({
+    name: 'search',
+    required: false,
+    type: String,
+    example: 'aditya',
+  })
   @ApiQuery({ name: 'roleId', required: false, type: Number, example: 2 })
-  @ApiQuery({ name: 'isVerifiedEmail', required: false, type: Boolean, example: true })
+  @ApiQuery({
+    name: 'isVerifiedEmail',
+    required: false,
+    type: Boolean,
+    example: true,
+  })
   @ApiResponse({ status: 200, description: 'Users fetched successfully.' })
   @ApiForbiddenResponse({ description: 'Requires Admin role.' })
   findAll(@Query() query: UserQueryDto) {

@@ -7,7 +7,10 @@ export class CreateRoleDto {
   @IsNotEmpty()
   name: string;
 
-  @ApiPropertyOptional({ example: 'Full access to all resources', description: 'Role description' })
+  @ApiPropertyOptional({
+    example: 'Full access to all resources',
+    description: 'Role description',
+  })
   @IsOptional()
   @IsString()
   description?: string;

@@ -1,18 +1,22 @@
-import { ConflictException, Injectable, NotFoundException } from '@nestjs/common';
+import {
+  ConflictException,
+  Injectable,
+  NotFoundException,
+} from '@nestjs/common';
 import { InjectModel } from '@nestjs/sequelize';
 import { Op } from 'sequelize';
 import { Category } from './entities/category.entity';
 import { CreateCategoryDto } from './dto/create-category.dto';
 import { generateUniqueSlug } from 'src/common/utils/slug.utils';
 import { UpdateCategoryDto } from './dto/update-category.dto';
-import { CategoryQueryDto } from './dto/query-category.dto'
+import { CategoryQueryDto } from './dto/query-category.dto';
 
 @Injectable()
 export class CategoriesService {
   constructor(
     @InjectModel(Category)
     private readonly categoryModel: typeof Category,
-  ) { }
+  ) {}
 
   async create(createCategoryDto: CreateCategoryDto) {
     const existingCategory = await this.categoryModel.findOne({
@@ -26,14 +30,14 @@ export class CategoriesService {
     const slug = await generateUniqueSlug(
       createCategoryDto.name,
       async (slug) => {
-        return !!(
-          await this.categoryModel.findOne({ where: { slug } })
-        );
+        return !!(await this.categoryModel.findOne({ where: { slug } }));
       },
     );
 
     if (createCategoryDto.parentId !== undefined) {
-      const parent = await this.categoryModel.findByPk(createCategoryDto.parentId);
+      const parent = await this.categoryModel.findByPk(
+        createCategoryDto.parentId,
+      );
       if (!parent) {
         throw new NotFoundException('Parent Category does not exist.');
       }
@@ -62,14 +66,14 @@ export class CategoriesService {
         {
           name: {
             [Op.iLike]: `%${search}%`,
-          }
+          },
         },
         {
           slug: {
             [Op.iLike]: `%${search}%`,
-          }
-        }
-      ]
+          },
+        },
+      ];
     }
 
     if (parentId !== undefined) {
@@ -91,8 +95,8 @@ export class CategoriesService {
           model: Category,
           as: 'children',
           attributes: ['id', 'name', 'slug'],
-        }
-      ]
+        },
+      ],
     });
 
     return {
@@ -102,8 +106,8 @@ export class CategoriesService {
         total: count,
         page,
         limit,
-        totalPages: Math.ceil(count / limit)
-      }
+        totalPages: Math.ceil(count / limit),
+      },
     };
   }
 
@@ -135,7 +139,8 @@ export class CategoriesService {
       const existingCategory = await this.categoryModel.findOne({
         where: { name: updateCategoryDto.name },
       });
-      if (existingCategory) throw new ConflictException('Category already exists.');
+      if (existingCategory)
+        throw new ConflictException('Category already exists.');
 
       updateData.slug = await generateUniqueSlug(
         updateCategoryDto.name,
@@ -149,7 +154,9 @@ export class CategoriesService {
       if (updateCategoryDto.parentId === id) {
         throw new ConflictException('Category cannot be its own parent.');
       }
-      const parent = await this.categoryModel.findByPk(updateCategoryDto.parentId);
+      const parent = await this.categoryModel.findByPk(
+        updateCategoryDto.parentId,
+      );
       if (!parent) throw new NotFoundException('Parent category not found.');
     }
 
@@ -293,7 +300,8 @@ export class CategoriesService {
     });
 
     if (!category) throw new NotFoundException('Category not found.');
-    if (!category.deletedAt) throw new ConflictException('Category is not deleted.');
+    if (!category.deletedAt)
+      throw new ConflictException('Category is not deleted.');
 
     await category.restore();
 

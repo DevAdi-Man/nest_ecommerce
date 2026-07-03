@@ -22,9 +22,9 @@ import { MailerModule } from '@nestjs-modules/mailer';
           from: config.get<string>('MAIL_FROM'),
         },
       }),
-    })
+    }),
   ],
   exports: [MailService],
-  providers: [MailService]
+  providers: [MailService],
 })
-export class MailModule { }
+export class MailModule {}

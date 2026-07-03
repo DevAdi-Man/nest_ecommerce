@@ -34,7 +34,9 @@ export class CreateUserDto {
   @ApiPropertyOptional({ example: 'Singh' })
   @IsOptional()
   @IsString({ message: 'Middle name must be a string.' })
-  @MaxLength(50, { message: 'Middle name cannot be longer than 50 characters.' })
+  @MaxLength(50, {
+    message: 'Middle name cannot be longer than 50 characters.',
+  })
   @Matches(/^[A-Za-z\s]+$/, {
     message: 'Middle name can only contain letters and spaces.',
   })
@@ -65,13 +67,9 @@ export class CreateUserDto {
   @IsString({ message: 'Password must be a string.' })
   @MinLength(8, { message: 'Password must be at least 8 characters long.' })
   @MaxLength(100, { message: 'Password cannot be longer than 100 characters.' })
-  @Matches(
-    /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).+$/,
-    {
-      message:
-        'Password must contain uppercase, lowercase and a number.',
-    },
-  )
+  @Matches(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).+$/, {
+    message: 'Password must contain uppercase, lowercase and a number.',
+  })
   password: string;
 
   @ApiProperty({ example: 1, description: 'Role ID to assign to the user' })

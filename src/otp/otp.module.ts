@@ -6,6 +6,6 @@ import { Otp } from './entities/otp.entity/otp.entity';
 @Module({
   imports: [SequelizeModule.forFeature([Otp])],
   providers: [OtpService],
-  exports: [OtpService]
+  exports: [OtpService],
 })
-export class OtpModule { }
+export class OtpModule {}

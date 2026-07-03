@@ -1,22 +1,31 @@
-import { Column, DataType, Table, Model, ForeignKey, BelongsTo, HasMany, Index } from "sequelize-typescript";
+import {
+  Column,
+  DataType,
+  Table,
+  Model,
+  ForeignKey,
+  BelongsTo,
+  HasMany,
+  Index,
+} from 'sequelize-typescript';
 
 @Table({
   tableName: 'categories',
   timestamps: true,
-  paranoid: true
+  paranoid: true,
 })
 export class Category extends Model {
   @Column({
     type: DataType.INTEGER,
     autoIncrement: true,
-    primaryKey: true
+    primaryKey: true,
   })
   declare id: number;
 
   @Column({
     type: DataType.STRING,
     allowNull: false,
-    unique: true
+    unique: true,
   })
   declare name: string;
 
@@ -24,13 +33,13 @@ export class Category extends Model {
   @Column({
     type: DataType.STRING,
     allowNull: false,
-    unique: true
+    unique: true,
   })
   declare slug: string;
 
   @Column({
     type: DataType.STRING,
-    allowNull: true
+    allowNull: true,
   })
   declare image: string;
 
@@ -38,7 +47,7 @@ export class Category extends Model {
   @ForeignKey(() => Category)
   @Column({
     type: DataType.INTEGER,
-    allowNull: true
+    allowNull: true,
   })
   declare parentId: number | null;
 

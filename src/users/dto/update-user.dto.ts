@@ -9,10 +9,7 @@ import {
 } from 'class-validator';
 
 export class UpdateUserDto extends PartialType(
-  OmitType(CreateUserDto, [
-    'email',
-    'roleId',
-  ] as const),
+  OmitType(CreateUserDto, ['email', 'roleId'] as const),
 ) {
   @IsOptional()
   @IsString({ message: 'Avatar must be a string.' })
@@ -26,7 +23,9 @@ export class UpdateUserDto extends PartialType(
 
   @IsOptional()
   @IsString({ message: 'Middle name must be a string.' })
-  @MaxLength(50, { message: 'Middle name cannot be longer than 50 characters.' })
+  @MaxLength(50, {
+    message: 'Middle name cannot be longer than 50 characters.',
+  })
   middleName?: string;
 
   @IsOptional()

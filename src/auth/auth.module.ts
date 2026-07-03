@@ -15,34 +15,35 @@ import { MailModule } from 'src/mail/mail.module';
 import { RolesGuard } from './guards/roles/roles.guard';
 
 @Module({
-  imports: [SequelizeModule.forFeature([User, Role]),
-  PassportModule.register({
-    defaultStrategy: 'jwt'
-  }),
-  JwtModule.registerAsync({
-    inject: [ConfigService],
-    useFactory: (config: ConfigService) => {
-      const secret = config.get<string>('JWT_ACCESS_SECRET');
-      const expiresIn = config.get<string>('JWT_ACCESS_EXPIRES_IN');
+  imports: [
+    SequelizeModule.forFeature([User, Role]),
+    PassportModule.register({
+      defaultStrategy: 'jwt',
+    }),
+    JwtModule.registerAsync({
+      inject: [ConfigService],
+      useFactory: (config: ConfigService) => {
+        const secret = config.get<string>('JWT_ACCESS_SECRET');
+        const expiresIn = config.get<string>('JWT_ACCESS_EXPIRES_IN');
 
-      if (!secret || !expiresIn) {
-        throw new Error('Missing JWT configuration in environment variables');
-      }
+        if (!secret || !expiresIn) {
+          throw new Error('Missing JWT configuration in environment variables');
+        }
 
-      return {
-        secret,
-        signOptions: {
-          expiresIn: expiresIn as any,
-        },
-      };
-    },
-  }),
+        return {
+          secret,
+          signOptions: {
+            expiresIn: expiresIn as any,
+          },
+        };
+      },
+    }),
     UsersModule,
     OtpModule,
-    MailModule
+    MailModule,
   ],
   controllers: [AuthController],
   providers: [AuthService, JwtStrategy, RefreshStrategy, RolesGuard],
-  exports: [JwtModule]
+  exports: [JwtModule],
 })
-export class AuthModule { }
+export class AuthModule {}

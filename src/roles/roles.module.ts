@@ -5,10 +5,8 @@ import { SequelizeModule } from '@nestjs/sequelize';
 import { Role } from './entities/role.entity';
 
 @Module({
-  imports: [
-    SequelizeModule.forFeature([Role])
-  ],
+  imports: [SequelizeModule.forFeature([Role])],
   controllers: [RolesController],
   providers: [RolesService],
 })
-export class RolesModule { }
+export class RolesModule {}

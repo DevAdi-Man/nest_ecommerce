@@ -30,14 +30,15 @@ import { Role } from 'src/auth/enums/role.enum';
 @ApiTags('Categories')
 @Controller('categories')
 export class CategoriesController {
-  constructor(private readonly categoriesService: CategoriesService) { }
+  constructor(private readonly categoriesService: CategoriesService) {}
 
   // PUBLIC ROUTES (no auth required)
 
   @Get()
   @ApiOperation({
     summary: 'Get all categories',
-    description: 'Returns all categories with their parent and direct children.',
+    description:
+      'Returns all categories with their parent and direct children.',
   })
   @ApiResponse({ status: 200, description: 'Categories fetched successfully.' })
   findAll() {
@@ -47,9 +48,13 @@ export class CategoriesController {
   @Get('tree')
   @ApiOperation({
     summary: 'Get category tree',
-    description: 'Returns a nested tree structure of all categories from root to leaves.',
+    description:
+      'Returns a nested tree structure of all categories from root to leaves.',
   })
-  @ApiResponse({ status: 200, description: 'Category tree fetched successfully.' })
+  @ApiResponse({
+    status: 200,
+    description: 'Category tree fetched successfully.',
+  })
   getTree() {
     return this.categoriesService.getTree();
   }
@@ -59,7 +64,10 @@ export class CategoriesController {
     summary: 'Get root categories',
     description: 'Returns only top-level categories (those without a parent).',
   })
-  @ApiResponse({ status: 200, description: 'Root categories fetched successfully.' })
+  @ApiResponse({
+    status: 200,
+    description: 'Root categories fetched successfully.',
+  })
   findRoots() {
     return this.categoriesService.findRoots();
   }
@@ -70,7 +78,10 @@ export class CategoriesController {
     description: 'Case-insensitive partial name match.',
   })
   @ApiQuery({ name: 'q', required: true, type: String, example: 'shirt' })
-  @ApiResponse({ status: 200, description: 'Search results fetched successfully.' })
+  @ApiResponse({
+    status: 200,
+    description: 'Search results fetched successfully.',
+  })
   search(@Query('q') query: string) {
     return this.categoriesService.search(query);
   }
@@ -105,7 +116,10 @@ export class CategoriesController {
     description: 'Returns all direct child categories for the given parent ID.',
   })
   @ApiParam({ name: 'id', type: Number, example: 1 })
-  @ApiResponse({ status: 200, description: 'Child categories fetched successfully.' })
+  @ApiResponse({
+    status: 200,
+    description: 'Child categories fetched successfully.',
+  })
   @ApiResponse({ status: 404, description: 'Parent category not found.' })
   findChildren(@Param('id', ParseIntPipe) id: number) {
     return this.categoriesService.findChildren(id);
@@ -119,7 +133,8 @@ export class CategoriesController {
   @ApiBearerAuth('access-token')
   @ApiOperation({
     summary: 'Create a new category [Admin]',
-    description: 'Creates a new category. Optionally assign a parent for sub-categories. Requires Admin role.',
+    description:
+      'Creates a new category. Optionally assign a parent for sub-categories. Requires Admin role.',
   })
   @ApiResponse({ status: 201, description: 'Category created successfully.' })
   @ApiResponse({ status: 400, description: 'Validation failed.' })
@@ -136,13 +151,17 @@ export class CategoriesController {
   @ApiBearerAuth('access-token')
   @ApiOperation({
     summary: 'Update a category [Admin]',
-    description: 'Updates name, image, or parent of a category. Slug is auto-regenerated on name change. Requires Admin role.',
+    description:
+      'Updates name, image, or parent of a category. Slug is auto-regenerated on name change. Requires Admin role.',
   })
   @ApiParam({ name: 'id', type: Number, example: 1 })
   @ApiResponse({ status: 200, description: 'Category updated successfully.' })
   @ApiResponse({ status: 400, description: 'Validation failed.' })
   @ApiResponse({ status: 404, description: 'Category not found.' })
-  @ApiResponse({ status: 409, description: 'Category name already exists or circular parent.' })
+  @ApiResponse({
+    status: 409,
+    description: 'Category name already exists or circular parent.',
+  })
   @ApiForbiddenResponse({ description: 'Requires Admin role.' })
   update(
     @Param('id', ParseIntPipe) id: number,
@@ -157,7 +176,8 @@ export class CategoriesController {
   @ApiBearerAuth('access-token')
   @ApiOperation({
     summary: 'Delete a category [Admin]',
-    description: 'Soft-deletes a category. Cannot delete if it has child categories. Requires Admin role.',
+    description:
+      'Soft-deletes a category. Cannot delete if it has child categories. Requires Admin role.',
   })
   @ApiParam({ name: 'id', type: Number, example: 1 })
   @ApiResponse({ status: 200, description: 'Category deleted successfully.' })
@@ -174,9 +194,13 @@ export class CategoriesController {
   @ApiBearerAuth('access-token')
   @ApiOperation({
     summary: 'Get all soft-deleted categories [Admin]',
-    description: 'Returns all categories that have been soft-deleted. Requires Admin role.',
+    description:
+      'Returns all categories that have been soft-deleted. Requires Admin role.',
   })
-  @ApiResponse({ status: 200, description: 'Deleted categories fetched successfully.' })
+  @ApiResponse({
+    status: 200,
+    description: 'Deleted categories fetched successfully.',
+  })
   @ApiForbiddenResponse({ description: 'Requires Admin role.' })
   findDeleted() {
     return this.categoriesService.findDeleted();
@@ -188,7 +212,8 @@ export class CategoriesController {
   @ApiBearerAuth('access-token')
   @ApiOperation({
     summary: 'Restore a soft-deleted category [Admin]',
-    description: 'Restores a previously soft-deleted category back to active state. Requires Admin role.',
+    description:
+      'Restores a previously soft-deleted category back to active state. Requires Admin role.',
   })
   @ApiParam({ name: 'id', type: Number, example: 1 })
   @ApiResponse({ status: 200, description: 'Category restored successfully.' })
