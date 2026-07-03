@@ -34,6 +34,20 @@ services:
     depends_on:
       - postgres
 
+  minio:
+    image: minio/minio
+    container_name: ecommerce_minio
+    restart: always
+    ports:
+      - "9000:9000"
+      - "9001:9001"
+    environment:
+      MINIO__ROOT_USER: minioadmin
+      MINIO_ROOT_PASSWORD: minioadmin
+    command: server /data --console-address ":9001"
+    volumes:
+      - minio_data:/data
+
   redis:
     image: redis:7-alpine
     container_name: ecommerce_redis
@@ -54,3 +68,4 @@ services:
 volumes:
   postgres_data:
   redis_data:
+  minio_data:
