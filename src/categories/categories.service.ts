@@ -5,6 +5,7 @@ import { Category } from './entities/category.entity';
 import { CreateCategoryDto } from './dto/create-category.dto';
 import { generateUniqueSlug } from 'src/common/utils/slug.utils';
 import { UpdateCategoryDto } from './dto/update-category.dto';
+import { CategoryQueryDto } from './dto/query-category.dto'
 
 @Injectable()
 export class CategoriesService {
@@ -50,18 +51,59 @@ export class CategoriesService {
   }
 
   // findAll — includes parent and direct children associations
-  async findAll() {
-    const categories = await this.categoryModel.findAll({
+  async findAll(query: CategoryQueryDto) {
+    const { page, limit, search, sortBy, order, parentId } = query;
+
+    const offset = (page - 1) * limit;
+
+    const where: any = {};
+    if (search) {
+      where[Op.or] = [
+        {
+          name: {
+            [Op.iLike]: `%${search}%`,
+          }
+        },
+        {
+          slug: {
+            [Op.iLike]: `%${search}%`,
+          }
+        }
+      ]
+    }
+
+    if (parentId !== undefined) {
+      where.parentId = parentId;
+    }
+
+    const { rows, count } = await this.categoryModel.findAndCountAll({
+      where,
+      limit,
+      offset,
+      order: [[sortBy, order]],
       include: [
-        { model: Category, as: 'parent', attributes: ['id', 'name', 'slug'] },
-        { model: Category, as: 'children', attributes: ['id', 'name', 'slug'] },
-      ],
-      order: [['name', 'ASC']],
+        {
+          model: Category,
+          as: 'parent',
+          attributes: ['id', 'name', 'slug'],
+        },
+        {
+          model: Category,
+          as: 'children',
+          attributes: ['id', 'name', 'slug'],
+        }
+      ]
     });
 
     return {
       message: 'Found All the categories successfully.',
-      categories,
+      data: rows,
+      meta: {
+        total: count,
+        page,
+        limit,
+        totalPages: Math.ceil(count / limit)
+      }
     };
   }
 
