@@ -36,6 +36,7 @@ export default {
         'addresses',
         'otp',
         'mail',
+        'media',
         'roles',
         'common',
         'config',
