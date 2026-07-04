@@ -26,6 +26,7 @@ import { JwtAuthGuard } from 'src/auth/guards/jwt-auth/jwt-auth.guard';
 import { RolesGuard } from 'src/auth/guards/roles/roles.guard';
 import { Roles } from 'src/auth/decorators/roles/roles.decorator';
 import { Role } from 'src/auth/enums/role.enum';
+import { CategoryQueryDto } from './dto/query-category.dto';
 
 @ApiTags('Categories')
 @Controller('categories')
@@ -41,8 +42,8 @@ export class CategoriesController {
       'Returns all categories with their parent and direct children.',
   })
   @ApiResponse({ status: 200, description: 'Categories fetched successfully.' })
-  findAll() {
-    return this.categoriesService.findAll();
+  findAll(@Query() query: CategoryQueryDto) {
+    return this.categoriesService.findAll(query);
   }
 
   @Get('tree')
