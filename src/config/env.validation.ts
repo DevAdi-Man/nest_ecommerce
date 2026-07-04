@@ -26,4 +26,11 @@ export const envValidationSchema = Joi.object({
 
   THROTTLE_TTL: Joi.number().default(60000),
   THROTTLE_LIMIT: Joi.number().default(10),
+
+  MINIO_ENDPOINT: Joi.string().required(),
+  MINIO_PORT: Joi.number().required(),
+  MINIO_ACCESS_KEY: Joi.string().required(),
+  MINIO_SECRET_KEY: Joi.string().required(),
+  MINIO_BUCKET: Joi.string().required(),
+  MINIO_USE_SSL: Joi.boolean().default(false),
 }).unknown(true);
