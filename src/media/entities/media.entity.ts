@@ -36,7 +36,7 @@ export class Media extends Model {
     allowNull: false,
     type: DataType.STRING,
   })
-  declare mineType: string;
+  declare mimeType: string; // fixed typo: was mineType
 
   @Column({
     allowNull: false,

@@ -108,6 +108,13 @@ temp/
 .cache/
 
 # ─────────────────────────────
+# AI agent files
+# ─────────────────────────────
+.agent/
+.agents/
+.kiro/
+
+# ─────────────────────────────
 # Local / personal notes (not for the repo)
 # Add your own scratch files here if needed
 # ─────────────────────────────
