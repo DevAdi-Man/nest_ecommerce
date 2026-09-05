@@ -18,6 +18,7 @@ import {
   ApiForbiddenResponse,
   ApiOperation,
   ApiParam,
+  ApiQuery,
   ApiResponse,
   ApiTags,
 } from '@nestjs/swagger';
@@ -54,6 +55,12 @@ export class ProductsController {
     summary: 'Get all Products',
     description: 'Returns all Products.',
   })
+  @ApiQuery({ name: 'page', required: false, type: Number, example: 1 })
+  @ApiQuery({ name: 'limit', required: false, type: Number, example: 10 })
+  @ApiQuery({ name: 'search', required: false, type: String, example: 'puma' })
+  @ApiQuery({ name: 'sortBy', required: false, type: String, example: 'name' })
+  @ApiQuery({ name: 'order', required: false, type: String, example: 'ASC' })
+  @ApiQuery({ name: 'categoryId', required: false, type: Number, example: 1 })
   @ApiResponse({ status: 200, description: 'Products fetched successfully.' })
   findAll(@Query() query: ProductQueryDto) {
     return this.productsService.findAll(query);
