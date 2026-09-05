@@ -16,7 +16,7 @@ export class CategoriesService {
   constructor(
     @InjectModel(Category)
     private readonly categoryModel: typeof Category,
-  ) {}
+  ) { }
 
   async create(createCategoryDto: CreateCategoryDto) {
     const existingCategory = await this.categoryModel.findOne({
@@ -61,6 +61,7 @@ export class CategoriesService {
     const offset = (page - 1) * limit;
 
     const where: any = {};
+
     if (search) {
       where[Op.or] = [
         {

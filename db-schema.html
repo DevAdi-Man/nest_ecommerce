@@ -348,6 +348,17 @@
     <div class="table-grid" id="grid-todo"></div>
   </div>
 
+  <div class="section" id="section-diagram">
+    <div class="section-title">
+      📊 Database ER Diagram
+    </div>
+    <div class="diagram-container" style="background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 24px; box-shadow: var(--shadow); overflow-x: auto;">
+      <div class="mermaid" id="mermaid-diagram">
+        %% Diagram will be generated here
+      </div>
+    </div>
+  </div>
+
   <div class="next-steps">
     <h3>🚀 Recommended Build Order</h3>
     <ol class="step-list">
@@ -609,7 +620,60 @@ try {
   if (savedTheme) document.documentElement.setAttribute('data-theme', savedTheme);
 } catch(_) {}
 
+function renderDiagram() {
+  let erDiagram = "erDiagram\n";
+  TABLES.forEach(t => {
+    erDiagram += `  ${t.name} {\n`;
+    t.columns.forEach(c => {
+      erDiagram += `    string ${c.name} ${c.type === 'pk' ? 'PK' : (c.type === 'fk' ? 'FK' : '')}\n`;
+    });
+    erDiagram += `  }\n`;
+    t.relations.forEach(r => {
+      if (r.startsWith("BelongsTo")) {
+        let target = r.split("→")[1].trim().split(" ")[0];
+        erDiagram += `  ${target} ||--o{ ${t.name} : "BelongsTo"\n`;
+      } else if (r.startsWith("HasMany")) {
+        let target = r.split("→")[1].trim().split(" ")[0];
+        erDiagram += `  ${t.name} ||--o{ ${target} : "HasMany"\n`;
+      } else if (r.startsWith("HasOne")) {
+        let target = r.split("→")[1].trim().split(" ")[0];
+        erDiagram += `  ${t.name} ||--o| ${target} : "HasOne"\n`;
+      }
+    });
+  });
+  
+  const mermaidDiv = document.getElementById('mermaid-diagram');
+  mermaidDiv.textContent = erDiagram;
+}
+
 render();
+renderDiagram();
+</script>
+<script src="https://cdn.jsdelivr.net/npm/svg-pan-zoom@3.6.1/dist/svg-pan-zoom.min.js"></script>
+<script type="module">
+  import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+  mermaid.initialize({ startOnLoad: true, theme: document.documentElement.getAttribute('data-theme') === 'dark' ? 'dark' : 'default' });
+
+  // Wait for Mermaid to render the SVG, then add pan/zoom
+  const observer = new MutationObserver((mutations, obs) => {
+    const svg = document.querySelector('#mermaid-diagram svg');
+    if (svg) {
+      obs.disconnect(); 
+      svg.style.maxWidth = '100%';
+      svg.style.height = '600px';
+      svgPanZoom(svg, {
+        zoomEnabled: true,
+        controlIconsEnabled: true,
+        fit: true,
+        center: true
+      });
+    }
+  });
+  
+  observer.observe(document.getElementById('mermaid-diagram'), {
+    childList: true,
+    subtree: true
+  });
 </script>
 </body>
 </html>
