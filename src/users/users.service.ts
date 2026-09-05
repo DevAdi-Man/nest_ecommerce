@@ -13,6 +13,7 @@ import { CreationAttributes, Op, WhereOptions } from 'sequelize';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { UserQueryDto } from './dto/user-query.dto';
 import { Role as RoleEnum } from 'src/auth/enums/role.enum';
+import { RolesService } from 'src/roles/roles.service';
 
 @Injectable()
 export class UsersService implements OnModuleInit {
@@ -22,6 +23,11 @@ export class UsersService implements OnModuleInit {
 
     @InjectModel(Role)
     private readonly roleModel: typeof Role,
+
+    // Injecting RolesService ensures NestJS initializes RolesService
+    // (and its onModuleInit — which seeds roles) before UsersService.
+    // This fixes the race condition where admin seed ran before roles existed.
+    private readonly rolesService: RolesService,
   ) {}
 
   async onModuleInit() {

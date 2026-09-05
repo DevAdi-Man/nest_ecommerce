@@ -59,7 +59,7 @@ export class OtpService {
     if (!isValid) throw new UnauthorizedException('Invalid OTP.');
 
     await savedOtp.update({
-      isUsed: false,
+      isUsed: true,
     });
   }
 

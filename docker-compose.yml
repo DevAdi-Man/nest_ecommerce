@@ -42,7 +42,7 @@ services:
       - "9000:9000"
       - "9001:9001"
     environment:
-      MINIO__ROOT_USER: minioadmin
+      MINIO_ROOT_USER: minioadmin
       MINIO_ROOT_PASSWORD: minioadmin
     command: server /data --console-address ":9001"
     volumes:
@@ -64,6 +64,15 @@ services:
     ports:
       - "1025:1025"
       - "8025:8025"
+
+  architecture-docs:
+    image: nginx:alpine
+    container_name: ecommerce_architecture_docs
+    restart: always
+    ports:
+      - "8082:80"
+    volumes:
+      - ./db-schema.html:/usr/share/nginx/html/index.html:ro
 
 volumes:
   postgres_data:
