@@ -65,6 +65,15 @@ services:
       - "1025:1025"
       - "8025:8025"
 
+  architecture-docs:
+    image: nginx:alpine
+    container_name: ecommerce_architecture_docs
+    restart: always
+    ports:
+      - "8082:80"
+    volumes:
+      - ./db-schema.html:/usr/share/nginx/html/index.html:ro
+
 volumes:
   postgres_data:
   redis_data:

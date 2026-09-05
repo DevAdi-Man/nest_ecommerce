@@ -1,7 +1,6 @@
 # Changelog
 
 All notable changes to this project will be documented in this file.
-
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project follows [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
@@ -10,6 +9,7 @@ and this project follows [Semantic Versioning](https://semver.org/spec/v2.0.0.ht
 ## [Unreleased]
 
 ### Added
+
 - MinIO integration as S3-compatible object storage (Docker)
 
 ---
@@ -17,6 +17,7 @@ and this project follows [Semantic Versioning](https://semver.org/spec/v2.0.0.ht
 ## [1.0.0] - 2026-06-22
 
 ### Added
+
 - JWT authentication with access and refresh tokens
 - OTP-based email verification flow
 - Role-based access control (RBAC) with admin and user roles
@@ -42,7 +43,7 @@ and this project follows [Semantic Versioning](https://semver.org/spec/v2.0.0.ht
 
 ---
 
-<!-- 
+<!--
 Versioning guide:
   MAJOR (1.x.x) → breaking changes
   MINOR (x.1.x) → new features, backward compatible

@@ -1,0 +1,615 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>E-Commerce DB Schema — Progress Tracker</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0f172a;
+    --surface: #1e293b;
+    --surface-hover: #334155;
+    --border: #334155;
+    --text: #f1f5f9;
+    --text-muted: #94a3b8;
+    --text-dim: #64748b;
+    --accent-emerald: #34d399;
+    --accent-emerald-bg: rgba(52, 211, 153, 0.1);
+    --accent-amber: #fbbf24;
+    --accent-amber-bg: rgba(251, 191, 36, 0.1);
+    --accent-rose: #fb7185;
+    --accent-rose-bg: rgba(251, 113, 133, 0.1);
+    --accent-violet: #a78bfa;
+    --accent-violet-bg: rgba(167, 139, 250, 0.1);
+    --accent-cyan: #22d3ee;
+    --check-done: #34d399;
+    --check-todo: #475569;
+    --radius: 12px;
+    --radius-sm: 8px;
+    --shadow: 0 4px 24px rgba(0,0,0,0.3);
+  }
+
+  [data-theme="light"] {
+    --bg: #f8fafc;
+    --surface: #ffffff;
+    --surface-hover: #f1f5f9;
+    --border: #e2e8f0;
+    --text: #0f172a;
+    --text-muted: #475569;
+    --text-dim: #94a3b8;
+    --accent-emerald-bg: rgba(52, 211, 153, 0.15);
+    --accent-amber-bg: rgba(251, 191, 36, 0.15);
+    --accent-rose-bg: rgba(251, 113, 133, 0.15);
+    --accent-violet-bg: rgba(167, 139, 250, 0.15);
+    --check-todo: #cbd5e1;
+    --shadow: 0 4px 24px rgba(0,0,0,0.08);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    padding: 32px 24px;
+    transition: background 0.3s, color 0.3s;
+  }
+
+  .container {
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  /* Header */
+  .header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 32px;
+  }
+  .header h1 {
+    font-size: 28px;
+    font-weight: 800;
+    letter-spacing: -0.5px;
+    background: linear-gradient(135deg, var(--accent-cyan), var(--accent-violet));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  .header-actions { display: flex; gap: 12px; align-items: center; }
+
+  .theme-toggle {
+    width: 40px; height: 40px; border-radius: 50%;
+    background: var(--surface); border: 1px solid var(--border);
+    color: var(--text); cursor: pointer; font-size: 18px;
+    display: flex; align-items: center; justify-content: center;
+    transition: all 0.2s;
+  }
+  .theme-toggle:hover { background: var(--surface-hover); transform: scale(1.05); }
+
+  /* Progress bar */
+  .progress-section {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 24px;
+    margin-bottom: 28px;
+    box-shadow: var(--shadow);
+  }
+  .progress-header {
+    display: flex; justify-content: space-between; align-items: center;
+    margin-bottom: 14px;
+  }
+  .progress-header h2 { font-size: 16px; font-weight: 600; color: var(--text-muted); }
+  .progress-count {
+    font-size: 22px; font-weight: 800;
+    color: var(--accent-emerald);
+  }
+  .progress-bar-track {
+    width: 100%; height: 10px;
+    background: var(--check-todo);
+    border-radius: 99px; overflow: hidden;
+  }
+  .progress-bar-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--accent-emerald), var(--accent-cyan));
+    border-radius: 99px;
+    transition: width 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  /* Stats row */
+  .stats-row {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 12px;
+    margin-bottom: 28px;
+  }
+  .stat-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    padding: 16px 18px;
+    text-align: center;
+  }
+  .stat-card .stat-value { font-size: 28px; font-weight: 800; }
+  .stat-card .stat-label { font-size: 12px; font-weight: 600; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px; margin-top: 4px; }
+  .stat-done .stat-value { color: var(--accent-emerald); }
+  .stat-todo .stat-value { color: var(--accent-amber); }
+  .stat-total .stat-value { color: var(--accent-violet); }
+
+  /* Sections */
+  .section { margin-bottom: 28px; }
+  .section-title {
+    display: flex; align-items: center; gap: 10px;
+    font-size: 18px; font-weight: 700;
+    margin-bottom: 14px;
+    padding-left: 2px;
+  }
+  .section-badge {
+    display: inline-flex; align-items: center; justify-content: center;
+    font-size: 11px; font-weight: 700;
+    padding: 3px 10px; border-radius: 99px;
+    text-transform: uppercase; letter-spacing: 0.5px;
+  }
+  .badge-done { background: var(--accent-emerald-bg); color: var(--accent-emerald); }
+  .badge-todo { background: var(--accent-amber-bg); color: var(--accent-amber); }
+
+  /* Table cards */
+  .table-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 14px;
+  }
+
+  .table-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 18px 20px;
+    cursor: pointer;
+    transition: all 0.25s ease;
+    position: relative;
+    overflow: hidden;
+  }
+  .table-card:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow);
+    border-color: var(--accent-violet);
+  }
+  .table-card.checked {
+    border-color: var(--accent-emerald);
+  }
+  .table-card.checked::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; height: 3px;
+    background: linear-gradient(90deg, var(--accent-emerald), var(--accent-cyan));
+  }
+
+  .card-header {
+    display: flex; align-items: center; gap: 12px;
+    margin-bottom: 10px;
+  }
+
+  /* Custom checkbox */
+  .checkbox-wrapper {
+    width: 24px; height: 24px; flex-shrink: 0;
+    border: 2px solid var(--check-todo);
+    border-radius: 6px;
+    display: flex; align-items: center; justify-content: center;
+    transition: all 0.25s ease;
+    position: relative;
+  }
+  .table-card.checked .checkbox-wrapper {
+    background: var(--accent-emerald);
+    border-color: var(--accent-emerald);
+  }
+  .checkbox-wrapper svg {
+    width: 14px; height: 14px;
+    stroke: white; stroke-width: 3;
+    fill: none; stroke-linecap: round; stroke-linejoin: round;
+    opacity: 0; transform: scale(0.5);
+    transition: all 0.2s ease;
+  }
+  .table-card.checked .checkbox-wrapper svg {
+    opacity: 1; transform: scale(1);
+  }
+
+  .card-title {
+    font-size: 16px; font-weight: 700;
+    flex: 1;
+  }
+  .table-card.checked .card-title {
+    color: var(--accent-emerald);
+  }
+  .card-file {
+    font-size: 11px; color: var(--text-dim);
+    font-family: 'JetBrains Mono', monospace;
+  }
+
+  .card-columns {
+    display: flex; flex-wrap: wrap; gap: 6px;
+    margin-top: 8px;
+  }
+  .column-tag {
+    font-size: 11px; font-weight: 500;
+    padding: 3px 8px; border-radius: 4px;
+    background: var(--accent-violet-bg);
+    color: var(--accent-violet);
+    font-family: 'JetBrains Mono', 'Courier New', monospace;
+  }
+  .column-tag.fk {
+    background: var(--accent-rose-bg);
+    color: var(--accent-rose);
+  }
+  .column-tag.pk {
+    background: var(--accent-emerald-bg);
+    color: var(--accent-emerald);
+  }
+
+  .card-relations {
+    margin-top: 10px;
+    font-size: 12px; color: var(--text-muted);
+    line-height: 1.6;
+  }
+  .relation-arrow { color: var(--accent-cyan); font-weight: 600; }
+
+  /* Next steps */
+  .next-steps {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 24px;
+    box-shadow: var(--shadow);
+  }
+  .next-steps h3 {
+    font-size: 18px; font-weight: 700;
+    margin-bottom: 16px;
+    display: flex; align-items: center; gap: 8px;
+  }
+  .step-list { list-style: none; }
+  .step-list li {
+    padding: 10px 14px;
+    border-radius: var(--radius-sm);
+    margin-bottom: 6px;
+    font-size: 14px;
+    display: flex; align-items: center; gap: 12px;
+    transition: background 0.2s;
+  }
+  .step-list li:hover { background: var(--surface-hover); }
+  .step-num {
+    width: 28px; height: 28px; border-radius: 50%;
+    background: var(--accent-violet-bg);
+    color: var(--accent-violet);
+    font-size: 13px; font-weight: 700;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+  }
+
+  /* Animations */
+  @keyframes checkPop {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.15); }
+    100% { transform: scale(1); }
+  }
+  .table-card.just-checked { animation: checkPop 0.3s ease; }
+</style>
+</head>
+<body>
+
+<div class="container">
+
+  <div class="header">
+    <h1>📋 DB Schema Progress</h1>
+    <div class="header-actions">
+      <button class="theme-toggle" onclick="toggleTheme()" title="Toggle theme">🌓</button>
+    </div>
+  </div>
+
+  <div class="progress-section">
+    <div class="progress-header">
+      <h2>Overall Progress</h2>
+      <span class="progress-count" id="progressCount">5 / 14</span>
+    </div>
+    <div class="progress-bar-track">
+      <div class="progress-bar-fill" id="progressBar" style="width: 35.7%"></div>
+    </div>
+  </div>
+
+  <div class="stats-row">
+    <div class="stat-card stat-done">
+      <div class="stat-value" id="statDone">5</div>
+      <div class="stat-label">Completed</div>
+    </div>
+    <div class="stat-card stat-todo">
+      <div class="stat-value" id="statTodo">9</div>
+      <div class="stat-label">Remaining</div>
+    </div>
+    <div class="stat-card stat-total">
+      <div class="stat-value">14</div>
+      <div class="stat-label">Total Tables</div>
+    </div>
+  </div>
+
+  <div class="section" id="section-done">
+    <div class="section-title">
+      ✅ Implemented <span class="section-badge badge-done">DONE</span>
+    </div>
+    <div class="table-grid" id="grid-done"></div>
+  </div>
+
+  <div class="section" id="section-todo">
+    <div class="section-title">
+      🔧 Pending Implementation <span class="section-badge badge-todo">TODO</span>
+    </div>
+    <div class="table-grid" id="grid-todo"></div>
+  </div>
+
+  <div class="next-steps">
+    <h3>🚀 Recommended Build Order</h3>
+    <ol class="step-list">
+      <li><span class="step-num">1</span> <strong>Products</strong> — entity + CRUD (depends on Categories)</li>
+      <li><span class="step-num">2</span> <strong>Addresses</strong> — user delivery addresses</li>
+      <li><span class="step-num">3</span> <strong>Cart + Cart Items</strong> — shopping cart flow</li>
+      <li><span class="step-num">4</span> <strong>Orders + Order Items + Payments</strong> — checkout flow</li>
+      <li><span class="step-num">5</span> <strong>Reviews, Wishlists, Coupons, Inventory</strong> — supporting features</li>
+    </ol>
+  </div>
+
+</div>
+
+<script>
+const TABLES = [
+  {
+    id: "roles", name: "roles", file: "roles/entities/role.entity.ts",
+    done: true,
+    columns: [
+      { name: "id", type: "pk" }, { name: "name", type: "col" }, { name: "description", type: "col" }
+    ],
+    relations: ["HasMany → users"]
+  },
+  {
+    id: "users", name: "users", file: "users/entities/user.entity.ts",
+    done: true,
+    columns: [
+      { name: "id", type: "pk" }, { name: "avatar", type: "col" }, { name: "firstName", type: "col" },
+      { name: "middleName", type: "col" }, { name: "lastName", type: "col" }, { name: "dateOfBirth", type: "col" },
+      { name: "email", type: "col" }, { name: "isVerifiedEmail", type: "col" }, { name: "password", type: "col" },
+      { name: "refreshToken", type: "col" }, { name: "roleId", type: "fk" }
+    ],
+    relations: ["BelongsTo → roles"]
+  },
+  {
+    id: "otps", name: "otps", file: "otp/entities/otp.entity/otp.entity.ts",
+    done: true,
+    columns: [
+      { name: "id", type: "pk" }, { name: "userId", type: "fk" }, { name: "otp", type: "col" },
+      { name: "type", type: "col" }, { name: "expiresAt", type: "col" }, { name: "isUsed", type: "col" }
+    ],
+    relations: ["BelongsTo → users"]
+  },
+  {
+    id: "categories", name: "categories", file: "categories/entities/category.entity.ts",
+    done: true,
+    columns: [
+      { name: "id", type: "pk" }, { name: "name", type: "col" }, { name: "slug", type: "col" },
+      { name: "image", type: "col" }, { name: "parentId", type: "fk" }
+    ],
+    relations: ["BelongsTo → categories (self)", "HasMany → categories (children)"]
+  },
+  {
+    id: "media", name: "media", file: "media/entities/media.entity.ts",
+    done: true,
+    columns: [
+      { name: "id", type: "pk" }, { name: "fileName", type: "col" }, { name: "objectKey", type: "col" },
+      { name: "url", type: "col" }, { name: "mimeType", type: "col" }, { name: "size", type: "col" },
+      { name: "bucket", type: "col" }
+    ],
+    relations: []
+  },
+  {
+    id: "products", name: "products", file: "products/entities/product.entity.ts",
+    done: false,
+    columns: [
+      { name: "id", type: "pk" }, { name: "name", type: "col" }, { name: "slug", type: "col" },
+      { name: "description", type: "col" }, { name: "price", type: "col" }, { name: "images", type: "col" },
+      { name: "categoryId", type: "fk" }
+    ],
+    relations: ["BelongsTo → categories", "HasMany → reviews", "HasOne → inventory"]
+  },
+  {
+    id: "addresses", name: "addresses", file: "addresses/entities/address.entity.ts",
+    done: false,
+    columns: [
+      { name: "id", type: "pk" }, { name: "userId", type: "fk" }, { name: "street", type: "col" },
+      { name: "city", type: "col" }, { name: "state", type: "col" }, { name: "zip", type: "col" },
+      { name: "country", type: "col" }, { name: "isDefault", type: "col" }
+    ],
+    relations: ["BelongsTo → users"]
+  },
+  {
+    id: "carts", name: "carts", file: "carts/entities/cart.entity.ts",
+    done: false,
+    columns: [
+      { name: "id", type: "pk" }, { name: "userId", type: "fk" }
+    ],
+    relations: ["BelongsTo → users", "HasMany → cart_items"]
+  },
+  {
+    id: "cart_items", name: "cart_items", file: "carts/entities/cart-item.entity.ts",
+    done: false,
+    columns: [
+      { name: "id", type: "pk" }, { name: "cartId", type: "fk" }, { name: "productId", type: "fk" },
+      { name: "quantity", type: "col" }
+    ],
+    relations: ["BelongsTo → carts", "BelongsTo → products"]
+  },
+  {
+    id: "orders", name: "orders", file: "orders/entities/order.entity.ts",
+    done: false,
+    columns: [
+      { name: "id", type: "pk" }, { name: "userId", type: "fk" }, { name: "addressId", type: "fk" },
+      { name: "couponId", type: "fk" }, { name: "status", type: "col" }, { name: "totalAmount", type: "col" }
+    ],
+    relations: ["BelongsTo → users", "BelongsTo → addresses", "HasMany → order_items", "HasOne → payments"]
+  },
+  {
+    id: "order_items", name: "order_items", file: "orders/entities/order-item.entity.ts",
+    done: false,
+    columns: [
+      { name: "id", type: "pk" }, { name: "orderId", type: "fk" }, { name: "productId", type: "fk" },
+      { name: "quantity", type: "col" }, { name: "unitPrice", type: "col" }
+    ],
+    relations: ["BelongsTo → orders", "BelongsTo → products"]
+  },
+  {
+    id: "payments", name: "payments", file: "payments/entities/payment.entity.ts",
+    done: false,
+    columns: [
+      { name: "id", type: "pk" }, { name: "orderId", type: "fk" }, { name: "method", type: "col" },
+      { name: "status", type: "col" }, { name: "transactionId", type: "col" }, { name: "amount", type: "col" }
+    ],
+    relations: ["BelongsTo → orders"]
+  },
+  {
+    id: "reviews", name: "reviews", file: "reviews/entities/review.entity.ts",
+    done: false,
+    columns: [
+      { name: "id", type: "pk" }, { name: "userId", type: "fk" }, { name: "productId", type: "fk" },
+      { name: "rating", type: "col" }, { name: "comment", type: "col" }
+    ],
+    relations: ["BelongsTo → users", "BelongsTo → products"]
+  },
+  {
+    id: "wishlists", name: "wishlists", file: "wishlists/entities/wishlist.entity.ts",
+    done: false,
+    columns: [
+      { name: "id", type: "pk" }, { name: "userId", type: "fk" }, { name: "productId", type: "fk" }
+    ],
+    relations: ["BelongsTo → users", "BelongsTo → products"]
+  },
+  {
+    id: "coupons", name: "coupons", file: "coupons/entities/coupon.entity.ts",
+    done: false,
+    columns: [
+      { name: "id", type: "pk" }, { name: "code", type: "col" }, { name: "discountPercent", type: "col" },
+      { name: "type", type: "col" }, { name: "minOrderAmount", type: "col" }, { name: "expiresAt", type: "col" },
+      { name: "isActive", type: "col" }
+    ],
+    relations: []
+  },
+  {
+    id: "inventory", name: "inventory", file: "inventory/entities/inventory.entity.ts",
+    done: false,
+    columns: [
+      { name: "id", type: "pk" }, { name: "productId", type: "fk" }, { name: "quantity", type: "col" },
+      { name: "sku", type: "col" }
+    ],
+    relations: ["BelongsTo → products"]
+  }
+];
+
+const STORAGE_KEY = 'ecommerce-db-progress';
+
+function loadState() {
+  try {
+    const saved = localStorage.getItem(STORAGE_KEY);
+    if (saved) return JSON.parse(saved);
+  } catch (_) {}
+  const state = {};
+  TABLES.forEach(t => { state[t.id] = t.done; });
+  return state;
+}
+
+function saveState(state) {
+  try { localStorage.setItem(STORAGE_KEY, JSON.stringify(state)); } catch(_) {}
+}
+
+let state = loadState();
+
+function renderCard(table) {
+  const isChecked = state[table.id];
+  const card = document.createElement('div');
+  card.className = 'table-card' + (isChecked ? ' checked' : '');
+  card.dataset.id = table.id;
+  card.onclick = () => toggleCheck(table.id);
+
+  const columnsHtml = table.columns.map(c =>
+    `<span class="column-tag ${c.type}">${c.name}</span>`
+  ).join('');
+
+  const relationsHtml = table.relations.length
+    ? `<div class="card-relations">${table.relations.map(r =>
+        r.replace(/→/g, '<span class="relation-arrow">→</span>')
+      ).join('<br>')}</div>`
+    : '';
+
+  card.innerHTML = `
+    <div class="card-header">
+      <div class="checkbox-wrapper">
+        <svg viewBox="0 0 24 24"><polyline points="4 12 10 18 20 6"/></svg>
+      </div>
+      <div>
+        <div class="card-title">${table.name}</div>
+        <div class="card-file">src/${table.file}</div>
+      </div>
+    </div>
+    <div class="card-columns">${columnsHtml}</div>
+    ${relationsHtml}
+  `;
+  return card;
+}
+
+function toggleCheck(id) {
+  state[id] = !state[id];
+  saveState(state);
+  render();
+  // pop animation
+  const el = document.querySelector(`.table-card[data-id="${id}"]`);
+  if (el) { el.classList.add('just-checked'); setTimeout(() => el.classList.remove('just-checked'), 300); }
+}
+
+function render() {
+  const gridDone = document.getElementById('grid-done');
+  const gridTodo = document.getElementById('grid-todo');
+  gridDone.innerHTML = '';
+  gridTodo.innerHTML = '';
+
+  const doneTables = TABLES.filter(t => state[t.id]);
+  const todoTables = TABLES.filter(t => !state[t.id]);
+
+  doneTables.forEach(t => gridDone.appendChild(renderCard(t)));
+  todoTables.forEach(t => gridTodo.appendChild(renderCard(t)));
+
+  const total = TABLES.length;
+  const doneCount = doneTables.length;
+  const todoCount = todoTables.length;
+  const pct = ((doneCount / total) * 100).toFixed(1);
+
+  document.getElementById('progressCount').textContent = `${doneCount} / ${total}`;
+  document.getElementById('progressBar').style.width = pct + '%';
+  document.getElementById('statDone').textContent = doneCount;
+  document.getElementById('statTodo').textContent = todoCount;
+}
+
+function toggleTheme() {
+  const html = document.documentElement;
+  const current = html.getAttribute('data-theme');
+  const next = current === 'dark' ? 'light' : 'dark';
+  html.setAttribute('data-theme', next);
+  try { localStorage.setItem('db-tracker-theme', next); } catch(_) {}
+}
+
+// Restore theme
+try {
+  const savedTheme = localStorage.getItem('db-tracker-theme');
+  if (savedTheme) document.documentElement.setAttribute('data-theme', savedTheme);
+} catch(_) {}
+
+render();
+</script>
+</body>
+</html>
