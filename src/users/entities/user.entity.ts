@@ -5,7 +5,9 @@ import {
   DataType,
   ForeignKey,
   BelongsTo,
+  HasOne,
 } from 'sequelize-typescript';
+import { Cart } from 'src/carts/entities/cart.entity';
 import { Role } from 'src/roles/entities/role.entity';
 
 @Table({
@@ -87,4 +89,7 @@ export class User extends Model {
 
   @BelongsTo(() => Role)
   declare role: Role;
+
+  @HasOne(() => Cart)
+  declare cart: Cart;
 }
