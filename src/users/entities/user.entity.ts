@@ -6,7 +6,9 @@ import {
   ForeignKey,
   BelongsTo,
   HasOne,
+  HasMany,
 } from 'sequelize-typescript';
+import { Address } from 'src/addresses/entities/address.entity';
 import { Cart } from 'src/carts/entities/cart.entity';
 import { Role } from 'src/roles/entities/role.entity';
 
@@ -92,4 +94,7 @@ export class User extends Model {
 
   @HasOne(() => Cart)
   declare cart: Cart;
+
+  @HasMany(() => Address)
+  declare addresses: Address[];
 }
