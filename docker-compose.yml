@@ -74,7 +74,29 @@ services:
     volumes:
       - ./db-schema.html:/usr/share/nginx/html/index.html:ro
 
+  schemaspy:
+    image: schemaspy/schemaspy:latest
+    container_name: ecommerce_schemaspy
+    user: "root"
+    command: -t pgsql11 -host postgres -port 5432 -db ecommerce -u postgres -p password -s public
+    volumes:
+      - schemaspy_data:/output
+    depends_on:
+      - postgres
+
+  schemaspy-docs:
+    image: nginx:alpine
+    container_name: ecommerce_schemaspy_docs
+    restart: always
+    ports:
+      - "8083:80"
+    volumes:
+      - schemaspy_data:/usr/share/nginx/html:ro
+    depends_on:
+      - schemaspy
+
 volumes:
+  schemaspy_data:
   postgres_data:
   redis_data:
   minio_data:

@@ -3,39 +3,24 @@ import {
   Column,
   DataType,
   ForeignKey,
+  Index,
   Model,
   Table,
 } from 'sequelize-typescript';
-import { User } from 'src/users/entities/user.entity';
+import { Order } from './order.entity';
 
 @Table({
-  tableName: 'address',
+  tableName: 'order_shipping_addresses',
   timestamps: true,
   paranoid: true,
 })
-export class Address extends Model {
+export class OrderShippingAddress extends Model {
   @Column({
     type: DataType.INTEGER,
     autoIncrement: true,
     primaryKey: true,
   })
   declare id: number;
-
-  @ForeignKey(() => User)
-  @Column({
-    type: DataType.INTEGER,
-    allowNull: false,
-  })
-  declare userId: number;
-
-  @BelongsTo(() => User)
-  declare user: User;
-
-  @Column({
-    type: DataType.STRING,
-    allowNull: true,
-  })
-  declare title?: string;
 
   @Column({
     type: DataType.TEXT,
@@ -47,37 +32,40 @@ export class Address extends Model {
     type: DataType.TEXT,
     allowNull: true,
   })
-  declare addressLine2?: string;
+  declare addressLine2: string | null;
 
   @Column({
-    type: DataType.STRING,
+    type: DataType.STRING(255),
     allowNull: false,
   })
   declare city: string;
 
   @Column({
-    type: DataType.STRING,
+    type: DataType.STRING(255),
     allowNull: false,
   })
   declare state: string;
 
   @Column({
-    type: DataType.STRING,
+    type: DataType.STRING(255),
     allowNull: false,
-  })
-  declare pincode: string;
-
-  @Column({
-    type: DataType.STRING,
-    allowNull: false,
-    defaultValue: 'India',
   })
   declare country: string;
 
   @Column({
-    type: DataType.BOOLEAN,
+    type: DataType.STRING(20),
     allowNull: false,
-    defaultValue: false,
   })
-  declare isDefault: boolean;
+  declare pincode: string;
+
+  @Index
+  @ForeignKey(() => Order)
+  @Column({
+    type: DataType.INTEGER,
+    allowNull: false,
+  })
+  declare orderId: number;
+
+  @BelongsTo(() => Order)
+  declare order: Order;
 }

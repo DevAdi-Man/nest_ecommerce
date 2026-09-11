@@ -19,15 +19,14 @@ import {
   ApiResponse,
   ApiTags,
 } from '@nestjs/swagger';
-
-import { UsersService } from './users.service';
+import { Roles } from 'src/auth/decorators/roles/roles.decorator';
+import { Role } from 'src/auth/enums/role.enum';
+import { JwtAuthGuard } from 'src/auth/guards/jwt-auth/jwt-auth.guard';
+import { RolesGuard } from 'src/auth/guards/roles/roles.guard';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { UserQueryDto } from './dto/user-query.dto';
-import { JwtAuthGuard } from 'src/auth/guards/jwt-auth/jwt-auth.guard';
-import { RolesGuard } from 'src/auth/guards/roles/roles.guard';
-import { Roles } from 'src/auth/decorators/roles/roles.decorator';
-import { Role } from 'src/auth/enums/role.enum';
+import { UsersService } from './users.service';
 
 @ApiTags('Users')
 @Controller('users')
