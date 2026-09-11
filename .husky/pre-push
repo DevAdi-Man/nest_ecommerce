@@ -1,0 +1,28 @@
+#!/bin/sh
+# Branch naming convention check (team-wide)
+# Allowed: feature/... | bug/... | hotfix/... | release/... | chore/...
+# Exception: main, master, develop, staging
+
+BRANCH=$(git symbolic-ref --short HEAD 2>/dev/null)
+
+pattern="^(feature|bug|hotfix|release|chore)\/.+"
+exception="^(main|master|develop|staging)$"
+
+if echo "$BRANCH" | grep -qE "$exception"; then
+  exit 0
+fi
+
+if ! echo "$BRANCH" | grep -qE "$pattern"; then
+  echo ""
+  echo "❌  Invalid branch name: '$BRANCH'"
+  echo ""
+  echo "   Branch naming convention:"
+  echo "     feature/<name>    — new features (e.g. feature/address)"
+  echo "     bug/<name>        — bug fixes   (e.g. bug/cart-total)"
+  echo "     hotfix/<name>     — urgent fixes"
+  echo "     release/<version> — release branches"
+  echo "     chore/<name>      — maintenance tasks"
+  echo ""
+  echo "   Tip: git checkout -b feature/my-branch"
+  exit 1
+fi
