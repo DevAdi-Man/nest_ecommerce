@@ -3,10 +3,10 @@ import {
   Column,
   DataType,
   ForeignKey,
-  Index,
-  Table,
-  Model,
   HasMany,
+  Index,
+  Model,
+  Table,
 } from 'sequelize-typescript';
 import { User } from 'src/users/entities/user.entity';
 import { CartItem } from './cartItem-entity';

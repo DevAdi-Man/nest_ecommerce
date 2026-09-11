@@ -7,8 +7,8 @@ import {
   Model,
   Table,
 } from 'sequelize-typescript';
-import { Cart } from './cart.entity';
 import { Product } from 'src/products/entities/product.entity';
+import { Cart } from './cart.entity';
 
 @Table({
   tableName: 'cart_items',
