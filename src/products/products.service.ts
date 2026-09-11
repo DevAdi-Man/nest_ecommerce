@@ -3,14 +3,14 @@ import {
   Injectable,
   NotFoundException,
 } from '@nestjs/common';
-import { CreateProductDto } from './dto/create-product.dto';
-import { UpdateProductDto } from './dto/update-product.dto';
 import { InjectModel } from '@nestjs/sequelize';
-import { Product } from './entities/product.entity';
-import { generateUniqueSlug } from 'src/common/utils/slug.utils';
-import { ProductQueryDto } from './dto/query-product.dto';
 import { Op } from 'sequelize';
 import { Category } from 'src/categories/entities/category.entity';
+import { generateUniqueSlug } from 'src/common/utils/slug.utils';
+import { CreateProductDto } from './dto/create-product.dto';
+import { ProductQueryDto } from './dto/query-product.dto';
+import { UpdateProductDto } from './dto/update-product.dto';
+import { Product } from './entities/product.entity';
 
 @Injectable()
 export class ProductsService {

@@ -1,13 +1,16 @@
 import {
-  Table,
+  BelongsTo,
   Column,
-  Model,
   DataType,
   ForeignKey,
-  BelongsTo,
+  HasMany,
   HasOne,
+  Model,
+  Table,
 } from 'sequelize-typescript';
+import { Address } from 'src/addresses/entities/address.entity';
 import { Cart } from 'src/carts/entities/cart.entity';
+import { Order } from 'src/orders/entities/order.entity';
 import { Role } from 'src/roles/entities/role.entity';
 
 @Table({
@@ -92,4 +95,10 @@ export class User extends Model {
 
   @HasOne(() => Cart)
   declare cart: Cart;
+
+  @HasMany(() => Address)
+  declare addresses: Address[];
+
+  @HasMany(() => Order)
+  declare orders: Order[];
 }

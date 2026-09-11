@@ -1,12 +1,12 @@
 import {
+  BelongsTo,
   Column,
   DataType,
-  Table,
-  Model,
   ForeignKey,
-  BelongsTo,
   HasMany,
   Index,
+  Model,
+  Table,
 } from 'sequelize-typescript';
 
 @Table({

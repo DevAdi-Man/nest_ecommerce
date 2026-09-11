@@ -1,13 +1,15 @@
 import {
+  BelongsTo,
   Column,
   DataType,
-  Table,
-  Model,
   ForeignKey,
-  BelongsTo,
+  HasMany,
   Index,
+  Model,
+  Table,
 } from 'sequelize-typescript';
 import { Category } from 'src/categories/entities/category.entity';
+import { OrderItem } from 'src/orders/entities/order-item.entity';
 
 @Table({
   tableName: 'products',
@@ -68,4 +70,7 @@ export class Product extends Model {
 
   @BelongsTo(() => Category, 'categoryId')
   declare category: Category;
+
+  @HasMany(() => OrderItem)
+  declare orderItems: OrderItem[];
 }
