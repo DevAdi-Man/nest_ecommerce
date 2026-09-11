@@ -10,6 +10,7 @@ import {
 } from 'sequelize-typescript';
 import { User } from 'src/users/entities/user.entity';
 import { OrderItem } from './order-item.entity';
+import { OrderShippingAddress } from './order-shipping-address.entity';
 
 @Table({
   tableName: 'Order',
@@ -65,4 +66,7 @@ export class Order extends Model {
 
   @HasMany(() => OrderItem)
   declare orderItems: OrderItem[];
+
+  @HasMany(() => OrderShippingAddress)
+  declare shippingAddresses: OrderShippingAddress[];
 }
