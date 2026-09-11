@@ -1,8 +1,15 @@
-import { BelongsTo, Column, DataType, ForeignKey, Model, Table } from "sequelize-typescript";
-import { User } from "src/users/entities/user.entity";
+import {
+  BelongsTo,
+  Column,
+  DataType,
+  ForeignKey,
+  Model,
+  Table,
+} from 'sequelize-typescript';
+import { User } from 'src/users/entities/user.entity';
 
 @Table({
-  tableName: "address",
+  tableName: 'address',
   timestamps: true,
   paranoid: true,
 })
@@ -63,7 +70,7 @@ export class Address extends Model {
   @Column({
     type: DataType.STRING,
     allowNull: false,
-    defaultValue: "India",
+    defaultValue: 'India',
   })
   declare country: string;
 
