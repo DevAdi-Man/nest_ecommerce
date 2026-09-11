@@ -82,15 +82,22 @@ export class OrdersService {
       status: 'PENDING',
       paymentStatus: 'PENDING',
     });
+    const addressData = address.get({ plain: true });
+    // Remove properties that shouldn't be copied
+    delete addressData.id;
+    delete addressData.userId;
+    delete addressData.isDefault;
+    delete addressData.title;
+
     // orderShipping address copy kro from address se
     const orderShippingAddress = await this.orderShippingAddresModel.create({
-      ...address,
+      ...addressData,
       orderId: order.id,
     });
     // order items create kro loop lga ke
     const orderItems = await Promise.all(
       cartItems.map(async (item) => {
-        await this.orderItemModel.create({
+        return await this.orderItemModel.create({
           orderId: order.id,
           productId: item.productId,
           quantity: item.quantity,

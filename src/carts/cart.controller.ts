@@ -19,7 +19,7 @@ import { Request as ExpressRequest } from 'express';
 
 interface RequestWithUser extends ExpressRequest {
   user: {
-    id: number;
+    sub: number;
     email: string;
     role: string;
   };
@@ -38,13 +38,13 @@ export class CartController {
     @Request() req: RequestWithUser,
     @Body() createCartDto: CreateCartDto,
   ) {
-    return this.cartService.create(req.user.id, createCartDto);
+    return this.cartService.create(req.user.sub, createCartDto);
   }
 
   @Get()
   @ApiOperation({ summary: 'Get current user cart' })
   findOne(@Request() req: RequestWithUser) {
-    return this.cartService.findOne(req.user.id);
+    return this.cartService.findOne(req.user.sub);
   }
 
   @Patch(':cartItemId')
@@ -54,7 +54,7 @@ export class CartController {
     @Param('cartItemId', ParseIntPipe) cartItemId: number,
     @Body() updateCartDto: UpdateCartDto,
   ) {
-    return this.cartService.update(req.user.id, cartItemId, updateCartDto);
+    return this.cartService.update(req.user.sub, cartItemId, updateCartDto);
   }
 
   @Delete(':cartItemId')
@@ -63,6 +63,6 @@ export class CartController {
     @Request() req: RequestWithUser,
     @Param('cartItemId', ParseIntPipe) cartItemId: number,
   ) {
-    return this.cartService.remove(req.user.id, cartItemId);
+    return this.cartService.remove(req.user.sub, cartItemId);
   }
 }
