@@ -84,19 +84,24 @@ export class OrdersService {
     });
     // orderShipping address copy kro from address se
     const orderShippingAddress = await this.orderShippingAddresModel.create({
-      ...address,
       orderId: order.id,
+      addressLine1: address.addressLine1,
+      addressLine2: address.addressLine2,
+      city: address.city,
+      state: address.state,
+      pincode: address.pincode,
+      country: address.country,
     });
     // order items create kro loop lga ke
     const orderItems = await Promise.all(
-      cartItems.map(async (item) => {
-        await this.orderItemModel.create({
+      cartItems.map((item) =>
+        this.orderItemModel.create({
           orderId: order.id,
           productId: item.productId,
           quantity: item.quantity,
           priceAtPurchase: item.product.price,
-        });
-      }),
+        }),
+      ),
     );
     // cart item ko delete kro
     await this.cartItemModel.destroy({
