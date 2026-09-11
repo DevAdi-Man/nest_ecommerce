@@ -35,6 +35,7 @@ export default {
         'wishlists',
         'addresses',
         'otp',
+        'shipping-address',
         'mail',
         'media',
         'roles',
