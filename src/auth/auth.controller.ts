@@ -25,6 +25,9 @@ import { ResetPasswordDto } from './dto/reset-password.dto';
 import { JwtAuthGuard } from './guards/jwt-auth/jwt-auth.guard';
 import { ResendVerificationDto } from './dto/resend-verification.dto';
 import { ChangePasswordDto } from './dto/change-password.dto';
+import { VerifyPhoneDto } from './dto/verify-phone.dto';
+import { LoginPhoneDto } from './dto/login-phone.dto';
+import { VerifyLoginOtpDto } from './dto/verify-login-otp.dto';
 
 interface AuthenticatedRequest extends ExpressRequest {
   user: JwtPayload;
@@ -86,6 +89,42 @@ export class AuthController {
   })
   verifyEmail(@Body() verifyEmailDto: VerifyEmailDto) {
     return this.authService.verifyEmail(verifyEmailDto);
+  }
+
+  @Post('verify-phone')
+  @ApiOperation({
+    summary: 'Verify user phone number',
+  })
+  @ApiResponse({
+    status: 200,
+    description: 'Phone verified successfully.',
+  })
+  verifyPhone(@Body() verifyPhoneDto: VerifyPhoneDto) {
+    return this.authService.verifyPhone(verifyPhoneDto);
+  }
+
+  @Post('send-login-otp')
+  @ApiOperation({
+    summary: 'Send OTP for phone login',
+  })
+  @ApiResponse({
+    status: 200,
+    description: 'OTP sent successfully.',
+  })
+  sendLoginOtp(@Body() loginPhoneDto: LoginPhoneDto) {
+    return this.authService.sendLoginOtp(loginPhoneDto);
+  }
+
+  @Post('verify-login-otp')
+  @ApiOperation({
+    summary: 'Login using phone and OTP',
+  })
+  @ApiResponse({
+    status: 200,
+    description: 'Logged in successfully.',
+  })
+  verifyLoginOtp(@Body() verifyLoginOtpDto: VerifyLoginOtpDto) {
+    return this.authService.verifyLoginOtp(verifyLoginOtpDto);
   }
 
   @Post('forgot-password')

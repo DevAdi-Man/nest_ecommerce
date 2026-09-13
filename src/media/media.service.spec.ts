@@ -65,6 +65,7 @@ describe('MediaService', () => {
     });
 
     it('should throw InternalServerErrorException if MinIO upload fails', async () => {
+      const loggerSpy = jest.spyOn(service['logger'], 'error').mockImplementation(() => {});
       mockMinioService.uploadFile.mockRejectedValueOnce(
         new Error('MinIO down'),
       );
@@ -72,6 +73,7 @@ describe('MediaService', () => {
       await expect(service.upload(file)).rejects.toThrow(
         InternalServerErrorException,
       );
+      loggerSpy.mockRestore();
     });
 
     it('should upload file, save to DB and return UploadedFileResponse', async () => {

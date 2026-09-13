@@ -58,12 +58,12 @@ export class User extends Model {
   @Column({
     type: DataType.STRING,
     unique: true,
-    allowNull: false,
+    allowNull: true,
     validate: {
       isEmail: true,
     },
   })
-  declare email: string;
+  declare email?: string;
 
   @Column({
     type: DataType.BOOLEAN,
@@ -73,9 +73,22 @@ export class User extends Model {
 
   @Column({
     type: DataType.STRING,
-    allowNull: false,
+    unique: true,
+    allowNull: true,
   })
-  declare password: string;
+  declare phone?: string;
+
+  @Column({
+    type: DataType.BOOLEAN,
+    defaultValue: false,
+  })
+  declare isVerifiedPhone: boolean;
+
+  @Column({
+    type: DataType.STRING,
+    allowNull: true, // Optional for phone OTP users
+  })
+  declare password?: string;
 
   @Column({
     type: DataType.STRING,

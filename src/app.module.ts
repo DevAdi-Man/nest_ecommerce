@@ -22,6 +22,8 @@ import { MediaModule } from './media/media.module';
 import { BrandsModule } from './brands/brands.module';
 import { SellerProfilesModule } from './seller-profiles/seller-profiles.module';
 import { DeliveryProfilesModule } from './delivery-profiles/delivery-profiles.module';
+import { InventoryModule } from './inventory/inventory.module';
+import { SmsModule } from './sms/sms.module';
 
 @Module({
   imports: [
@@ -78,6 +80,8 @@ import { DeliveryProfilesModule } from './delivery-profiles/delivery-profiles.mo
     BrandsModule,
     SellerProfilesModule,
     DeliveryProfilesModule,
+    InventoryModule,
+    SmsModule,
   ],
   providers: [
     {

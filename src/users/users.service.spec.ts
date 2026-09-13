@@ -1,12 +1,21 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { UsersService } from './users.service';
+import { RolesService } from '../roles/roles.service';
+import { getModelToken } from '@nestjs/sequelize';
+import { User } from './entities/user.entity';
+import { Role } from '../roles/entities/role.entity';
 
 describe('UsersService', () => {
   let service: UsersService;
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
-      providers: [UsersService],
+      providers: [
+        UsersService,
+        { provide: getModelToken(User), useValue: {} },
+        { provide: getModelToken(Role), useValue: {} },
+        { provide: RolesService, useValue: {} }
+      ],
     }).compile();
 
     service = module.get<UsersService>(UsersService);

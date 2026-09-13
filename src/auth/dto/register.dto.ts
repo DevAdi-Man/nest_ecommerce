@@ -69,22 +69,30 @@ export class RegisterDto {
   @IsNotEmpty({ message: 'Date of birth is required.' })
   dateOfBirth: string;
 
-  @ApiProperty({
+  @ApiPropertyOptional({
     example: 'aditya@example.com',
   })
-  @IsNotEmpty({ message: 'Email is required.' })
+  @IsOptional()
   @IsEmail({}, { message: 'Please provide a valid email address.' })
-  email: string;
+  email?: string;
 
-  @ApiProperty({
+  @ApiPropertyOptional({
+    example: '+919876543210',
+  })
+  @IsOptional()
+  @IsString()
+  @Matches(/^\+?[1-9]\d{1,14}$/, { message: 'Please provide a valid phone number (E.164 format).' })
+  phone?: string;
+
+  @ApiPropertyOptional({
     example: 'Admin@123',
   })
-  @IsNotEmpty({ message: 'Password is required.' })
+  @IsOptional()
   @IsString({ message: 'Password must be a string.' })
   @MinLength(8, { message: 'Password must be at least 8 characters long.' })
   @MaxLength(100, { message: 'Password cannot be longer than 100 characters.' })
   @Matches(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).+$/, {
     message: 'Password must contain uppercase, lowercase and a number.',
   })
-  password: string;
+  password?: string;
 }

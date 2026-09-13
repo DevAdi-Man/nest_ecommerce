@@ -12,6 +12,7 @@ import { RefreshStrategy } from './strategies/refresh.strategy/refresh.strategy'
 import { UsersModule } from 'src/users/users.module';
 import { OtpModule } from 'src/otp/otp.module';
 import { MailModule } from 'src/mail/mail.module';
+import { SmsModule } from 'src/sms/sms.module';
 import { RolesGuard } from './guards/roles/roles.guard';
 
 @Module({
@@ -41,6 +42,7 @@ import { RolesGuard } from './guards/roles/roles.guard';
     UsersModule,
     OtpModule,
     MailModule,
+    SmsModule,
   ],
   controllers: [AuthController],
   providers: [AuthService, JwtStrategy, RefreshStrategy, RolesGuard],
