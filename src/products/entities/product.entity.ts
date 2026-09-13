@@ -9,7 +9,10 @@ import {
   Table,
 } from 'sequelize-typescript';
 import { Category } from 'src/categories/entities/category.entity';
-import { OrderItem } from 'src/orders/entities/order-item.entity';
+import { Brand } from 'src/brands/entities/brand.entity';
+import { SellerProfile } from 'src/seller-profiles/entities/seller-profile.entity';
+import { ProductVariant } from './product-variant.entity';
+import { ProductImage } from './product-image.entity';
 
 @Table({
   tableName: 'products',
@@ -54,12 +57,6 @@ export class Product extends Model {
   })
   declare price: number;
 
-  @Column({
-    type: DataType.ARRAY(DataType.STRING),
-    allowNull: true,
-  })
-  declare images: string[];
-
   @Index
   @ForeignKey(() => Category)
   @Column({
@@ -71,6 +68,29 @@ export class Product extends Model {
   @BelongsTo(() => Category, 'categoryId')
   declare category: Category;
 
-  @HasMany(() => OrderItem)
-  declare orderItems: OrderItem[];
+  @ForeignKey(() => Brand)
+  @Column({
+    type: DataType.INTEGER,
+    allowNull: true,
+  })
+  declare brandId?: number;
+
+  @BelongsTo(() => Brand)
+  declare brand: Brand;
+
+  @ForeignKey(() => SellerProfile)
+  @Column({
+    type: DataType.INTEGER,
+    allowNull: true,
+  })
+  declare sellerId?: number;
+
+  @BelongsTo(() => SellerProfile)
+  declare seller: SellerProfile;
+
+  @HasMany(() => ProductVariant)
+  declare variants: ProductVariant[];
+
+  @HasMany(() => ProductImage)
+  declare images: ProductImage[];
 }

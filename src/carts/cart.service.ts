@@ -3,7 +3,8 @@ import { CreateCartDto } from './dto/create-cart.dto';
 import { UpdateCartDto } from './dto/update-cart.dto';
 import { InjectModel } from '@nestjs/sequelize';
 import { Cart } from './entities/cart.entity';
-import { CartItem } from './entities/cartItem-entity';
+import { CartItem } from './entities/cart-item.entity';
+import { ProductVariant } from 'src/products/entities/product-variant.entity';
 import { Product } from 'src/products/entities/product.entity';
 
 @Injectable()
@@ -32,7 +33,7 @@ export class CartService {
     const cartItem = await this.cartItemModel.findOne({
       where: {
         cartId: cart.id,
-        productId: createCartDto.productId,
+        productVariantId: createCartDto.productVariantId,
       },
     });
 
@@ -50,7 +51,7 @@ export class CartService {
     // 4. Agar nahi hai, toh naya item create karo
     const newItem = await this.cartItemModel.create({
       cartId: cart.id,
-      productId: createCartDto.productId,
+      productVariantId: createCartDto.productVariantId,
       quantity: createCartDto.quantity ?? 1,
     });
 
@@ -72,7 +73,8 @@ export class CartService {
           model: CartItem,
           include: [
             {
-              model: Product,
+              model: ProductVariant,
+              include: [{ model: Product }]
             },
           ],
         },

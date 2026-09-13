@@ -7,7 +7,8 @@ import {
   Model,
   Table,
 } from 'sequelize-typescript';
-import { Product } from 'src/products/entities/product.entity';
+import { ProductVariant } from 'src/products/entities/product-variant.entity';
+import { SellerProfile } from 'src/seller-profiles/entities/seller-profile.entity';
 import { Order } from './order.entity';
 
 @Table({
@@ -50,13 +51,23 @@ export class OrderItem extends Model {
   declare orders: Order;
 
   @Index
-  @ForeignKey(() => Product)
+  @ForeignKey(() => ProductVariant)
   @Column({
     type: DataType.INTEGER,
     allowNull: false,
   })
-  declare productId: number;
+  declare productVariantId: number;
 
-  @BelongsTo(() => Product)
-  declare product: Product;
+  @BelongsTo(() => ProductVariant)
+  declare productVariant: ProductVariant;
+
+  @ForeignKey(() => SellerProfile)
+  @Column({
+    type: DataType.INTEGER,
+    allowNull: false,
+  })
+  declare sellerId: number;
+
+  @BelongsTo(() => SellerProfile)
+  declare seller: SellerProfile;
 }

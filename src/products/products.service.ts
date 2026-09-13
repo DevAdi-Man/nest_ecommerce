@@ -34,8 +34,10 @@ export class ProductsService {
       },
     );
 
+    const { images, ...restCreate } = createProductDto;
+
     const product = await this.productModel.create({
-      ...createProductDto,
+      ...restCreate,
       slug,
     });
 
@@ -115,7 +117,8 @@ export class ProductsService {
     const { product } = await this.findOne(id);
     if (!product) throw new NotFoundException('Product not found.');
 
-    const updateData: Partial<Product> = { ...updateProductDto };
+    const { images, ...restUpdate } = updateProductDto;
+    const updateData: Partial<Product> = { ...restUpdate } as Partial<Product>;
 
     if (updateProductDto.name && updateProductDto.name !== product.name) {
       const existingProduct = await this.productModel.findOne({

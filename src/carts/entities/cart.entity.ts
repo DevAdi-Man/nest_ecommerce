@@ -9,7 +9,7 @@ import {
   Table,
 } from 'sequelize-typescript';
 import { User } from 'src/users/entities/user.entity';
-import { CartItem } from './cartItem-entity';
+import { CartItem } from './cart-item.entity';
 
 @Table({
   tableName: 'cart',

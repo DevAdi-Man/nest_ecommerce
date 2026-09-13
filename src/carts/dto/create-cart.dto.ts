@@ -3,20 +3,19 @@ import { IsInt, IsNotEmpty, IsOptional, Min } from 'class-validator';
 
 export class CreateCartDto {
   @ApiProperty({
-    description: 'Id of the product to add to cart.',
+    description: 'Product variant ID to add in cart',
     example: 1,
   })
   @IsInt()
   @IsNotEmpty()
-  productId: number;
+  productVariantId: number;
 
   @ApiPropertyOptional({
-    description: 'Quentity of the product.',
+    description: 'Quantity of Product',
     example: 1,
-    default: 1,
   })
   @IsOptional()
   @IsInt()
   @Min(1)
-  quantity?: number = 1;
+  quantity?: number;
 }

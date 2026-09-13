@@ -2,7 +2,8 @@ import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectModel } from '@nestjs/sequelize';
 import { Address } from 'src/addresses/entities/address.entity';
 import { Cart } from 'src/carts/entities/cart.entity';
-import { CartItem } from 'src/carts/entities/cartItem-entity';
+import { CartItem } from 'src/carts/entities/cart-item.entity';
+import { ProductVariant } from 'src/products/entities/product-variant.entity';
 import { Product } from 'src/products/entities/product.entity';
 import { CreateOrderDto } from './dto/create-order.dto';
 import { UpdateOrderDto } from './dto/update-order.dto';
@@ -48,7 +49,12 @@ export class OrdersService {
       where: {
         cartId: cart.id,
       },
-      include: [Product],
+      include: [
+        {
+          model: ProductVariant,
+          include: [Product],
+        },
+      ],
     });
 
     // cart empty check kro to error
@@ -58,7 +64,7 @@ export class OrdersService {
 
     // totalAmount calculate kro
     const totalAmount = cartItems.reduce(
-      (total, item) => total + item.product.price * item.quantity,
+      (total, item) => total + (item.productVariant?.price ?? 0) * item.quantity,
       0,
     );
 
@@ -99,9 +105,10 @@ export class OrdersService {
       cartItems.map(async (item) => {
         return await this.orderItemModel.create({
           orderId: order.id,
-          productId: item.productId,
+          productVariantId: item.productVariantId,
+          sellerId: item.productVariant.product.sellerId,
           quantity: item.quantity,
-          priceAtPurchase: item.product.price,
+          priceAtPurchase: item.productVariant.price,
         });
       }),
     );
