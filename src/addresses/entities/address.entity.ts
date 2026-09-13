@@ -80,4 +80,22 @@ export class Address extends Model {
     defaultValue: false,
   })
   declare isDefault: boolean;
+
+  @Column({
+    type: DataType.STRING(20),
+    allowNull: true,
+  })
+  declare phone?: string;
+
+  @Column({
+    type: DataType.DECIMAL(10, 8),
+    allowNull: true,
+  })
+  declare latitude?: number;
+
+  @Column({
+    type: DataType.DECIMAL(11, 8),
+    allowNull: true,
+  })
+  declare longitude?: number;
 }

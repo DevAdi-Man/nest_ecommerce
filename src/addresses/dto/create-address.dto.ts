@@ -86,5 +86,28 @@ export class CreateAddressDto {
   })
   @IsOptional()
   @IsBoolean()
-  isDefault: boolean;
+  isDefault?: boolean;
+
+  @ApiPropertyOptional({
+    description: 'Phone number for this address',
+    example: '+919876543210',
+  })
+  @IsOptional()
+  @IsString()
+  @MaxLength(20)
+  phone?: string;
+
+  @ApiPropertyOptional({
+    description: 'Latitude',
+    example: 28.7041,
+  })
+  @IsOptional()
+  latitude?: number;
+
+  @ApiPropertyOptional({
+    description: 'Longitude',
+    example: 77.1025,
+  })
+  @IsOptional()
+  longitude?: number;
 }
