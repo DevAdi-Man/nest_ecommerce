@@ -43,4 +43,12 @@ export class UpdateUserDto extends PartialType(
   @MinLength(6, { message: 'Password must be at least 6 characters long.' })
   @MaxLength(100, { message: 'Password cannot be longer than 100 characters.' })
   password?: string;
+
+  @IsOptional()
+  @IsString({ message: 'Phone must be a string.' })
+  @MaxLength(20, { message: 'Phone cannot be longer than 20 characters.' })
+  phone?: string;
+
+  @IsOptional()
+  isActive?: boolean;
 }

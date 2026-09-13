@@ -77,4 +77,10 @@ export class CreateUserDto {
   @IsInt({ message: 'Role ID must be an integer.' })
   @Min(1, { message: 'Role ID must be greater than 0.' })
   roleId: number;
+
+  @ApiPropertyOptional({ example: '+1234567890' })
+  @IsOptional()
+  @IsString({ message: 'Phone must be a string.' })
+  @MaxLength(20, { message: 'Phone cannot be longer than 20 characters.' })
+  phone?: string;
 }

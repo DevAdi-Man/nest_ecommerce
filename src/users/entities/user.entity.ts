@@ -72,6 +72,18 @@ export class User extends Model {
   declare isVerifiedEmail: boolean;
 
   @Column({
+    type: DataType.STRING(20),
+    allowNull: true,
+  })
+  declare phone?: string;
+
+  @Column({
+    type: DataType.BOOLEAN,
+    defaultValue: true,
+  })
+  declare isActive: boolean;
+
+  @Column({
     type: DataType.STRING,
     allowNull: false,
   })

@@ -54,6 +54,7 @@ import { MediaModule } from './media/media.module';
           database: config.get('DB_NAME'),
           autoLoadModels: true,
           synchronize: true,
+          sync: { alter: true },
         };
       },
     }),

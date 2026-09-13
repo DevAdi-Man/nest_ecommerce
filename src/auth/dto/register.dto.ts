@@ -87,4 +87,10 @@ export class RegisterDto {
     message: 'Password must contain uppercase, lowercase and a number.',
   })
   password: string;
+
+  @ApiPropertyOptional({ example: '+1234567890' })
+  @IsOptional()
+  @IsString({ message: 'Phone must be a string.' })
+  @MaxLength(20, { message: 'Phone cannot be longer than 20 characters.' })
+  phone?: string;
 }
