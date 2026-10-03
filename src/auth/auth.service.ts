@@ -295,11 +295,12 @@ export class AuthService {
     if (!user) {
       return {
         message:
-          'If an account exists with this email, a password reset email has been sent.',
+          'If an account exists with this email, a verification email has been sent.',
       };
     }
-    if (!user.isVerifiedEmail)
-      throw new UnauthorizedException('Please verify email first.');
+    if (user.isVerifiedEmail) {
+      throw new ConflictException('Email is already verified.');
+    }
 
     const otp = await this.otpService.createOtp(user.id, OtpType.VERIFY_EMAIL);
 
@@ -338,7 +339,7 @@ export class AuthService {
     const user = await this.userModel.findByPk(userId);
     if (!user) throw new NotFoundException('User not found.');
     if (!user.isVerifiedEmail)
-      throw new UnauthorizedException('Please verifi email first.');
+      throw new UnauthorizedException('Please verify email first.');
 
     const isOldPasswordCorrect = await this.comparePassword(
       changePasswordDto.oldPassword,
@@ -359,7 +360,7 @@ export class AuthService {
 
     const hashPassword = await this.hashPassword(changePasswordDto.newPassword);
     await user.update({
-      passport: hashPassword,
+      password: hashPassword,
       refreshToken: null,
     });
     return { message: 'Password changed successfully.' };

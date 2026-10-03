@@ -1,24 +1,23 @@
 services:
   postgres:
-    image: postgres:17
+    image: docker.io/library/postgres:17
     container_name: ecommerce_db
     restart: always
     ports:
-      - "5432:5432"
+      - '5432:5432'
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: password
       POSTGRES_DB: ecommerce
-
     volumes:
       - postgres_data:/var/lib/postgresql/data
 
   pgadmin:
-    image: dpage/pgadmin4
+    image: docker.io/dpage/pgadmin4
     container_name: ecommerce_pgadmin
     restart: always
     ports:
-      - "5050:80"
+      - '5050:80'
     environment:
       PGADMIN_DEFAULT_EMAIL: admin@example.com
       PGADMIN_DEFAULT_PASSWORD: admin123
@@ -26,21 +25,21 @@ services:
       - postgres
 
   adminer:
-    image: adminer
+    image: docker.io/library/adminer
     container_name: ecommerce_adminer
     restart: always
     ports:
-      - "8081:8080"
+      - '8081:8080'
     depends_on:
       - postgres
 
   minio:
-    image: minio/minio
+    image: quay.io/minio/minio:latest
     container_name: ecommerce_minio
     restart: always
     ports:
-      - "9000:9000"
-      - "9001:9001"
+      - '9000:9000'
+      - '9001:9001'
     environment:
       MINIO_ROOT_USER: minioadmin
       MINIO_ROOT_PASSWORD: minioadmin
@@ -49,35 +48,35 @@ services:
       - minio_data:/data
 
   redis:
-    image: redis:7-alpine
+    image: docker.io/library/redis:7-alpine
     container_name: ecommerce_redis
     restart: always
     ports:
-      - "6379:6379"
+      - '6379:6379'
     volumes:
       - redis_data:/data
 
   mailpit:
-    image: axllent/mailpit
+    image: docker.io/axllent/mailpit
     container_name: ecommerce_mailpit
     restart: always
     ports:
-      - "1025:1025"
-      - "8025:8025"
+      - '1025:1025'
+      - '8025:8025'
 
   architecture-docs:
-    image: nginx:alpine
+    image: docker.io/library/nginx:alpine
     container_name: ecommerce_architecture_docs
     restart: always
     ports:
-      - "8082:80"
+      - '8082:80'
     volumes:
-      - ./db-schema.html:/usr/share/nginx/html/index.html:ro
+      - ./db-schema.html:/usr/share/nginx/html/index.html:ro,Z
 
   schemaspy:
-    image: schemaspy/schemaspy:latest
+    image: docker.io/schemaspy/schemaspy:latest
     container_name: ecommerce_schemaspy
-    user: "root"
+    # user: 'root'
     command: -t pgsql11 -host postgres -port 5432 -db ecommerce -u postgres -p password -s public
     volumes:
       - schemaspy_data:/output
@@ -85,13 +84,13 @@ services:
       - postgres
 
   schemaspy-docs:
-    image: nginx:alpine
+    image: docker.io/library/nginx:alpine
     container_name: ecommerce_schemaspy_docs
     restart: always
     ports:
-      - "8083:80"
+      - '8083:80'
     volumes:
-      - schemaspy_data:/usr/share/nginx/html:ro
+      - schemaspy_data:/usr/share/nginx/html:ro,Z
     depends_on:
       - schemaspy
 

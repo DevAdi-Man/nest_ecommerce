@@ -39,6 +39,7 @@ export default {
         'mail',
         'media',
         'roles',
+        'seller',
         'common',
         'config',
         'docker',
