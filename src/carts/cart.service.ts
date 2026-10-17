@@ -43,7 +43,7 @@ export class CartService {
       await cartItem.save();
 
       return {
-        message: 'Cart Item quantity update.',
+        message: 'Cart item quantity updated.',
         cartItem,
       };
     }
@@ -55,7 +55,7 @@ export class CartService {
     });
 
     return {
-      message: 'Cart Item is added.',
+      message: 'Item added to cart successfully.',
       cartItem: newItem,
     };
   }
@@ -85,7 +85,7 @@ export class CartService {
     }
 
     return {
-      message: 'Cart create successfull.',
+      message: 'Cart fetched successfully.',
       cart,
     };
   }
@@ -121,7 +121,7 @@ export class CartService {
     cartItem.quantity = updateCartDto.quantity;
     await cartItem.save();
     return {
-      message: 'Cart Item added successfull.',
+      message: 'Cart item updated successfully.',
       cartItem,
     };
   }
@@ -152,7 +152,7 @@ export class CartService {
 
     await cartItem.destroy();
     return {
-      message: 'Cart Item remove successfull.',
+      message: 'Cart item removed successfully.',
     };
   }
 }

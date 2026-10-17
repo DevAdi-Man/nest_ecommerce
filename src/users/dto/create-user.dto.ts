@@ -29,7 +29,7 @@ export class CreateUserDto {
   @Matches(/^[A-Za-z\s]+$/, {
     message: 'First name can only contain letters and spaces.',
   })
-  firstName: string;
+  declare firstName: string;
 
   @ApiPropertyOptional({ example: 'Singh' })
   @IsOptional()
@@ -40,7 +40,7 @@ export class CreateUserDto {
   @Matches(/^[A-Za-z\s]+$/, {
     message: 'Middle name can only contain letters and spaces.',
   })
-  middleName?: string;
+  declare middleName?: string;
 
   @ApiProperty({ example: 'Sharma' })
   @IsString({ message: 'Last name must be a string.' })
@@ -50,17 +50,17 @@ export class CreateUserDto {
   @Matches(/^[A-Za-z\s]+$/, {
     message: 'Last name can only contain letters and spaces.',
   })
-  lastName: string;
+  declare lastName: string;
 
   @ApiProperty({ example: '2002-05-11' })
   @IsDateString({}, { message: 'Date of birth must be a valid ISO date.' })
   @IsNotEmpty({ message: 'Date of birth is required.' })
-  dateOfBirth: string;
+  declare dateOfBirth: string;
 
   @ApiProperty({ example: 'prachi@example.com' })
   @IsNotEmpty({ message: 'Email is required.' })
   @IsEmail({}, { message: 'Please provide a valid email address.' })
-  email: string;
+  declare email: string;
 
   @ApiProperty({ example: 'Admin@123' })
   @IsNotEmpty({ message: 'Password is required.' })
@@ -70,11 +70,11 @@ export class CreateUserDto {
   @Matches(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).+$/, {
     message: 'Password must contain uppercase, lowercase and a number.',
   })
-  password: string;
+  declare password: string;
 
   @ApiProperty({ example: 1, description: 'Role ID to assign to the user' })
   @IsNotEmpty({ message: 'Role ID is required.' })
   @IsInt({ message: 'Role ID must be an integer.' })
   @Min(1, { message: 'Role ID must be greater than 0.' })
-  roleId: number;
+  declare roleId: number;
 }

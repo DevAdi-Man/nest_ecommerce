@@ -12,6 +12,7 @@ import { Address } from 'src/addresses/entities/address.entity';
 import { Cart } from 'src/carts/entities/cart.entity';
 import { Order } from 'src/orders/entities/order.entity';
 import { Role } from 'src/roles/entities/role.entity';
+import { Seller } from 'src/seller/entities/seller.entity';
 
 @Table({
   tableName: 'users',
@@ -101,4 +102,7 @@ export class User extends Model {
 
   @HasMany(() => Order)
   declare orders: Order[];
+
+  @HasOne(() => Seller)
+  declare seller: Seller;
 }

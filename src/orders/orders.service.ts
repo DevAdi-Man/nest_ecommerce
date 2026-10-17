@@ -113,7 +113,7 @@ export class OrdersService {
     });
     // order return kro
     return {
-      message: 'Order create successfull.',
+      message: 'Order created successfully.',
       order,
       orderItems,
       orderShippingAddress,
