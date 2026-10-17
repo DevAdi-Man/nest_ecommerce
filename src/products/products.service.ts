@@ -117,7 +117,7 @@ export class ProductsService {
 
     const updateData: Partial<Product> = { ...updateProductDto };
 
-    if (updateProductDto.name && updateProductDto.name !== product.name) {
+    if (updateProductDto.name && updateProductDto.name !== product.title) {
       const existingProduct = await this.productModel.findOne({
         where: { name: updateProductDto.name },
       });
