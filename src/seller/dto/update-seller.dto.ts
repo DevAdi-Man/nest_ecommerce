@@ -1,7 +1,6 @@
 import { ApiPropertyOptional } from '@nestjs/swagger';
 import {
   IsDateString,
-  IsEnum,
   IsOptional,
   IsString,
   IsUrl,
@@ -9,7 +8,6 @@ import {
   MaxLength,
   MinLength,
 } from 'class-validator';
-import { SellerTier } from './create-seller.dto';
 
 export class UpdateSellerDto {
   // --- Profile Fields ---
@@ -82,15 +80,4 @@ export class UpdateSellerDto {
     message: 'GSTIN must be a valid GSTIN format.',
   })
   gstin?: string;
-
-  @ApiPropertyOptional({
-    enum: SellerTier,
-    example: SellerTier.GOLD,
-    description: 'Tier of the seller',
-  })
-  @IsOptional()
-  @IsEnum(SellerTier, {
-    message: 'Tier must be one of the following values: BRONZE, SILVER, GOLD.',
-  })
-  tier?: SellerTier;
 }

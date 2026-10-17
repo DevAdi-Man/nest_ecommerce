@@ -1,5 +1,6 @@
 import {
   BadRequestException,
+  ConflictException,
   Injectable,
   NotFoundException,
 } from '@nestjs/common';
@@ -10,8 +11,8 @@ import { User } from 'src/users/entities/user.entity';
 import { InjectConnection, InjectModel } from '@nestjs/sequelize';
 import { Role } from 'src/roles/entities/role.entity';
 import { Role as RoleEnum } from 'src/auth/enums/role.enum';
-import { Sequelize, WhereOptions } from 'sequelize';
-import { UpgradeSellerDto } from './dto/upgade-seller.dto';
+import { Op, Sequelize, WhereOptions } from 'sequelize';
+import { UpgradeSellerDto } from './dto/upgrade-seller.dto';
 import * as bcrypt from 'bcrypt';
 import { SellerQueryDto } from './dto/query-seller.dto';
 
@@ -41,6 +42,22 @@ export class SellerService {
         transaction,
       });
       if (!sellerRole) throw new NotFoundException('Role does not exist.');
+
+      const existingUser = await this.userModel.findOne({
+        where: { email: createSellerDto.email },
+        transaction,
+      });
+      if (existingUser) {
+        throw new ConflictException('Email already exists.');
+      }
+
+      const existingGstin = await this.sellerModel.findOne({
+        where: { gstin: createSellerDto.gstin },
+        transaction,
+      });
+      if (existingGstin) {
+        throw new ConflictException('Seller with this GSTIN already exists.');
+      }
 
       const hashedPassword = await this.hashPassword(createSellerDto.password);
 
@@ -111,20 +128,19 @@ export class SellerService {
   }
 
   async findOne(id: number) {
-    const seller = await this.sellerModel.findByPk(id);
+    const seller = await this.sellerModel.findByPk(id, {
+      include: [
+        {
+          model: User,
+          attributes: {
+            exclude: ['password', 'refreshToken'],
+          },
+        },
+      ],
+    });
     if (!seller) throw new NotFoundException('Seller not found.');
 
-    const user = await this.userModel.findByPk(seller.userId, {
-      attributes: { exclude: ['password', 'refreshToken'] },
-    });
-    if (!user) {
-      throw new NotFoundException('User not found.');
-    }
-
-    return {
-      ...user.toJSON(),
-      ...seller.toJSON(),
-    };
+    return seller;
   }
 
   async upgrade(userId: number, dto: UpgradeSellerDto) {
@@ -132,6 +148,16 @@ export class SellerService {
 
     if (!user) {
       throw new NotFoundException('User not found.');
+    }
+
+    const gstinConflict = await this.sellerModel.findOne({
+      where: {
+        gstin: dto.gstin,
+        userId: { [Op.ne]: userId },
+      },
+    });
+    if (gstinConflict) {
+      throw new ConflictException('Seller with this GSTIN already exists.');
     }
 
     const existingSeller = await this.sellerModel.findOne({
@@ -185,7 +211,9 @@ export class SellerService {
       if (!seller) throw new NotFoundException('Seller not found.');
 
       if (seller.status !== SellerStatus.PENDING) {
-        throw new BadRequestException('Only pending seller can be approve.');
+        throw new BadRequestException(
+          'Only pending seller applications can be approved.',
+        );
       }
 
       const sellerRole = await this.roleModel.findOne({
@@ -236,7 +264,9 @@ export class SellerService {
       if (!seller) throw new NotFoundException('Seller not found.');
 
       if (seller.status !== SellerStatus.PENDING) {
-        throw new BadRequestException('Only pending seller can be rejected.');
+        throw new BadRequestException(
+          'Only pending seller applications can be rejected.',
+        );
       }
 
       await seller.update(
@@ -292,10 +322,26 @@ export class SellerService {
       const sellerUpdates: Partial<Seller> = {};
       if (updateSellerDto.legalBusinessName !== undefined)
         sellerUpdates.legalBusinessName = updateSellerDto.legalBusinessName;
-      if (updateSellerDto.gstin !== undefined)
+      if (
+        updateSellerDto.gstin !== undefined &&
+        updateSellerDto.gstin !== seller.gstin
+      ) {
+        const existingGstin = await this.sellerModel.findOne({
+          where: {
+            gstin: updateSellerDto.gstin,
+            id: { [Op.ne]: seller.id },
+          },
+          transaction,
+        });
+        if (existingGstin) {
+          throw new ConflictException('Seller with this GSTIN already exists.');
+        }
         sellerUpdates.gstin = updateSellerDto.gstin;
-      if (updateSellerDto.tier !== undefined)
-        sellerUpdates.tier = updateSellerDto.tier;
+        // If GSTIN changes on an approved seller, re-verification is required
+        if (seller.status === SellerStatus.APPROVED) {
+          sellerUpdates.status = SellerStatus.PENDING;
+        }
+      }
 
       if (Object.keys(sellerUpdates).length > 0) {
         await seller.update(sellerUpdates, { transaction });

@@ -3,6 +3,7 @@ import {
   IsEnum,
   IsNotEmpty,
   IsString,
+  Matches,
   MaxLength,
   MinLength,
 } from 'class-validator';
@@ -24,18 +25,21 @@ export class UpgradeSellerDto {
   declare legalBusinessName: string;
 
   @ApiProperty({
-    example: '123456789012345',
+    example: '27ABCDE1234F1Z5',
     description: 'GSTIN of the seller',
   })
   @IsString({ message: 'GSTIN must be a string.' })
   @IsNotEmpty({ message: 'GSTIN is required.' })
+  @Matches(/^[0-9]{2}[A-Z]{5}[0-9]{4}[A-Z][1-9A-Z]Z[0-9A-Z]$/, {
+    message: 'GSTIN must be a valid GSTIN format.',
+  })
   declare gstin: string;
 
   @ApiProperty({
-    example: 'Gold',
+    enum: SellerTier,
+    example: SellerTier.GOLD,
     description: 'Tier of the seller',
   })
-  @IsString({ message: 'Tier must be a string.' })
   @IsNotEmpty({ message: 'Tier is required.' })
   @IsEnum(SellerTier, {
     message: 'Tier must be one of the following values: BRONZE, SILVER, GOLD.',

@@ -3,12 +3,16 @@ import {
   Column,
   DataType,
   ForeignKey,
+  HasMany,
+  HasOne,
   Index,
   Model,
   Table,
 } from 'sequelize-typescript';
 import { User } from 'src/users/entities/user.entity';
 import { SellerTier } from '../dto/create-seller.dto';
+import { SellerPayOut } from './seller-payout-account.entity';
+import { SellerLedgerEntry } from './seller-ledger-entry.entity';
 
 export enum SellerStatus {
   PENDING = 'PENDING',
@@ -59,7 +63,7 @@ export class Seller extends Model {
     allowNull: false,
     defaultValue: SellerStatus.PENDING,
   })
-  declare status: string;
+  declare status: SellerStatus;
 
   @Index
   @ForeignKey(() => User)
@@ -72,4 +76,10 @@ export class Seller extends Model {
 
   @BelongsTo(() => User)
   declare user: User;
+
+  @HasOne(() => SellerPayOut)
+  declare sellerPayout: SellerPayOut;
+
+  @HasMany(() => SellerLedgerEntry)
+  declare sellerLedgerEntry: SellerLedgerEntry[];
 }

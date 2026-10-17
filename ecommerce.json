@@ -1,0 +1,6065 @@
+{
+  "version": "32.5.4",
+  "pages": [
+    {
+      "id": "erd",
+      "name": "Ecommerce_Marketplace_ERD",
+      "cells": [
+        {
+          "id": "1",
+          "type": "layer"
+        },
+        {
+          "id": "t_Role",
+          "type": "node",
+          "parent": "1",
+          "label": "Role"
+        },
+        {
+          "id": "row_c_Role_id",
+          "type": "node",
+          "parent": "t_Role"
+        },
+        {
+          "id": "c_Role_id_pk",
+          "type": "node",
+          "parent": "row_c_Role_id",
+          "label": "PK "
+        },
+        {
+          "id": "c_Role_id_name",
+          "type": "node",
+          "parent": "row_c_Role_id",
+          "label": "id"
+        },
+        {
+          "id": "c_Role_id_type",
+          "type": "node",
+          "parent": "row_c_Role_id",
+          "label": "integer"
+        },
+        {
+          "id": "row_c_Role_name",
+          "type": "node",
+          "parent": "t_Role"
+        },
+        {
+          "id": "c_Role_name_pk",
+          "type": "node",
+          "parent": "row_c_Role_name"
+        },
+        {
+          "id": "c_Role_name_name",
+          "type": "node",
+          "parent": "row_c_Role_name",
+          "label": "name"
+        },
+        {
+          "id": "c_Role_name_type",
+          "type": "node",
+          "parent": "row_c_Role_name",
+          "label": "varchar(50)"
+        },
+        {
+          "id": "row_c_Role_description",
+          "type": "node",
+          "parent": "t_Role"
+        },
+        {
+          "id": "c_Role_description_pk",
+          "type": "node",
+          "parent": "row_c_Role_description"
+        },
+        {
+          "id": "c_Role_description_name",
+          "type": "node",
+          "parent": "row_c_Role_description",
+          "label": "description"
+        },
+        {
+          "id": "c_Role_description_type",
+          "type": "node",
+          "parent": "row_c_Role_description",
+          "label": "varchar(255)"
+        },
+        {
+          "id": "t_User",
+          "type": "node",
+          "parent": "1",
+          "label": "User"
+        },
+        {
+          "id": "row_c_User_id",
+          "type": "node",
+          "parent": "t_User"
+        },
+        {
+          "id": "c_User_id_pk",
+          "type": "node",
+          "parent": "row_c_User_id",
+          "label": "PK "
+        },
+        {
+          "id": "c_User_id_name",
+          "type": "node",
+          "parent": "row_c_User_id",
+          "label": "id"
+        },
+        {
+          "id": "c_User_id_type",
+          "type": "node",
+          "parent": "row_c_User_id",
+          "label": "integer"
+        },
+        {
+          "id": "row_c_User_firstName",
+          "type": "node",
+          "parent": "t_User"
+        },
+        {
+          "id": "c_User_firstName_pk",
+          "type": "node",
+          "parent": "row_c_User_firstName"
+        },
+        {
+          "id": "c_User_firstName_name",
+          "type": "node",
+          "parent": "row_c_User_firstName",
+          "label": "firstName"
+        },
+        {
+          "id": "c_User_firstName_type",
+          "type": "node",
+          "parent": "row_c_User_firstName",
+          "label": "varchar(100)"
+        },
+        {
+          "id": "row_c_User_lastName",
+          "type": "node",
+          "parent": "t_User"
+        },
+        {
+          "id": "c_User_lastName_pk",
+          "type": "node",
+          "parent": "row_c_User_lastName"
+        },
+        {
+          "id": "c_User_lastName_name",
+          "type": "node",
+          "parent": "row_c_User_lastName",
+          "label": "lastName"
+        },
+        {
+          "id": "c_User_lastName_type",
+          "type": "node",
+          "parent": "row_c_User_lastName",
+          "label": "varchar(100)"
+        },
+        {
+          "id": "row_c_User_email",
+          "type": "node",
+          "parent": "t_User"
+        },
+        {
+          "id": "c_User_email_pk",
+          "type": "node",
+          "parent": "row_c_User_email"
+        },
+        {
+          "id": "c_User_email_name",
+          "type": "node",
+          "parent": "row_c_User_email",
+          "label": "email"
+        },
+        {
+          "id": "c_User_email_type",
+          "type": "node",
+          "parent": "row_c_User_email",
+          "label": "varchar(255)"
+        },
+        {
+          "id": "row_c_User_phone",
+          "type": "node",
+          "parent": "t_User"
+        },
+        {
+          "id": "c_User_phone_pk",
+          "type": "node",
+          "parent": "row_c_User_phone"
+        },
+        {
+          "id": "c_User_phone_name",
+          "type": "node",
+          "parent": "row_c_User_phone",
+          "label": "phone"
+        },
+        {
+          "id": "c_User_phone_type",
+          "type": "node",
+          "parent": "row_c_User_phone",
+          "label": "varchar(20)"
+        },
+        {
+          "id": "row_c_User_passwordHash",
+          "type": "node",
+          "parent": "t_User"
+        },
+        {
+          "id": "c_User_passwordHash_pk",
+          "type": "node",
+          "parent": "row_c_User_passwordHash"
+        },
+        {
+          "id": "c_User_passwordHash_name",
+          "type": "node",
+          "parent": "row_c_User_passwordHash",
+          "label": "passwordHash"
+        },
+        {
+          "id": "c_User_passwordHash_type",
+          "type": "node",
+          "parent": "row_c_User_passwordHash",
+          "label": "varchar(255)"
+        },
+        {
+          "id": "row_c_User_avatarUrl",
+          "type": "node",
+          "parent": "t_User"
+        },
+        {
+          "id": "c_User_avatarUrl_pk",
+          "type": "node",
+          "parent": "row_c_User_avatarUrl"
+        },
+        {
+          "id": "c_User_avatarUrl_name",
+          "type": "node",
+          "parent": "row_c_User_avatarUrl",
+          "label": "avatarUrl"
+        },
+        {
+          "id": "c_User_avatarUrl_type",
+          "type": "node",
+          "parent": "row_c_User_avatarUrl",
+          "label": "varchar(500)"
+        },
+        {
+          "id": "row_c_User_dateOfBirth",
+          "type": "node",
+          "parent": "t_User"
+        },
+        {
+          "id": "c_User_dateOfBirth_pk",
+          "type": "node",
+          "parent": "row_c_User_dateOfBirth"
+        },
+        {
+          "id": "c_User_dateOfBirth_name",
+          "type": "node",
+          "parent": "row_c_User_dateOfBirth",
+          "label": "dateOfBirth"
+        },
+        {
+          "id": "c_User_dateOfBirth_type",
+          "type": "node",
+          "parent": "row_c_User_dateOfBirth",
+          "label": "date"
+        },
+        {
+          "id": "row_c_User_isVerified",
+          "type": "node",
+          "parent": "t_User"
+        },
+        {
+          "id": "c_User_isVerified_pk",
+          "type": "node",
+          "parent": "row_c_User_isVerified"
+        },
+        {
+          "id": "c_User_isVerified_name",
+          "type": "node",
+          "parent": "row_c_User_isVerified",
+          "label": "isVerified"
+        },
+        {
+          "id": "c_User_isVerified_type",
+          "type": "node",
+          "parent": "row_c_User_isVerified",
+          "label": "boolean"
+        },
+        {
+          "id": "row_c_User_status",
+          "type": "node",
+          "parent": "t_User"
+        },
+        {
+          "id": "c_User_status_pk",
+          "type": "node",
+          "parent": "row_c_User_status"
+        },
+        {
+          "id": "c_User_status_name",
+          "type": "node",
+          "parent": "row_c_User_status",
+          "label": "status"
+        },
+        {
+          "id": "c_User_status_type",
+          "type": "node",
+          "parent": "row_c_User_status",
+          "label": "varchar(20)"
+        },
+        {
+          "id": "row_c_User_createdAt",
+          "type": "node",
+          "parent": "t_User"
+        },
+        {
+          "id": "c_User_createdAt_pk",
+          "type": "node",
+          "parent": "row_c_User_createdAt"
+        },
+        {
+          "id": "c_User_createdAt_name",
+          "type": "node",
+          "parent": "row_c_User_createdAt",
+          "label": "createdAt"
+        },
+        {
+          "id": "c_User_createdAt_type",
+          "type": "node",
+          "parent": "row_c_User_createdAt",
+          "label": "timestamp"
+        },
+        {
+          "id": "row_c_User_updatedAt",
+          "type": "node",
+          "parent": "t_User"
+        },
+        {
+          "id": "c_User_updatedAt_pk",
+          "type": "node",
+          "parent": "row_c_User_updatedAt"
+        },
+        {
+          "id": "c_User_updatedAt_name",
+          "type": "node",
+          "parent": "row_c_User_updatedAt",
+          "label": "updatedAt"
+        },
+        {
+          "id": "c_User_updatedAt_type",
+          "type": "node",
+          "parent": "row_c_User_updatedAt",
+          "label": "timestamp"
+        },
+        {
+          "id": "t_UserRole",
+          "type": "node",
+          "parent": "1",
+          "label": "UserRole"
+        },
+        {
+          "id": "row_c_UserRole_id",
+          "type": "node",
+          "parent": "t_UserRole"
+        },
+        {
+          "id": "c_UserRole_id_pk",
+          "type": "node",
+          "parent": "row_c_UserRole_id",
+          "label": "PK "
+        },
+        {
+          "id": "c_UserRole_id_name",
+          "type": "node",
+          "parent": "row_c_UserRole_id",
+          "label": "id"
+        },
+        {
+          "id": "c_UserRole_id_type",
+          "type": "node",
+          "parent": "row_c_UserRole_id",
+          "label": "integer"
+        },
+        {
+          "id": "row_c_UserRole_userId",
+          "type": "node",
+          "parent": "t_UserRole"
+        },
+        {
+          "id": "c_UserRole_userId_pk",
+          "type": "node",
+          "parent": "row_c_UserRole_userId",
+          "label": "FK "
+        },
+        {
+          "id": "c_UserRole_userId_name",
+          "type": "node",
+          "parent": "row_c_UserRole_userId",
+          "label": "userId"
+        },
+        {
+          "id": "c_UserRole_userId_type",
+          "type": "node",
+          "parent": "row_c_UserRole_userId",
+          "label": "integer"
+        },
+        {
+          "id": "row_c_UserRole_roleId",
+          "type": "node",
+          "parent": "t_UserRole"
+        },
+        {
+          "id": "c_UserRole_roleId_pk",
+          "type": "node",
+          "parent": "row_c_UserRole_roleId",
+          "label": "FK "
+        },
+        {
+          "id": "c_UserRole_roleId_name",
+          "type": "node",
+          "parent": "row_c_UserRole_roleId",
+          "label": "roleId"
+        },
+        {
+          "id": "c_UserRole_roleId_type",
+          "type": "node",
+          "parent": "row_c_UserRole_roleId",
+          "label": "integer"
+        },
+        {
+          "id": "row_c_UserRole_assignedAt",
+          "type": "node",
+          "parent": "t_UserRole"
+        },
+        {
+          "id": "c_UserRole_assignedAt_pk",
+          "type": "node",
+          "parent": "row_c_UserRole_assignedAt"
+        },
+        {
+          "id": "c_UserRole_assignedAt_name",
+          "type": "node",
+          "parent": "row_c_UserRole_assignedAt",
+          "label": "assignedAt"
+        },
+        {
+          "id": "c_UserRole_assignedAt_type",
+          "type": "node",
+          "parent": "row_c_UserRole_assignedAt",
+          "label": "timestamp"
+        },
+        {
+          "id": "t_Address",
+          "type": "node",
+          "parent": "1",
+          "label": "Address"
+        },
+        {
+          "id": "row_c_Address_id",
+          "type": "node",
+          "parent": "t_Address"
+        },
+        {
+          "id": "c_Address_id_pk",
+          "type": "node",
+          "parent": "row_c_Address_id",
+          "label": "PK "
+        },
+        {
+          "id": "c_Address_id_name",
+          "type": "node",
+          "parent": "row_c_Address_id",
+          "label": "id"
+        },
+        {
+          "id": "c_Address_id_type",
+          "type": "node",
+          "parent": "row_c_Address_id",
+          "label": "integer"
+        },
+        {
+          "id": "row_c_Address_userId",
+          "type": "node",
+          "parent": "t_Address"
+        },
+        {
+          "id": "c_Address_userId_pk",
+          "type": "node",
+          "parent": "row_c_Address_userId",
+          "label": "FK "
+        },
+        {
+          "id": "c_Address_userId_name",
+          "type": "node",
+          "parent": "row_c_Address_userId",
+          "label": "userId"
+        },
+        {
+          "id": "c_Address_userId_type",
+          "type": "node",
+          "parent": "row_c_Address_userId",
+          "label": "integer"
+        },
+        {
+          "id": "row_c_Address_fullName",
+          "type": "node",
+          "parent": "t_Address"
+        },
+        {
+          "id": "c_Address_fullName_pk",
+          "type": "node",
+          "parent": "row_c_Address_fullName"
+        },
+        {
+          "id": "c_Address_fullName_name",
+          "type": "node",
+          "parent": "row_c_Address_fullName",
+          "label": "fullName"
+        },
+        {
+          "id": "c_Address_fullName_type",
+          "type": "node",
+          "parent": "row_c_Address_fullName",
+          "label": "varchar(255)"
+        },
+        {
+          "id": "row_c_Address_phone",
+          "type": "node",
+          "parent": "t_Address"
+        },
+        {
+          "id": "c_Address_phone_pk",
+          "type": "node",
+          "parent": "row_c_Address_phone"
+        },
+        {
+          "id": "c_Address_phone_name",
+          "type": "node",
+          "parent": "row_c_Address_phone",
+          "label": "phone"
+        },
+        {
+          "id": "c_Address_phone_type",
+          "type": "node",
+          "parent": "row_c_Address_phone",
+          "label": "varchar(20)"
+        },
+        {
+          "id": "row_c_Address_addressLine1",
+          "type": "node",
+          "parent": "t_Address"
+        },
+        {
+          "id": "c_Address_addressLine1_pk",
+          "type": "node",
+          "parent": "row_c_Address_addressLine1"
+        },
+        {
+          "id": "c_Address_addressLine1_name",
+          "type": "node",
+          "parent": "row_c_Address_addressLine1",
+          "label": "addressLine1"
+        },
+        {
+          "id": "c_Address_addressLine1_type",
+          "type": "node",
+          "parent": "row_c_Address_addressLine1",
+          "label": "varchar(255)"
+        },
+        {
+          "id": "row_c_Address_addressLine2",
+          "type": "node",
+          "parent": "t_Address"
+        },
+        {
+          "id": "c_Address_addressLine2_pk",
+          "type": "node",
+          "parent": "row_c_Address_addressLine2"
+        },
+        {
+          "id": "c_Address_addressLine2_name",
+          "type": "node",
+          "parent": "row_c_Address_addressLine2",
+          "label": "addressLine2"
+        },
+        {
+          "id": "c_Address_addressLine2_type",
+          "type": "node",
+          "parent": "row_c_Address_addressLine2",
+          "label": "varchar(255)"
+        },
+        {
+          "id": "row_c_Address_city",
+          "type": "node",
+          "parent": "t_Address"
+        },
+        {
+          "id": "c_Address_city_pk",
+          "type": "node",
+          "parent": "row_c_Address_city"
+        },
+        {
+          "id": "c_Address_city_name",
+          "type": "node",
+          "parent": "row_c_Address_city",
+          "label": "city"
+        },
+        {
+          "id": "c_Address_city_type",
+          "type": "node",
+          "parent": "row_c_Address_city",
+          "label": "varchar(100)"
+        },
+        {
+          "id": "row_c_Address_state",
+          "type": "node",
+          "parent": "t_Address"
+        },
+        {
+          "id": "c_Address_state_pk",
+          "type": "node",
+          "parent": "row_c_Address_state"
+        },
+        {
+          "id": "c_Address_state_name",
+          "type": "node",
+          "parent": "row_c_Address_state",
+          "label": "state"
+        },
+        {
+          "id": "c_Address_state_type",
+          "type": "node",
+          "parent": "row_c_Address_state",
+          "label": "varchar(100)"
+        },
+        {
+          "id": "row_c_Address_pincode",
+          "type": "node",
+          "parent": "t_Address"
+        },
+        {
+          "id": "c_Address_pincode_pk",
+          "type": "node",
+          "parent": "row_c_Address_pincode"
+        },
+        {
+          "id": "c_Address_pincode_name",
+          "type": "node",
+          "parent": "row_c_Address_pincode",
+          "label": "pincode"
+        },
+        {
+          "id": "c_Address_pincode_type",
+          "type": "node",
+          "parent": "row_c_Address_pincode",
+          "label": "varchar(20)"
+        },
+        {
+          "id": "row_c_Address_country",
+          "type": "node",
+          "parent": "t_Address"
+        },
+        {
+          "id": "c_Address_country_pk",
+          "type": "node",
+          "parent": "row_c_Address_country"
+        },
+        {
+          "id": "c_Address_country_name",
+          "type": "node",
+          "parent": "row_c_Address_country",
+          "label": "country"
+        },
+        {
+          "id": "c_Address_country_type",
+          "type": "node",
+          "parent": "row_c_Address_country",
+          "label": "varchar(100)"
+        },
+        {
+          "id": "row_c_Address_isDefault",
+          "type": "node",
+          "parent": "t_Address"
+        },
+        {
+          "id": "c_Address_isDefault_pk",
+          "type": "node",
+          "parent": "row_c_Address_isDefault"
+        },
+        {
+          "id": "c_Address_isDefault_name",
+          "type": "node",
+          "parent": "row_c_Address_isDefault",
+          "label": "isDefault"
+        },
+        {
+          "id": "c_Address_isDefault_type",
+          "type": "node",
+          "parent": "row_c_Address_isDefault",
+          "label": "boolean"
+        },
+        {
+          "id": "row_c_Address_addressType",
+          "type": "node",
+          "parent": "t_Address"
+        },
+        {
+          "id": "c_Address_addressType_pk",
+          "type": "node",
+          "parent": "row_c_Address_addressType"
+        },
+        {
+          "id": "c_Address_addressType_name",
+          "type": "node",
+          "parent": "row_c_Address_addressType",
+          "label": "addressType"
+        },
+        {
+          "id": "c_Address_addressType_type",
+          "type": "node",
+          "parent": "row_c_Address_addressType",
+          "label": "varchar(20)"
+        },
+        {
+          "id": "t_Hub",
+          "type": "node",
+          "parent": "1",
+          "label": "Hub"
+        },
+        {
+          "id": "row_c_Hub_id",
+          "type": "node",
+          "parent": "t_Hub"
+        },
+        {
+          "id": "c_Hub_id_pk",
+          "type": "node",
+          "parent": "row_c_Hub_id",
+          "label": "PK "
+        },
+        {
+          "id": "c_Hub_id_name",
+          "type": "node",
+          "parent": "row_c_Hub_id",
+          "label": "id"
+        },
+        {
+          "id": "c_Hub_id_type",
+          "type": "node",
+          "parent": "row_c_Hub_id",
+          "label": "integer"
+        },
+        {
+          "id": "row_c_Hub_name",
+          "type": "node",
+          "parent": "t_Hub"
+        },
+        {
+          "id": "c_Hub_name_pk",
+          "type": "node",
+          "parent": "row_c_Hub_name"
+        },
+        {
+          "id": "c_Hub_name_name",
+          "type": "node",
+          "parent": "row_c_Hub_name",
+          "label": "name"
+        },
+        {
+          "id": "c_Hub_name_type",
+          "type": "node",
+          "parent": "row_c_Hub_name",
+          "label": "varchar(255)"
+        },
+        {
+          "id": "row_c_Hub_city",
+          "type": "node",
+          "parent": "t_Hub"
+        },
+        {
+          "id": "c_Hub_city_pk",
+          "type": "node",
+          "parent": "row_c_Hub_city"
+        },
+        {
+          "id": "c_Hub_city_name",
+          "type": "node",
+          "parent": "row_c_Hub_city",
+          "label": "city"
+        },
+        {
+          "id": "c_Hub_city_type",
+          "type": "node",
+          "parent": "row_c_Hub_city",
+          "label": "varchar(100)"
+        },
+        {
+          "id": "row_c_Hub_state",
+          "type": "node",
+          "parent": "t_Hub"
+        },
+        {
+          "id": "c_Hub_state_pk",
+          "type": "node",
+          "parent": "row_c_Hub_state"
+        },
+        {
+          "id": "c_Hub_state_name",
+          "type": "node",
+          "parent": "row_c_Hub_state",
+          "label": "state"
+        },
+        {
+          "id": "c_Hub_state_type",
+          "type": "node",
+          "parent": "row_c_Hub_state",
+          "label": "varchar(100)"
+        },
+        {
+          "id": "row_c_Hub_pincode",
+          "type": "node",
+          "parent": "t_Hub"
+        },
+        {
+          "id": "c_Hub_pincode_pk",
+          "type": "node",
+          "parent": "row_c_Hub_pincode"
+        },
+        {
+          "id": "c_Hub_pincode_name",
+          "type": "node",
+          "parent": "row_c_Hub_pincode",
+          "label": "pincode"
+        },
+        {
+          "id": "c_Hub_pincode_type",
+          "type": "node",
+          "parent": "row_c_Hub_pincode",
+          "label": "varchar(20)"
+        },
+        {
+          "id": "t_DeliveryAgentAccount",
+          "type": "node",
+          "parent": "1",
+          "label": "DeliveryAgentAccount"
+        },
+        {
+          "id": "row_c_DeliveryAgentAccount_id",
+          "type": "node",
+          "parent": "t_DeliveryAgentAccount"
+        },
+        {
+          "id": "c_DeliveryAgentAccount_id_pk",
+          "type": "node",
+          "parent": "row_c_DeliveryAgentAccount_id",
+          "label": "PK "
+        },
+        {
+          "id": "c_DeliveryAgentAccount_id_name",
+          "type": "node",
+          "parent": "row_c_DeliveryAgentAccount_id",
+          "label": "id"
+        },
+        {
+          "id": "c_DeliveryAgentAccount_id_type",
+          "type": "node",
+          "parent": "row_c_DeliveryAgentAccount_id",
+          "label": "integer"
+        },
+        {
+          "id": "row_c_DeliveryAgentAccount_userId",
+          "type": "node",
+          "parent": "t_DeliveryAgentAccount"
+        },
+        {
+          "id": "c_DeliveryAgentAccount_userId_pk",
+          "type": "node",
+          "parent": "row_c_DeliveryAgentAccount_userId",
+          "label": "FK "
+        },
+        {
+          "id": "c_DeliveryAgentAccount_userId_name",
+          "type": "node",
+          "parent": "row_c_DeliveryAgentAccount_userId",
+          "label": "userId"
+        },
+        {
+          "id": "c_DeliveryAgentAccount_userId_type",
+          "type": "node",
+          "parent": "row_c_DeliveryAgentAccount_userId",
+          "label": "integer"
+        },
+        {
+          "id": "row_c_DeliveryAgentAccount_hubId",
+          "type": "node",
+          "parent": "t_DeliveryAgentAccount"
+        },
+        {
+          "id": "c_DeliveryAgentAccount_hubId_pk",
+          "type": "node",
+          "parent": "row_c_DeliveryAgentAccount_hubId",
+          "label": "FK "
+        },
+        {
+          "id": "c_DeliveryAgentAccount_hubId_name",
+          "type": "node",
+          "parent": "row_c_DeliveryAgentAccount_hubId",
+          "label": "hubId"
+        },
+        {
+          "id": "c_DeliveryAgentAccount_hubId_type",
+          "type": "node",
+          "parent": "row_c_DeliveryAgentAccount_hubId",
+          "label": "integer"
+        },
+        {
+          "id": "row_c_DeliveryAgentAccount_isAvailable",
+          "type": "node",
+          "parent": "t_DeliveryAgentAccount"
+        },
+        {
+          "id": "c_DeliveryAgentAccount_isAvailable_pk",
+          "type": "node",
+          "parent": "row_c_DeliveryAgentAccount_isAvailable"
+        },
+        {
+          "id": "c_DeliveryAgentAccount_isAvailable_name",
+          "type": "node",
+          "parent": "row_c_DeliveryAgentAccount_isAvailable",
+          "label": "isAvailable"
+        },
+        {
+          "id": "c_DeliveryAgentAccount_isAvailable_type",
+          "type": "node",
+          "parent": "row_c_DeliveryAgentAccount_isAvailable",
+          "label": "boolean"
+        },
+        {
+          "id": "t_SellerAccount",
+          "type": "node",
+          "parent": "1",
+          "label": "SellerAccount"
+        },
+        {
+          "id": "row_c_SellerAccount_id",
+          "type": "node",
+          "parent": "t_SellerAccount"
+        },
+        {
+          "id": "c_SellerAccount_id_pk",
+          "type": "node",
+          "parent": "row_c_SellerAccount_id",
+          "label": "PK "
+        },
+        {
+          "id": "c_SellerAccount_id_name",
+          "type": "node",
+          "parent": "row_c_SellerAccount_id",
+          "label": "id"
+        },
+        {
+          "id": "c_SellerAccount_id_type",
+          "type": "node",
+          "parent": "row_c_SellerAccount_id",
+          "label": "integer"
+        },
+        {
+          "id": "row_c_SellerAccount_userId",
+          "type": "node",
+          "parent": "t_SellerAccount"
+        },
+        {
+          "id": "c_SellerAccount_userId_pk",
+          "type": "node",
+          "parent": "row_c_SellerAccount_userId",
+          "label": "FK "
+        },
+        {
+          "id": "c_SellerAccount_userId_name",
+          "type": "node",
+          "parent": "row_c_SellerAccount_userId",
+          "label": "userId"
+        },
+        {
+          "id": "c_SellerAccount_userId_type",
+          "type": "node",
+          "parent": "row_c_SellerAccount_userId",
+          "label": "integer"
+        },
+        {
+          "id": "row_c_SellerAccount_legalBusinessName",
+          "type": "node",
+          "parent": "t_SellerAccount"
+        },
+        {
+          "id": "c_SellerAccount_legalBusinessName_pk",
+          "type": "node",
+          "parent": "row_c_SellerAccount_legalBusinessName"
+        },
+        {
+          "id": "c_SellerAccount_legalBusinessName_name",
+          "type": "node",
+          "parent": "row_c_SellerAccount_legalBusinessName",
+          "label": "legalBusinessName"
+        },
+        {
+          "id": "c_SellerAccount_legalBusinessName_type",
+          "type": "node",
+          "parent": "row_c_SellerAccount_legalBusinessName",
+          "label": "varchar(255)"
+        },
+        {
+          "id": "row_c_SellerAccount_gstin",
+          "type": "node",
+          "parent": "t_SellerAccount"
+        },
+        {
+          "id": "c_SellerAccount_gstin_pk",
+          "type": "node",
+          "parent": "row_c_SellerAccount_gstin"
+        },
+        {
+          "id": "c_SellerAccount_gstin_name",
+          "type": "node",
+          "parent": "row_c_SellerAccount_gstin",
+          "label": "gstin"
+        },
+        {
+          "id": "c_SellerAccount_gstin_type",
+          "type": "node",
+          "parent": "row_c_SellerAccount_gstin",
+          "label": "varchar(50)"
+        },
+        {
+          "id": "row_c_SellerAccount_tier",
+          "type": "node",
+          "parent": "t_SellerAccount"
+        },
+        {
+          "id": "c_SellerAccount_tier_pk",
+          "type": "node",
+          "parent": "row_c_SellerAccount_tier"
+        },
+        {
+          "id": "c_SellerAccount_tier_name",
+          "type": "node",
+          "parent": "row_c_SellerAccount_tier",
+          "label": "tier"
+        },
+        {
+          "id": "c_SellerAccount_tier_type",
+          "type": "node",
+          "parent": "row_c_SellerAccount_tier",
+          "label": "varchar(50)"
+        },
+        {
+          "id": "row_c_SellerAccount_rating",
+          "type": "node",
+          "parent": "t_SellerAccount"
+        },
+        {
+          "id": "c_SellerAccount_rating_pk",
+          "type": "node",
+          "parent": "row_c_SellerAccount_rating"
+        },
+        {
+          "id": "c_SellerAccount_rating_name",
+          "type": "node",
+          "parent": "row_c_SellerAccount_rating",
+          "label": "rating"
+        },
+        {
+          "id": "c_SellerAccount_rating_type",
+          "type": "node",
+          "parent": "row_c_SellerAccount_rating",
+          "label": "decimal(3,2)"
+        },
+        {
+          "id": "row_c_SellerAccount_status",
+          "type": "node",
+          "parent": "t_SellerAccount"
+        },
+        {
+          "id": "c_SellerAccount_status_pk",
+          "type": "node",
+          "parent": "row_c_SellerAccount_status"
+        },
+        {
+          "id": "c_SellerAccount_status_name",
+          "type": "node",
+          "parent": "row_c_SellerAccount_status",
+          "label": "status"
+        },
+        {
+          "id": "c_SellerAccount_status_type",
+          "type": "node",
+          "parent": "row_c_SellerAccount_status",
+          "label": "varchar(50)"
+        },
+        {
+          "id": "row_c_SellerAccount_createdAt",
+          "type": "node",
+          "parent": "t_SellerAccount"
+        },
+        {
+          "id": "c_SellerAccount_createdAt_pk",
+          "type": "node",
+          "parent": "row_c_SellerAccount_createdAt"
+        },
+        {
+          "id": "c_SellerAccount_createdAt_name",
+          "type": "node",
+          "parent": "row_c_SellerAccount_createdAt",
+          "label": "createdAt"
+        },
+        {
+          "id": "c_SellerAccount_createdAt_type",
+          "type": "node",
+          "parent": "row_c_SellerAccount_createdAt",
+          "label": "timestamp"
+        },
+        {
+          "id": "t_SellerPayoutAccount",
+          "type": "node",
+          "parent": "1",
+          "label": "SellerPayoutAccount"
+        },
+        {
+          "id": "row_c_SellerPayoutAccount_id",
+          "type": "node",
+          "parent": "t_SellerPayoutAccount"
+        },
+        {
+          "id": "c_SellerPayoutAccount_id_pk",
+          "type": "node",
+          "parent": "row_c_SellerPayoutAccount_id",
+          "label": "PK "
+        },
+        {
+          "id": "c_SellerPayoutAccount_id_name",
+          "type": "node",
+          "parent": "row_c_SellerPayoutAccount_id",
+          "label": "id"
+        },
+        {
+          "id": "c_SellerPayoutAccount_id_type",
+          "type": "node",
+          "parent": "row_c_SellerPayoutAccount_id",
+          "label": "integer"
+        },
+        {
+          "id": "row_c_SellerPayoutAccount_sellerId",
+          "type": "node",
+          "parent": "t_SellerPayoutAccount"
+        },
+        {
+          "id": "c_SellerPayoutAccount_sellerId_pk",
+          "type": "node",
+          "parent": "row_c_SellerPayoutAccount_sellerId",
+          "label": "FK "
+        },
+        {
+          "id": "c_SellerPayoutAccount_sellerId_name",
+          "type": "node",
+          "parent": "row_c_SellerPayoutAccount_sellerId",
+          "label": "sellerId"
+        },
+        {
+          "id": "c_SellerPayoutAccount_sellerId_type",
+          "type": "node",
+          "parent": "row_c_SellerPayoutAccount_sellerId",
+          "label": "integer"
+        },
+        {
+          "id": "row_c_SellerPayoutAccount_accountHolderName",
+          "type": "node",
+          "parent": "t_SellerPayoutAccount"
+        },
+        {
+          "id": "c_SellerPayoutAccount_accountHolderName_pk",
+          "type": "node",
+          "parent": "row_c_SellerPayoutAccount_accountHolderName"
+        },
+        {
+          "id": "c_SellerPayoutAccount_accountHolderName_name",
+          "type": "node",
+          "parent": "row_c_SellerPayoutAccount_accountHolderName",
+          "label": "accountHolderName"
+        },
+        {
+          "id": "c_SellerPayoutAccount_accountHolderName_type",
+          "type": "node",
+          "parent": "row_c_SellerPayoutAccount_accountHolderName",
+          "label": "varchar(255)"
+        },
+        {
+          "id": "row_c_SellerPayoutAccount_bankAccountNumberEnc",
+          "type": "node",
+          "parent": "t_SellerPayoutAccount"
+        },
+        {
+          "id": "c_SellerPayoutAccount_bankAccountNumberEnc_pk",
+          "type": "node",
+          "parent": "row_c_SellerPayoutAccount_bankAccountNumberEnc"
+        },
+        {
+          "id": "c_SellerPayoutAccount_bankAccountNumberEnc_name",
+          "type": "node",
+          "parent": "row_c_SellerPayoutAccount_bankAccountNumberEnc",
+          "label": "bankAccountNumberEnc"
+        },
+        {
+          "id": "c_SellerPayoutAccount_bankAccountNumberEnc_type",
+          "type": "node",
+          "parent": "row_c_SellerPayoutAccount_bankAccountNumberEnc",
+          "label": "varchar(255)"
+        },
+        {
+          "id": "row_c_SellerPayoutAccount_ifscCode",
+          "type": "node",
+          "parent": "t_SellerPayoutAccount"
+        },
+        {
+          "id": "c_SellerPayoutAccount_ifscCode_pk",
+          "type": "node",
+          "parent": "row_c_SellerPayoutAccount_ifscCode"
+        },
+        {
+          "id": "c_SellerPayoutAccount_ifscCode_name",
+          "type": "node",
+          "parent": "row_c_SellerPayoutAccount_ifscCode",
+          "label": "ifscCode"
+        },
+        {
+          "id": "c_SellerPayoutAccount_ifscCode_type",
+          "type": "node",
+          "parent": "row_c_SellerPayoutAccount_ifscCode",
+          "label": "varchar(50)"
+        },
+        {
+          "id": "row_c_SellerPayoutAccount_bankName",
+          "type": "node",
+          "parent": "t_SellerPayoutAccount"
+        },
+        {
+          "id": "c_SellerPayoutAccount_bankName_pk",
+          "type": "node",
+          "parent": "row_c_SellerPayoutAccount_bankName"
+        },
+        {
+          "id": "c_SellerPayoutAccount_bankName_name",
+          "type": "node",
+          "parent": "row_c_SellerPayoutAccount_bankName",
+          "label": "bankName"
+        },
+        {
+          "id": "c_SellerPayoutAccount_bankName_type",
+          "type": "node",
+          "parent": "row_c_SellerPayoutAccount_bankName",
+          "label": "varchar(255)"
+        },
+        {
+          "id": "row_c_SellerPayoutAccount_upiId",
+          "type": "node",
+          "parent": "t_SellerPayoutAccount"
+        },
+        {
+          "id": "c_SellerPayoutAccount_upiId_pk",
+          "type": "node",
+          "parent": "row_c_SellerPayoutAccount_upiId"
+        },
+        {
+          "id": "c_SellerPayoutAccount_upiId_name",
+          "type": "node",
+          "parent": "row_c_SellerPayoutAccount_upiId",
+          "label": "upiId"
+        },
+        {
+          "id": "c_SellerPayoutAccount_upiId_type",
+          "type": "node",
+          "parent": "row_c_SellerPayoutAccount_upiId",
+          "label": "varchar(255)"
+        },
+        {
+          "id": "row_c_SellerPayoutAccount_payoutCycle",
+          "type": "node",
+          "parent": "t_SellerPayoutAccount"
+        },
+        {
+          "id": "c_SellerPayoutAccount_payoutCycle_pk",
+          "type": "node",
+          "parent": "row_c_SellerPayoutAccount_payoutCycle"
+        },
+        {
+          "id": "c_SellerPayoutAccount_payoutCycle_name",
+          "type": "node",
+          "parent": "row_c_SellerPayoutAccount_payoutCycle",
+          "label": "payoutCycle"
+        },
+        {
+          "id": "c_SellerPayoutAccount_payoutCycle_type",
+          "type": "node",
+          "parent": "row_c_SellerPayoutAccount_payoutCycle",
+          "label": "varchar(50)"
+        },
+        {
+          "id": "row_c_SellerPayoutAccount_isVerified",
+          "type": "node",
+          "parent": "t_SellerPayoutAccount"
+        },
+        {
+          "id": "c_SellerPayoutAccount_isVerified_pk",
+          "type": "node",
+          "parent": "row_c_SellerPayoutAccount_isVerified"
+        },
+        {
+          "id": "c_SellerPayoutAccount_isVerified_name",
+          "type": "node",
+          "parent": "row_c_SellerPayoutAccount_isVerified",
+          "label": "isVerified"
+        },
+        {
+          "id": "c_SellerPayoutAccount_isVerified_type",
+          "type": "node",
+          "parent": "row_c_SellerPayoutAccount_isVerified",
+          "label": "boolean"
+        },
+        {
+          "id": "t_SellerPayout",
+          "type": "node",
+          "parent": "1",
+          "label": "SellerPayout"
+        },
+        {
+          "id": "row_c_SellerPayout_id",
+          "type": "node",
+          "parent": "t_SellerPayout"
+        },
+        {
+          "id": "c_SellerPayout_id_pk",
+          "type": "node",
+          "parent": "row_c_SellerPayout_id",
+          "label": "PK "
+        },
+        {
+          "id": "c_SellerPayout_id_name",
+          "type": "node",
+          "parent": "row_c_SellerPayout_id",
+          "label": "id"
+        },
+        {
+          "id": "c_SellerPayout_id_type",
+          "type": "node",
+          "parent": "row_c_SellerPayout_id",
+          "label": "integer"
+        },
+        {
+          "id": "row_c_SellerPayout_sellerId",
+          "type": "node",
+          "parent": "t_SellerPayout"
+        },
+        {
+          "id": "c_SellerPayout_sellerId_pk",
+          "type": "node",
+          "parent": "row_c_SellerPayout_sellerId",
+          "label": "FK "
+        },
+        {
+          "id": "c_SellerPayout_sellerId_name",
+          "type": "node",
+          "parent": "row_c_SellerPayout_sellerId",
+          "label": "sellerId"
+        },
+        {
+          "id": "c_SellerPayout_sellerId_type",
+          "type": "node",
+          "parent": "row_c_SellerPayout_sellerId",
+          "label": "integer"
+        },
+        {
+          "id": "row_c_SellerPayout_payoutAccountId",
+          "type": "node",
+          "parent": "t_SellerPayout"
+        },
+        {
+          "id": "c_SellerPayout_payoutAccountId_pk",
+          "type": "node",
+          "parent": "row_c_SellerPayout_payoutAccountId",
+          "label": "FK "
+        },
+        {
+          "id": "c_SellerPayout_payoutAccountId_name",
+          "type": "node",
+          "parent": "row_c_SellerPayout_payoutAccountId",
+          "label": "payoutAccountId"
+        },
+        {
+          "id": "c_SellerPayout_payoutAccountId_type",
+          "type": "node",
+          "parent": "row_c_SellerPayout_payoutAccountId",
+          "label": "integer"
+        },
+        {
+          "id": "row_c_SellerPayout_amount",
+          "type": "node",
+          "parent": "t_SellerPayout"
+        },
+        {
+          "id": "c_SellerPayout_amount_pk",
+          "type": "node",
+          "parent": "row_c_SellerPayout_amount"
+        },
+        {
+          "id": "c_SellerPayout_amount_name",
+          "type": "node",
+          "parent": "row_c_SellerPayout_amount",
+          "label": "amount"
+        },
+        {
+          "id": "c_SellerPayout_amount_type",
+          "type": "node",
+          "parent": "row_c_SellerPayout_amount",
+          "label": "numeric(12,2)"
+        },
+        {
+          "id": "row_c_SellerPayout_periodStart",
+          "type": "node",
+          "parent": "t_SellerPayout"
+        },
+        {
+          "id": "c_SellerPayout_periodStart_pk",
+          "type": "node",
+          "parent": "row_c_SellerPayout_periodStart"
+        },
+        {
+          "id": "c_SellerPayout_periodStart_name",
+          "type": "node",
+          "parent": "row_c_SellerPayout_periodStart",
+          "label": "periodStart"
+        },
+        {
+          "id": "c_SellerPayout_periodStart_type",
+          "type": "node",
+          "parent": "row_c_SellerPayout_periodStart",
+          "label": "date"
+        },
+        {
+          "id": "row_c_SellerPayout_periodEnd",
+          "type": "node",
+          "parent": "t_SellerPayout"
+        },
+        {
+          "id": "c_SellerPayout_periodEnd_pk",
+          "type": "node",
+          "parent": "row_c_SellerPayout_periodEnd"
+        },
+        {
+          "id": "c_SellerPayout_periodEnd_name",
+          "type": "node",
+          "parent": "row_c_SellerPayout_periodEnd",
+          "label": "periodEnd"
+        },
+        {
+          "id": "c_SellerPayout_periodEnd_type",
+          "type": "node",
+          "parent": "row_c_SellerPayout_periodEnd",
+          "label": "date"
+        },
+        {
+          "id": "row_c_SellerPayout_status",
+          "type": "node",
+          "parent": "t_SellerPayout"
+        },
+        {
+          "id": "c_SellerPayout_status_pk",
+          "type": "node",
+          "parent": "row_c_SellerPayout_status"
+        },
+        {
+          "id": "c_SellerPayout_status_name",
+          "type": "node",
+          "parent": "row_c_SellerPayout_status",
+          "label": "status"
+        },
+        {
+          "id": "c_SellerPayout_status_type",
+          "type": "node",
+          "parent": "row_c_SellerPayout_status",
+          "label": "varchar(50)"
+        },
+        {
+          "id": "row_c_SellerPayout_utrNumber",
+          "type": "node",
+          "parent": "t_SellerPayout"
+        },
+        {
+          "id": "c_SellerPayout_utrNumber_pk",
+          "type": "node",
+          "parent": "row_c_SellerPayout_utrNumber"
+        },
+        {
+          "id": "c_SellerPayout_utrNumber_name",
+          "type": "node",
+          "parent": "row_c_SellerPayout_utrNumber",
+          "label": "utrNumber"
+        },
+        {
+          "id": "c_SellerPayout_utrNumber_type",
+          "type": "node",
+          "parent": "row_c_SellerPayout_utrNumber",
+          "label": "varchar(100)"
+        },
+        {
+          "id": "row_c_SellerPayout_paidAt",
+          "type": "node",
+          "parent": "t_SellerPayout"
+        },
+        {
+          "id": "c_SellerPayout_paidAt_pk",
+          "type": "node",
+          "parent": "row_c_SellerPayout_paidAt"
+        },
+        {
+          "id": "c_SellerPayout_paidAt_name",
+          "type": "node",
+          "parent": "row_c_SellerPayout_paidAt",
+          "label": "paidAt"
+        },
+        {
+          "id": "c_SellerPayout_paidAt_type",
+          "type": "node",
+          "parent": "row_c_SellerPayout_paidAt",
+          "label": "timestamp"
+        },
+        {
+          "id": "t_SellerLedgerEntry",
+          "type": "node",
+          "parent": "1",
+          "label": "SellerLedgerEntry"
+        },
+        {
+          "id": "row_c_SellerLedgerEntry_id",
+          "type": "node",
+          "parent": "t_SellerLedgerEntry"
+        },
+        {
+          "id": "c_SellerLedgerEntry_id_pk",
+          "type": "node",
+          "parent": "row_c_SellerLedgerEntry_id",
+          "label": "PK "
+        },
+        {
+          "id": "c_SellerLedgerEntry_id_name",
+          "type": "node",
+          "parent": "row_c_SellerLedgerEntry_id",
+          "label": "id"
+        },
+        {
+          "id": "c_SellerLedgerEntry_id_type",
+          "type": "node",
+          "parent": "row_c_SellerLedgerEntry_id",
+          "label": "integer"
+        },
+        {
+          "id": "row_c_SellerLedgerEntry_sellerId",
+          "type": "node",
+          "parent": "t_SellerLedgerEntry"
+        },
+        {
+          "id": "c_SellerLedgerEntry_sellerId_pk",
+          "type": "node",
+          "parent": "row_c_SellerLedgerEntry_sellerId",
+          "label": "FK "
+        },
+        {
+          "id": "c_SellerLedgerEntry_sellerId_name",
+          "type": "node",
+          "parent": "row_c_SellerLedgerEntry_sellerId",
+          "label": "sellerId"
+        },
+        {
+          "id": "c_SellerLedgerEntry_sellerId_type",
+          "type": "node",
+          "parent": "row_c_SellerLedgerEntry_sellerId",
+          "label": "integer"
+        },
+        {
+          "id": "row_c_SellerLedgerEntry_subOrderId",
+          "type": "node",
+          "parent": "t_SellerLedgerEntry"
+        },
+        {
+          "id": "c_SellerLedgerEntry_subOrderId_pk",
+          "type": "node",
+          "parent": "row_c_SellerLedgerEntry_subOrderId",
+          "label": "FK "
+        },
+        {
+          "id": "c_SellerLedgerEntry_subOrderId_name",
+          "type": "node",
+          "parent": "row_c_SellerLedgerEntry_subOrderId",
+          "label": "subOrderId"
+        },
+        {
+          "id": "c_SellerLedgerEntry_subOrderId_type",
+          "type": "node",
+          "parent": "row_c_SellerLedgerEntry_subOrderId",
+          "label": "integer"
+        },
+        {
+          "id": "row_c_SellerLedgerEntry_payoutId",
+          "type": "node",
+          "parent": "t_SellerLedgerEntry"
+        },
+        {
+          "id": "c_SellerLedgerEntry_payoutId_pk",
+          "type": "node",
+          "parent": "row_c_SellerLedgerEntry_payoutId",
+          "label": "FK "
+        },
+        {
+          "id": "c_SellerLedgerEntry_payoutId_name",
+          "type": "node",
+          "parent": "row_c_SellerLedgerEntry_payoutId",
+          "label": "payoutId"
+        },
+        {
+          "id": "c_SellerLedgerEntry_payoutId_type",
+          "type": "node",
+          "parent": "row_c_SellerLedgerEntry_payoutId",
+          "label": "integer"
+        },
+        {
+          "id": "row_c_SellerLedgerEntry_type",
+          "type": "node",
+          "parent": "t_SellerLedgerEntry"
+        },
+        {
+          "id": "c_SellerLedgerEntry_type_pk",
+          "type": "node",
+          "parent": "row_c_SellerLedgerEntry_type"
+        },
+        {
+          "id": "c_SellerLedgerEntry_type_name",
+          "type": "node",
+          "parent": "row_c_SellerLedgerEntry_type",
+          "label": "type"
+        },
+        {
+          "id": "c_SellerLedgerEntry_type_type",
+          "type": "node",
+          "parent": "row_c_SellerLedgerEntry_type",
+          "label": "varchar(50)"
+        },
+        {
+          "id": "row_c_SellerLedgerEntry_amount",
+          "type": "node",
+          "parent": "t_SellerLedgerEntry"
+        },
+        {
+          "id": "c_SellerLedgerEntry_amount_pk",
+          "type": "node",
+          "parent": "row_c_SellerLedgerEntry_amount"
+        },
+        {
+          "id": "c_SellerLedgerEntry_amount_name",
+          "type": "node",
+          "parent": "row_c_SellerLedgerEntry_amount",
+          "label": "amount"
+        },
+        {
+          "id": "c_SellerLedgerEntry_amount_type",
+          "type": "node",
+          "parent": "row_c_SellerLedgerEntry_amount",
+          "label": "numeric(12,2)"
+        },
+        {
+          "id": "row_c_SellerLedgerEntry_description",
+          "type": "node",
+          "parent": "t_SellerLedgerEntry"
+        },
+        {
+          "id": "c_SellerLedgerEntry_description_pk",
+          "type": "node",
+          "parent": "row_c_SellerLedgerEntry_description"
+        },
+        {
+          "id": "c_SellerLedgerEntry_description_name",
+          "type": "node",
+          "parent": "row_c_SellerLedgerEntry_description",
+          "label": "description"
+        },
+        {
+          "id": "c_SellerLedgerEntry_description_type",
+          "type": "node",
+          "parent": "row_c_SellerLedgerEntry_description",
+          "label": "varchar(255)"
+        },
+        {
+          "id": "row_c_SellerLedgerEntry_createdAt",
+          "type": "node",
+          "parent": "t_SellerLedgerEntry"
+        },
+        {
+          "id": "c_SellerLedgerEntry_createdAt_pk",
+          "type": "node",
+          "parent": "row_c_SellerLedgerEntry_createdAt"
+        },
+        {
+          "id": "c_SellerLedgerEntry_createdAt_name",
+          "type": "node",
+          "parent": "row_c_SellerLedgerEntry_createdAt",
+          "label": "createdAt"
+        },
+        {
+          "id": "c_SellerLedgerEntry_createdAt_type",
+          "type": "node",
+          "parent": "row_c_SellerLedgerEntry_createdAt",
+          "label": "timestamp"
+        },
+        {
+          "id": "t_Warehouse",
+          "type": "node",
+          "parent": "1",
+          "label": "Warehouse"
+        },
+        {
+          "id": "row_c_Warehouse_id",
+          "type": "node",
+          "parent": "t_Warehouse"
+        },
+        {
+          "id": "c_Warehouse_id_pk",
+          "type": "node",
+          "parent": "row_c_Warehouse_id",
+          "label": "PK "
+        },
+        {
+          "id": "c_Warehouse_id_name",
+          "type": "node",
+          "parent": "row_c_Warehouse_id",
+          "label": "id"
+        },
+        {
+          "id": "c_Warehouse_id_type",
+          "type": "node",
+          "parent": "row_c_Warehouse_id",
+          "label": "integer"
+        },
+        {
+          "id": "row_c_Warehouse_sellerId",
+          "type": "node",
+          "parent": "t_Warehouse"
+        },
+        {
+          "id": "c_Warehouse_sellerId_pk",
+          "type": "node",
+          "parent": "row_c_Warehouse_sellerId",
+          "label": "FK "
+        },
+        {
+          "id": "c_Warehouse_sellerId_name",
+          "type": "node",
+          "parent": "row_c_Warehouse_sellerId",
+          "label": "sellerId"
+        },
+        {
+          "id": "c_Warehouse_sellerId_type",
+          "type": "node",
+          "parent": "row_c_Warehouse_sellerId",
+          "label": "integer"
+        },
+        {
+          "id": "row_c_Warehouse_name",
+          "type": "node",
+          "parent": "t_Warehouse"
+        },
+        {
+          "id": "c_Warehouse_name_pk",
+          "type": "node",
+          "parent": "row_c_Warehouse_name"
+        },
+        {
+          "id": "c_Warehouse_name_name",
+          "type": "node",
+          "parent": "row_c_Warehouse_name",
+          "label": "name"
+        },
+        {
+          "id": "c_Warehouse_name_type",
+          "type": "node",
+          "parent": "row_c_Warehouse_name",
+          "label": "varchar(255)"
+        },
+        {
+          "id": "row_c_Warehouse_addressLine1",
+          "type": "node",
+          "parent": "t_Warehouse"
+        },
+        {
+          "id": "c_Warehouse_addressLine1_pk",
+          "type": "node",
+          "parent": "row_c_Warehouse_addressLine1"
+        },
+        {
+          "id": "c_Warehouse_addressLine1_name",
+          "type": "node",
+          "parent": "row_c_Warehouse_addressLine1",
+          "label": "addressLine1"
+        },
+        {
+          "id": "c_Warehouse_addressLine1_type",
+          "type": "node",
+          "parent": "row_c_Warehouse_addressLine1",
+          "label": "varchar(255)"
+        },
+        {
+          "id": "row_c_Warehouse_city",
+          "type": "node",
+          "parent": "t_Warehouse"
+        },
+        {
+          "id": "c_Warehouse_city_pk",
+          "type": "node",
+          "parent": "row_c_Warehouse_city"
+        },
+        {
+          "id": "c_Warehouse_city_name",
+          "type": "node",
+          "parent": "row_c_Warehouse_city",
+          "label": "city"
+        },
+        {
+          "id": "c_Warehouse_city_type",
+          "type": "node",
+          "parent": "row_c_Warehouse_city",
+          "label": "varchar(100)"
+        },
+        {
+          "id": "row_c_Warehouse_state",
+          "type": "node",
+          "parent": "t_Warehouse"
+        },
+        {
+          "id": "c_Warehouse_state_pk",
+          "type": "node",
+          "parent": "row_c_Warehouse_state"
+        },
+        {
+          "id": "c_Warehouse_state_name",
+          "type": "node",
+          "parent": "row_c_Warehouse_state",
+          "label": "state"
+        },
+        {
+          "id": "c_Warehouse_state_type",
+          "type": "node",
+          "parent": "row_c_Warehouse_state",
+          "label": "varchar(100)"
+        },
+        {
+          "id": "row_c_Warehouse_pincode",
+          "type": "node",
+          "parent": "t_Warehouse"
+        },
+        {
+          "id": "c_Warehouse_pincode_pk",
+          "type": "node",
+          "parent": "row_c_Warehouse_pincode"
+        },
+        {
+          "id": "c_Warehouse_pincode_name",
+          "type": "node",
+          "parent": "row_c_Warehouse_pincode",
+          "label": "pincode"
+        },
+        {
+          "id": "c_Warehouse_pincode_type",
+          "type": "node",
+          "parent": "row_c_Warehouse_pincode",
+          "label": "varchar(20)"
+        },
+        {
+          "id": "row_c_Warehouse_latitude",
+          "type": "node",
+          "parent": "t_Warehouse"
+        },
+        {
+          "id": "c_Warehouse_latitude_pk",
+          "type": "node",
+          "parent": "row_c_Warehouse_latitude"
+        },
+        {
+          "id": "c_Warehouse_latitude_name",
+          "type": "node",
+          "parent": "row_c_Warehouse_latitude",
+          "label": "latitude"
+        },
+        {
+          "id": "c_Warehouse_latitude_type",
+          "type": "node",
+          "parent": "row_c_Warehouse_latitude",
+          "label": "decimal(9,6)"
+        },
+        {
+          "id": "row_c_Warehouse_longitude",
+          "type": "node",
+          "parent": "t_Warehouse"
+        },
+        {
+          "id": "c_Warehouse_longitude_pk",
+          "type": "node",
+          "parent": "row_c_Warehouse_longitude"
+        },
+        {
+          "id": "c_Warehouse_longitude_name",
+          "type": "node",
+          "parent": "row_c_Warehouse_longitude",
+          "label": "longitude"
+        },
+        {
+          "id": "c_Warehouse_longitude_type",
+          "type": "node",
+          "parent": "row_c_Warehouse_longitude",
+          "label": "decimal(9,6)"
+        },
+        {
+          "id": "row_c_Warehouse_isActive",
+          "type": "node",
+          "parent": "t_Warehouse"
+        },
+        {
+          "id": "c_Warehouse_isActive_pk",
+          "type": "node",
+          "parent": "row_c_Warehouse_isActive"
+        },
+        {
+          "id": "c_Warehouse_isActive_name",
+          "type": "node",
+          "parent": "row_c_Warehouse_isActive",
+          "label": "isActive"
+        },
+        {
+          "id": "c_Warehouse_isActive_type",
+          "type": "node",
+          "parent": "row_c_Warehouse_isActive",
+          "label": "boolean"
+        },
+        {
+          "id": "t_Category",
+          "type": "node",
+          "parent": "1",
+          "label": "Category"
+        },
+        {
+          "id": "row_c_Category_id",
+          "type": "node",
+          "parent": "t_Category"
+        },
+        {
+          "id": "c_Category_id_pk",
+          "type": "node",
+          "parent": "row_c_Category_id",
+          "label": "PK "
+        },
+        {
+          "id": "c_Category_id_name",
+          "type": "node",
+          "parent": "row_c_Category_id",
+          "label": "id"
+        },
+        {
+          "id": "c_Category_id_type",
+          "type": "node",
+          "parent": "row_c_Category_id",
+          "label": "integer"
+        },
+        {
+          "id": "row_c_Category_name",
+          "type": "node",
+          "parent": "t_Category"
+        },
+        {
+          "id": "c_Category_name_pk",
+          "type": "node",
+          "parent": "row_c_Category_name"
+        },
+        {
+          "id": "c_Category_name_name",
+          "type": "node",
+          "parent": "row_c_Category_name",
+          "label": "name"
+        },
+        {
+          "id": "c_Category_name_type",
+          "type": "node",
+          "parent": "row_c_Category_name",
+          "label": "varchar(255)"
+        },
+        {
+          "id": "row_c_Category_slug",
+          "type": "node",
+          "parent": "t_Category"
+        },
+        {
+          "id": "c_Category_slug_pk",
+          "type": "node",
+          "parent": "row_c_Category_slug"
+        },
+        {
+          "id": "c_Category_slug_name",
+          "type": "node",
+          "parent": "row_c_Category_slug",
+          "label": "slug"
+        },
+        {
+          "id": "c_Category_slug_type",
+          "type": "node",
+          "parent": "row_c_Category_slug",
+          "label": "varchar(255)"
+        },
+        {
+          "id": "row_c_Category_imageUrl",
+          "type": "node",
+          "parent": "t_Category"
+        },
+        {
+          "id": "c_Category_imageUrl_pk",
+          "type": "node",
+          "parent": "row_c_Category_imageUrl"
+        },
+        {
+          "id": "c_Category_imageUrl_name",
+          "type": "node",
+          "parent": "row_c_Category_imageUrl",
+          "label": "imageUrl"
+        },
+        {
+          "id": "c_Category_imageUrl_type",
+          "type": "node",
+          "parent": "row_c_Category_imageUrl",
+          "label": "varchar(500)"
+        },
+        {
+          "id": "row_c_Category_parentId",
+          "type": "node",
+          "parent": "t_Category"
+        },
+        {
+          "id": "c_Category_parentId_pk",
+          "type": "node",
+          "parent": "row_c_Category_parentId",
+          "label": "FK "
+        },
+        {
+          "id": "c_Category_parentId_name",
+          "type": "node",
+          "parent": "row_c_Category_parentId",
+          "label": "parentId"
+        },
+        {
+          "id": "c_Category_parentId_type",
+          "type": "node",
+          "parent": "row_c_Category_parentId",
+          "label": "integer"
+        },
+        {
+          "id": "t_Brand",
+          "type": "node",
+          "parent": "1",
+          "label": "Brand"
+        },
+        {
+          "id": "row_c_Brand_id",
+          "type": "node",
+          "parent": "t_Brand"
+        },
+        {
+          "id": "c_Brand_id_pk",
+          "type": "node",
+          "parent": "row_c_Brand_id",
+          "label": "PK "
+        },
+        {
+          "id": "c_Brand_id_name",
+          "type": "node",
+          "parent": "row_c_Brand_id",
+          "label": "id"
+        },
+        {
+          "id": "c_Brand_id_type",
+          "type": "node",
+          "parent": "row_c_Brand_id",
+          "label": "integer"
+        },
+        {
+          "id": "row_c_Brand_name",
+          "type": "node",
+          "parent": "t_Brand"
+        },
+        {
+          "id": "c_Brand_name_pk",
+          "type": "node",
+          "parent": "row_c_Brand_name"
+        },
+        {
+          "id": "c_Brand_name_name",
+          "type": "node",
+          "parent": "row_c_Brand_name",
+          "label": "name"
+        },
+        {
+          "id": "c_Brand_name_type",
+          "type": "node",
+          "parent": "row_c_Brand_name",
+          "label": "varchar(255)"
+        },
+        {
+          "id": "row_c_Brand_slug",
+          "type": "node",
+          "parent": "t_Brand"
+        },
+        {
+          "id": "c_Brand_slug_pk",
+          "type": "node",
+          "parent": "row_c_Brand_slug"
+        },
+        {
+          "id": "c_Brand_slug_name",
+          "type": "node",
+          "parent": "row_c_Brand_slug",
+          "label": "slug"
+        },
+        {
+          "id": "c_Brand_slug_type",
+          "type": "node",
+          "parent": "row_c_Brand_slug",
+          "label": "varchar(255)"
+        },
+        {
+          "id": "row_c_Brand_logoUrl",
+          "type": "node",
+          "parent": "t_Brand"
+        },
+        {
+          "id": "c_Brand_logoUrl_pk",
+          "type": "node",
+          "parent": "row_c_Brand_logoUrl"
+        },
+        {
+          "id": "c_Brand_logoUrl_name",
+          "type": "node",
+          "parent": "row_c_Brand_logoUrl",
+          "label": "logoUrl"
+        },
+        {
+          "id": "c_Brand_logoUrl_type",
+          "type": "node",
+          "parent": "row_c_Brand_logoUrl",
+          "label": "varchar(500)"
+        },
+        {
+          "id": "t_Product",
+          "type": "node",
+          "parent": "1",
+          "label": "Product"
+        },
+        {
+          "id": "row_c_Product_id",
+          "type": "node",
+          "parent": "t_Product"
+        },
+        {
+          "id": "c_Product_id_pk",
+          "type": "node",
+          "parent": "row_c_Product_id",
+          "label": "PK "
+        },
+        {
+          "id": "c_Product_id_name",
+          "type": "node",
+          "parent": "row_c_Product_id",
+          "label": "id"
+        },
+        {
+          "id": "c_Product_id_type",
+          "type": "node",
+          "parent": "row_c_Product_id",
+          "label": "integer"
+        },
+        {
+          "id": "row_c_Product_title",
+          "type": "node",
+          "parent": "t_Product"
+        },
+        {
+          "id": "c_Product_title_pk",
+          "type": "node",
+          "parent": "row_c_Product_title"
+        },
+        {
+          "id": "c_Product_title_name",
+          "type": "node",
+          "parent": "row_c_Product_title",
+          "label": "title"
+        },
+        {
+          "id": "c_Product_title_type",
+          "type": "node",
+          "parent": "row_c_Product_title",
+          "label": "varchar(255)"
+        },
+        {
+          "id": "row_c_Product_slug",
+          "type": "node",
+          "parent": "t_Product"
+        },
+        {
+          "id": "c_Product_slug_pk",
+          "type": "node",
+          "parent": "row_c_Product_slug"
+        },
+        {
+          "id": "c_Product_slug_name",
+          "type": "node",
+          "parent": "row_c_Product_slug",
+          "label": "slug"
+        },
+        {
+          "id": "c_Product_slug_type",
+          "type": "node",
+          "parent": "row_c_Product_slug",
+          "label": "varchar(255)"
+        },
+        {
+          "id": "row_c_Product_categoryId",
+          "type": "node",
+          "parent": "t_Product"
+        },
+        {
+          "id": "c_Product_categoryId_pk",
+          "type": "node",
+          "parent": "row_c_Product_categoryId",
+          "label": "FK "
+        },
+        {
+          "id": "c_Product_categoryId_name",
+          "type": "node",
+          "parent": "row_c_Product_categoryId",
+          "label": "categoryId"
+        },
+        {
+          "id": "c_Product_categoryId_type",
+          "type": "node",
+          "parent": "row_c_Product_categoryId",
+          "label": "integer"
+        },
+        {
+          "id": "row_c_Product_brandId",
+          "type": "node",
+          "parent": "t_Product"
+        },
+        {
+          "id": "c_Product_brandId_pk",
+          "type": "node",
+          "parent": "row_c_Product_brandId",
+          "label": "FK "
+        },
+        {
+          "id": "c_Product_brandId_name",
+          "type": "node",
+          "parent": "row_c_Product_brandId",
+          "label": "brandId"
+        },
+        {
+          "id": "c_Product_brandId_type",
+          "type": "node",
+          "parent": "row_c_Product_brandId",
+          "label": "integer"
+        },
+        {
+          "id": "row_c_Product_description",
+          "type": "node",
+          "parent": "t_Product"
+        },
+        {
+          "id": "c_Product_description_pk",
+          "type": "node",
+          "parent": "row_c_Product_description"
+        },
+        {
+          "id": "c_Product_description_name",
+          "type": "node",
+          "parent": "row_c_Product_description",
+          "label": "description"
+        },
+        {
+          "id": "c_Product_description_type",
+          "type": "node",
+          "parent": "row_c_Product_description",
+          "label": "text"
+        },
+        {
+          "id": "row_c_Product_status",
+          "type": "node",
+          "parent": "t_Product"
+        },
+        {
+          "id": "c_Product_status_pk",
+          "type": "node",
+          "parent": "row_c_Product_status"
+        },
+        {
+          "id": "c_Product_status_name",
+          "type": "node",
+          "parent": "row_c_Product_status",
+          "label": "status"
+        },
+        {
+          "id": "c_Product_status_type",
+          "type": "node",
+          "parent": "row_c_Product_status",
+          "label": "varchar(50)"
+        },
+        {
+          "id": "row_c_Product_createdAt",
+          "type": "node",
+          "parent": "t_Product"
+        },
+        {
+          "id": "c_Product_createdAt_pk",
+          "type": "node",
+          "parent": "row_c_Product_createdAt"
+        },
+        {
+          "id": "c_Product_createdAt_name",
+          "type": "node",
+          "parent": "row_c_Product_createdAt",
+          "label": "createdAt"
+        },
+        {
+          "id": "c_Product_createdAt_type",
+          "type": "node",
+          "parent": "row_c_Product_createdAt",
+          "label": "timestamp"
+        },
+        {
+          "id": "t_ProductAttribute",
+          "type": "node",
+          "parent": "1",
+          "label": "ProductAttribute"
+        },
+        {
+          "id": "row_c_ProductAttribute_id",
+          "type": "node",
+          "parent": "t_ProductAttribute"
+        },
+        {
+          "id": "c_ProductAttribute_id_pk",
+          "type": "node",
+          "parent": "row_c_ProductAttribute_id",
+          "label": "PK "
+        },
+        {
+          "id": "c_ProductAttribute_id_name",
+          "type": "node",
+          "parent": "row_c_ProductAttribute_id",
+          "label": "id"
+        },
+        {
+          "id": "c_ProductAttribute_id_type",
+          "type": "node",
+          "parent": "row_c_ProductAttribute_id",
+          "label": "integer"
+        },
+        {
+          "id": "row_c_ProductAttribute_productId",
+          "type": "node",
+          "parent": "t_ProductAttribute"
+        },
+        {
+          "id": "c_ProductAttribute_productId_pk",
+          "type": "node",
+          "parent": "row_c_ProductAttribute_productId",
+          "label": "FK "
+        },
+        {
+          "id": "c_ProductAttribute_productId_name",
+          "type": "node",
+          "parent": "row_c_ProductAttribute_productId",
+          "label": "productId"
+        },
+        {
+          "id": "c_ProductAttribute_productId_type",
+          "type": "node",
+          "parent": "row_c_ProductAttribute_productId",
+          "label": "integer"
+        },
+        {
+          "id": "row_c_ProductAttribute_attrName",
+          "type": "node",
+          "parent": "t_ProductAttribute"
+        },
+        {
+          "id": "c_ProductAttribute_attrName_pk",
+          "type": "node",
+          "parent": "row_c_ProductAttribute_attrName"
+        },
+        {
+          "id": "c_ProductAttribute_attrName_name",
+          "type": "node",
+          "parent": "row_c_ProductAttribute_attrName",
+          "label": "attrName"
+        },
+        {
+          "id": "c_ProductAttribute_attrName_type",
+          "type": "node",
+          "parent": "row_c_ProductAttribute_attrName",
+          "label": "varchar(100)"
+        },
+        {
+          "id": "row_c_ProductAttribute_attrValue",
+          "type": "node",
+          "parent": "t_ProductAttribute"
+        },
+        {
+          "id": "c_ProductAttribute_attrValue_pk",
+          "type": "node",
+          "parent": "row_c_ProductAttribute_attrValue"
+        },
+        {
+          "id": "c_ProductAttribute_attrValue_name",
+          "type": "node",
+          "parent": "row_c_ProductAttribute_attrValue",
+          "label": "attrValue"
+        },
+        {
+          "id": "c_ProductAttribute_attrValue_type",
+          "type": "node",
+          "parent": "row_c_ProductAttribute_attrValue",
+          "label": "varchar(100)"
+        },
+        {
+          "id": "t_ProductVariant",
+          "type": "node",
+          "parent": "1",
+          "label": "ProductVariant"
+        },
+        {
+          "id": "row_c_ProductVariant_id",
+          "type": "node",
+          "parent": "t_ProductVariant"
+        },
+        {
+          "id": "c_ProductVariant_id_pk",
+          "type": "node",
+          "parent": "row_c_ProductVariant_id",
+          "label": "PK "
+        },
+        {
+          "id": "c_ProductVariant_id_name",
+          "type": "node",
+          "parent": "row_c_ProductVariant_id",
+          "label": "id"
+        },
+        {
+          "id": "c_ProductVariant_id_type",
+          "type": "node",
+          "parent": "row_c_ProductVariant_id",
+          "label": "integer"
+        },
+        {
+          "id": "row_c_ProductVariant_productId",
+          "type": "node",
+          "parent": "t_ProductVariant"
+        },
+        {
+          "id": "c_ProductVariant_productId_pk",
+          "type": "node",
+          "parent": "row_c_ProductVariant_productId",
+          "label": "FK "
+        },
+        {
+          "id": "c_ProductVariant_productId_name",
+          "type": "node",
+          "parent": "row_c_ProductVariant_productId",
+          "label": "productId"
+        },
+        {
+          "id": "c_ProductVariant_productId_type",
+          "type": "node",
+          "parent": "row_c_ProductVariant_productId",
+          "label": "integer"
+        },
+        {
+          "id": "row_c_ProductVariant_size",
+          "type": "node",
+          "parent": "t_ProductVariant"
+        },
+        {
+          "id": "c_ProductVariant_size_pk",
+          "type": "node",
+          "parent": "row_c_ProductVariant_size"
+        },
+        {
+          "id": "c_ProductVariant_size_name",
+          "type": "node",
+          "parent": "row_c_ProductVariant_size",
+          "label": "size"
+        },
+        {
+          "id": "c_ProductVariant_size_type",
+          "type": "node",
+          "parent": "row_c_ProductVariant_size",
+          "label": "varchar(100)"
+        },
+        {
+          "id": "row_c_ProductVariant_color",
+          "type": "node",
+          "parent": "t_ProductVariant"
+        },
+        {
+          "id": "c_ProductVariant_color_pk",
+          "type": "node",
+          "parent": "row_c_ProductVariant_color"
+        },
+        {
+          "id": "c_ProductVariant_color_name",
+          "type": "node",
+          "parent": "row_c_ProductVariant_color",
+          "label": "color"
+        },
+        {
+          "id": "c_ProductVariant_color_type",
+          "type": "node",
+          "parent": "row_c_ProductVariant_color",
+          "label": "varchar(100)"
+        },
+        {
+          "id": "row_c_ProductVariant_universalSku",
+          "type": "node",
+          "parent": "t_ProductVariant"
+        },
+        {
+          "id": "c_ProductVariant_universalSku_pk",
+          "type": "node",
+          "parent": "row_c_ProductVariant_universalSku"
+        },
+        {
+          "id": "c_ProductVariant_universalSku_name",
+          "type": "node",
+          "parent": "row_c_ProductVariant_universalSku",
+          "label": "universalSku"
+        },
+        {
+          "id": "c_ProductVariant_universalSku_type",
+          "type": "node",
+          "parent": "row_c_ProductVariant_universalSku",
+          "label": "varchar(100)"
+        },
+        {
+          "id": "row_c_ProductVariant_weight",
+          "type": "node",
+          "parent": "t_ProductVariant"
+        },
+        {
+          "id": "c_ProductVariant_weight_pk",
+          "type": "node",
+          "parent": "row_c_ProductVariant_weight"
+        },
+        {
+          "id": "c_ProductVariant_weight_name",
+          "type": "node",
+          "parent": "row_c_ProductVariant_weight",
+          "label": "weight"
+        },
+        {
+          "id": "c_ProductVariant_weight_type",
+          "type": "node",
+          "parent": "row_c_ProductVariant_weight",
+          "label": "decimal(8,3)"
+        },
+        {
+          "id": "t_ProductImage",
+          "type": "node",
+          "parent": "1",
+          "label": "ProductImage"
+        },
+        {
+          "id": "row_c_ProductImage_id",
+          "type": "node",
+          "parent": "t_ProductImage"
+        },
+        {
+          "id": "c_ProductImage_id_pk",
+          "type": "node",
+          "parent": "row_c_ProductImage_id",
+          "label": "PK "
+        },
+        {
+          "id": "c_ProductImage_id_name",
+          "type": "node",
+          "parent": "row_c_ProductImage_id",
+          "label": "id"
+        },
+        {
+          "id": "c_ProductImage_id_type",
+          "type": "node",
+          "parent": "row_c_ProductImage_id",
+          "label": "integer"
+        },
+        {
+          "id": "row_c_ProductImage_productId",
+          "type": "node",
+          "parent": "t_ProductImage"
+        },
+        {
+          "id": "c_ProductImage_productId_pk",
+          "type": "node",
+          "parent": "row_c_ProductImage_productId",
+          "label": "FK "
+        },
+        {
+          "id": "c_ProductImage_productId_name",
+          "type": "node",
+          "parent": "row_c_ProductImage_productId",
+          "label": "productId"
+        },
+        {
+          "id": "c_ProductImage_productId_type",
+          "type": "node",
+          "parent": "row_c_ProductImage_productId",
+          "label": "integer"
+        },
+        {
+          "id": "row_c_ProductImage_variantId",
+          "type": "node",
+          "parent": "t_ProductImage"
+        },
+        {
+          "id": "c_ProductImage_variantId_pk",
+          "type": "node",
+          "parent": "row_c_ProductImage_variantId",
+          "label": "FK "
+        },
+        {
+          "id": "c_ProductImage_variantId_name",
+          "type": "node",
+          "parent": "row_c_ProductImage_variantId",
+          "label": "variantId"
+        },
+        {
+          "id": "c_ProductImage_variantId_type",
+          "type": "node",
+          "parent": "row_c_ProductImage_variantId",
+          "label": "integer"
+        },
+        {
+          "id": "row_c_ProductImage_imageUrl",
+          "type": "node",
+          "parent": "t_ProductImage"
+        },
+        {
+          "id": "c_ProductImage_imageUrl_pk",
+          "type": "node",
+          "parent": "row_c_ProductImage_imageUrl"
+        },
+        {
+          "id": "c_ProductImage_imageUrl_name",
+          "type": "node",
+          "parent": "row_c_ProductImage_imageUrl",
+          "label": "imageUrl"
+        },
+        {
+          "id": "c_ProductImage_imageUrl_type",
+          "type": "node",
+          "parent": "row_c_ProductImage_imageUrl",
+          "label": "varchar(500)"
+        },
+        {
+          "id": "row_c_ProductImage_sortOrder",
+          "type": "node",
+          "parent": "t_ProductImage"
+        },
+        {
+          "id": "c_ProductImage_sortOrder_pk",
+          "type": "node",
+          "parent": "row_c_ProductImage_sortOrder"
+        },
+        {
+          "id": "c_ProductImage_sortOrder_name",
+          "type": "node",
+          "parent": "row_c_ProductImage_sortOrder",
+          "label": "sortOrder"
+        },
+        {
+          "id": "c_ProductImage_sortOrder_type",
+          "type": "node",
+          "parent": "row_c_ProductImage_sortOrder",
+          "label": "integer"
+        },
+        {
+          "id": "row_c_ProductImage_isPrimary",
+          "type": "node",
+          "parent": "t_ProductImage"
+        },
+        {
+          "id": "c_ProductImage_isPrimary_pk",
+          "type": "node",
+          "parent": "row_c_ProductImage_isPrimary"
+        },
+        {
+          "id": "c_ProductImage_isPrimary_name",
+          "type": "node",
+          "parent": "row_c_ProductImage_isPrimary",
+          "label": "isPrimary"
+        },
+        {
+          "id": "c_ProductImage_isPrimary_type",
+          "type": "node",
+          "parent": "row_c_ProductImage_isPrimary",
+          "label": "boolean"
+        },
+        {
+          "id": "t_Listing",
+          "type": "node",
+          "parent": "1",
+          "label": "Listing"
+        },
+        {
+          "id": "row_c_Listing_id",
+          "type": "node",
+          "parent": "t_Listing"
+        },
+        {
+          "id": "c_Listing_id_pk",
+          "type": "node",
+          "parent": "row_c_Listing_id",
+          "label": "PK "
+        },
+        {
+          "id": "c_Listing_id_name",
+          "type": "node",
+          "parent": "row_c_Listing_id",
+          "label": "id"
+        },
+        {
+          "id": "c_Listing_id_type",
+          "type": "node",
+          "parent": "row_c_Listing_id",
+          "label": "integer"
+        },
+        {
+          "id": "row_c_Listing_variantId",
+          "type": "node",
+          "parent": "t_Listing"
+        },
+        {
+          "id": "c_Listing_variantId_pk",
+          "type": "node",
+          "parent": "row_c_Listing_variantId",
+          "label": "FK "
+        },
+        {
+          "id": "c_Listing_variantId_name",
+          "type": "node",
+          "parent": "row_c_Listing_variantId",
+          "label": "variantId"
+        },
+        {
+          "id": "c_Listing_variantId_type",
+          "type": "node",
+          "parent": "row_c_Listing_variantId",
+          "label": "integer"
+        },
+        {
+          "id": "row_c_Listing_sellerId",
+          "type": "node",
+          "parent": "t_Listing"
+        },
+        {
+          "id": "c_Listing_sellerId_pk",
+          "type": "node",
+          "parent": "row_c_Listing_sellerId",
+          "label": "FK "
+        },
+        {
+          "id": "c_Listing_sellerId_name",
+          "type": "node",
+          "parent": "row_c_Listing_sellerId",
+          "label": "sellerId"
+        },
+        {
+          "id": "c_Listing_sellerId_type",
+          "type": "node",
+          "parent": "row_c_Listing_sellerId",
+          "label": "integer"
+        },
+        {
+          "id": "row_c_Listing_sellerSku",
+          "type": "node",
+          "parent": "t_Listing"
+        },
+        {
+          "id": "c_Listing_sellerSku_pk",
+          "type": "node",
+          "parent": "row_c_Listing_sellerSku"
+        },
+        {
+          "id": "c_Listing_sellerSku_name",
+          "type": "node",
+          "parent": "row_c_Listing_sellerSku",
+          "label": "sellerSku"
+        },
+        {
+          "id": "c_Listing_sellerSku_type",
+          "type": "node",
+          "parent": "row_c_Listing_sellerSku",
+          "label": "varchar(100)"
+        },
+        {
+          "id": "row_c_Listing_price",
+          "type": "node",
+          "parent": "t_Listing"
+        },
+        {
+          "id": "c_Listing_price_pk",
+          "type": "node",
+          "parent": "row_c_Listing_price"
+        },
+        {
+          "id": "c_Listing_price_name",
+          "type": "node",
+          "parent": "row_c_Listing_price",
+          "label": "price"
+        },
+        {
+          "id": "c_Listing_price_type",
+          "type": "node",
+          "parent": "row_c_Listing_price",
+          "label": "numeric(12,2)"
+        },
+        {
+          "id": "row_c_Listing_mrp",
+          "type": "node",
+          "parent": "t_Listing"
+        },
+        {
+          "id": "c_Listing_mrp_pk",
+          "type": "node",
+          "parent": "row_c_Listing_mrp"
+        },
+        {
+          "id": "c_Listing_mrp_name",
+          "type": "node",
+          "parent": "row_c_Listing_mrp",
+          "label": "mrp"
+        },
+        {
+          "id": "c_Listing_mrp_type",
+          "type": "node",
+          "parent": "row_c_Listing_mrp",
+          "label": "numeric(12,2)"
+        },
+        {
+          "id": "row_c_Listing_condition",
+          "type": "node",
+          "parent": "t_Listing"
+        },
+        {
+          "id": "c_Listing_condition_pk",
+          "type": "node",
+          "parent": "row_c_Listing_condition"
+        },
+        {
+          "id": "c_Listing_condition_name",
+          "type": "node",
+          "parent": "row_c_Listing_condition",
+          "label": "condition"
+        },
+        {
+          "id": "c_Listing_condition_type",
+          "type": "node",
+          "parent": "row_c_Listing_condition",
+          "label": "varchar(50)"
+        },
+        {
+          "id": "row_c_Listing_fulfillmentType",
+          "type": "node",
+          "parent": "t_Listing"
+        },
+        {
+          "id": "c_Listing_fulfillmentType_pk",
+          "type": "node",
+          "parent": "row_c_Listing_fulfillmentType"
+        },
+        {
+          "id": "c_Listing_fulfillmentType_name",
+          "type": "node",
+          "parent": "row_c_Listing_fulfillmentType",
+          "label": "fulfillmentType"
+        },
+        {
+          "id": "c_Listing_fulfillmentType_type",
+          "type": "node",
+          "parent": "row_c_Listing_fulfillmentType",
+          "label": "varchar(20)"
+        },
+        {
+          "id": "row_c_Listing_status",
+          "type": "node",
+          "parent": "t_Listing"
+        },
+        {
+          "id": "c_Listing_status_pk",
+          "type": "node",
+          "parent": "row_c_Listing_status"
+        },
+        {
+          "id": "c_Listing_status_name",
+          "type": "node",
+          "parent": "row_c_Listing_status",
+          "label": "status"
+        },
+        {
+          "id": "c_Listing_status_type",
+          "type": "node",
+          "parent": "row_c_Listing_status",
+          "label": "varchar(50)"
+        },
+        {
+          "id": "t_WarehouseStock",
+          "type": "node",
+          "parent": "1",
+          "label": "WarehouseStock"
+        },
+        {
+          "id": "row_c_WarehouseStock_id",
+          "type": "node",
+          "parent": "t_WarehouseStock"
+        },
+        {
+          "id": "c_WarehouseStock_id_pk",
+          "type": "node",
+          "parent": "row_c_WarehouseStock_id",
+          "label": "PK "
+        },
+        {
+          "id": "c_WarehouseStock_id_name",
+          "type": "node",
+          "parent": "row_c_WarehouseStock_id",
+          "label": "id"
+        },
+        {
+          "id": "c_WarehouseStock_id_type",
+          "type": "node",
+          "parent": "row_c_WarehouseStock_id",
+          "label": "integer"
+        },
+        {
+          "id": "row_c_WarehouseStock_listingId",
+          "type": "node",
+          "parent": "t_WarehouseStock"
+        },
+        {
+          "id": "c_WarehouseStock_listingId_pk",
+          "type": "node",
+          "parent": "row_c_WarehouseStock_listingId",
+          "label": "FK "
+        },
+        {
+          "id": "c_WarehouseStock_listingId_name",
+          "type": "node",
+          "parent": "row_c_WarehouseStock_listingId",
+          "label": "listingId"
+        },
+        {
+          "id": "c_WarehouseStock_listingId_type",
+          "type": "node",
+          "parent": "row_c_WarehouseStock_listingId",
+          "label": "integer"
+        },
+        {
+          "id": "row_c_WarehouseStock_warehouseId",
+          "type": "node",
+          "parent": "t_WarehouseStock"
+        },
+        {
+          "id": "c_WarehouseStock_warehouseId_pk",
+          "type": "node",
+          "parent": "row_c_WarehouseStock_warehouseId",
+          "label": "FK "
+        },
+        {
+          "id": "c_WarehouseStock_warehouseId_name",
+          "type": "node",
+          "parent": "row_c_WarehouseStock_warehouseId",
+          "label": "warehouseId"
+        },
+        {
+          "id": "c_WarehouseStock_warehouseId_type",
+          "type": "node",
+          "parent": "row_c_WarehouseStock_warehouseId",
+          "label": "integer"
+        },
+        {
+          "id": "row_c_WarehouseStock_quantityAvailable",
+          "type": "node",
+          "parent": "t_WarehouseStock"
+        },
+        {
+          "id": "c_WarehouseStock_quantityAvailable_pk",
+          "type": "node",
+          "parent": "row_c_WarehouseStock_quantityAvailable"
+        },
+        {
+          "id": "c_WarehouseStock_quantityAvailable_name",
+          "type": "node",
+          "parent": "row_c_WarehouseStock_quantityAvailable",
+          "label": "quantityAvailable"
+        },
+        {
+          "id": "c_WarehouseStock_quantityAvailable_type",
+          "type": "node",
+          "parent": "row_c_WarehouseStock_quantityAvailable",
+          "label": "integer"
+        },
+        {
+          "id": "row_c_WarehouseStock_quantityReserved",
+          "type": "node",
+          "parent": "t_WarehouseStock"
+        },
+        {
+          "id": "c_WarehouseStock_quantityReserved_pk",
+          "type": "node",
+          "parent": "row_c_WarehouseStock_quantityReserved"
+        },
+        {
+          "id": "c_WarehouseStock_quantityReserved_name",
+          "type": "node",
+          "parent": "row_c_WarehouseStock_quantityReserved",
+          "label": "quantityReserved"
+        },
+        {
+          "id": "c_WarehouseStock_quantityReserved_type",
+          "type": "node",
+          "parent": "row_c_WarehouseStock_quantityReserved",
+          "label": "integer"
+        },
+        {
+          "id": "t_PriceHistory",
+          "type": "node",
+          "parent": "1",
+          "label": "PriceHistory"
+        },
+        {
+          "id": "row_c_PriceHistory_id",
+          "type": "node",
+          "parent": "t_PriceHistory"
+        },
+        {
+          "id": "c_PriceHistory_id_pk",
+          "type": "node",
+          "parent": "row_c_PriceHistory_id",
+          "label": "PK "
+        },
+        {
+          "id": "c_PriceHistory_id_name",
+          "type": "node",
+          "parent": "row_c_PriceHistory_id",
+          "label": "id"
+        },
+        {
+          "id": "c_PriceHistory_id_type",
+          "type": "node",
+          "parent": "row_c_PriceHistory_id",
+          "label": "integer"
+        },
+        {
+          "id": "row_c_PriceHistory_listingId",
+          "type": "node",
+          "parent": "t_PriceHistory"
+        },
+        {
+          "id": "c_PriceHistory_listingId_pk",
+          "type": "node",
+          "parent": "row_c_PriceHistory_listingId",
+          "label": "FK "
+        },
+        {
+          "id": "c_PriceHistory_listingId_name",
+          "type": "node",
+          "parent": "row_c_PriceHistory_listingId",
+          "label": "listingId"
+        },
+        {
+          "id": "c_PriceHistory_listingId_type",
+          "type": "node",
+          "parent": "row_c_PriceHistory_listingId",
+          "label": "integer"
+        },
+        {
+          "id": "row_c_PriceHistory_price",
+          "type": "node",
+          "parent": "t_PriceHistory"
+        },
+        {
+          "id": "c_PriceHistory_price_pk",
+          "type": "node",
+          "parent": "row_c_PriceHistory_price"
+        },
+        {
+          "id": "c_PriceHistory_price_name",
+          "type": "node",
+          "parent": "row_c_PriceHistory_price",
+          "label": "price"
+        },
+        {
+          "id": "c_PriceHistory_price_type",
+          "type": "node",
+          "parent": "row_c_PriceHistory_price",
+          "label": "numeric(12,2)"
+        },
+        {
+          "id": "row_c_PriceHistory_recordedAt",
+          "type": "node",
+          "parent": "t_PriceHistory"
+        },
+        {
+          "id": "c_PriceHistory_recordedAt_pk",
+          "type": "node",
+          "parent": "row_c_PriceHistory_recordedAt"
+        },
+        {
+          "id": "c_PriceHistory_recordedAt_name",
+          "type": "node",
+          "parent": "row_c_PriceHistory_recordedAt",
+          "label": "recordedAt"
+        },
+        {
+          "id": "c_PriceHistory_recordedAt_type",
+          "type": "node",
+          "parent": "row_c_PriceHistory_recordedAt",
+          "label": "timestamp"
+        },
+        {
+          "id": "t_Cart",
+          "type": "node",
+          "parent": "1",
+          "label": "Cart"
+        },
+        {
+          "id": "row_c_Cart_id",
+          "type": "node",
+          "parent": "t_Cart"
+        },
+        {
+          "id": "c_Cart_id_pk",
+          "type": "node",
+          "parent": "row_c_Cart_id",
+          "label": "PK "
+        },
+        {
+          "id": "c_Cart_id_name",
+          "type": "node",
+          "parent": "row_c_Cart_id",
+          "label": "id"
+        },
+        {
+          "id": "c_Cart_id_type",
+          "type": "node",
+          "parent": "row_c_Cart_id",
+          "label": "integer"
+        },
+        {
+          "id": "row_c_Cart_userId",
+          "type": "node",
+          "parent": "t_Cart"
+        },
+        {
+          "id": "c_Cart_userId_pk",
+          "type": "node",
+          "parent": "row_c_Cart_userId",
+          "label": "FK "
+        },
+        {
+          "id": "c_Cart_userId_name",
+          "type": "node",
+          "parent": "row_c_Cart_userId",
+          "label": "userId"
+        },
+        {
+          "id": "c_Cart_userId_type",
+          "type": "node",
+          "parent": "row_c_Cart_userId",
+          "label": "integer"
+        },
+        {
+          "id": "row_c_Cart_createdAt",
+          "type": "node",
+          "parent": "t_Cart"
+        },
+        {
+          "id": "c_Cart_createdAt_pk",
+          "type": "node",
+          "parent": "row_c_Cart_createdAt"
+        },
+        {
+          "id": "c_Cart_createdAt_name",
+          "type": "node",
+          "parent": "row_c_Cart_createdAt",
+          "label": "createdAt"
+        },
+        {
+          "id": "c_Cart_createdAt_type",
+          "type": "node",
+          "parent": "row_c_Cart_createdAt",
+          "label": "timestamp"
+        },
+        {
+          "id": "row_c_Cart_updatedAt",
+          "type": "node",
+          "parent": "t_Cart"
+        },
+        {
+          "id": "c_Cart_updatedAt_pk",
+          "type": "node",
+          "parent": "row_c_Cart_updatedAt"
+        },
+        {
+          "id": "c_Cart_updatedAt_name",
+          "type": "node",
+          "parent": "row_c_Cart_updatedAt",
+          "label": "updatedAt"
+        },
+        {
+          "id": "c_Cart_updatedAt_type",
+          "type": "node",
+          "parent": "row_c_Cart_updatedAt",
+          "label": "timestamp"
+        },
+        {
+          "id": "t_CartItem",
+          "type": "node",
+          "parent": "1",
+          "label": "CartItem"
+        },
+        {
+          "id": "row_c_CartItem_id",
+          "type": "node",
+          "parent": "t_CartItem"
+        },
+        {
+          "id": "c_CartItem_id_pk",
+          "type": "node",
+          "parent": "row_c_CartItem_id",
+          "label": "PK "
+        },
+        {
+          "id": "c_CartItem_id_name",
+          "type": "node",
+          "parent": "row_c_CartItem_id",
+          "label": "id"
+        },
+        {
+          "id": "c_CartItem_id_type",
+          "type": "node",
+          "parent": "row_c_CartItem_id",
+          "label": "integer"
+        },
+        {
+          "id": "row_c_CartItem_cartId",
+          "type": "node",
+          "parent": "t_CartItem"
+        },
+        {
+          "id": "c_CartItem_cartId_pk",
+          "type": "node",
+          "parent": "row_c_CartItem_cartId",
+          "label": "FK "
+        },
+        {
+          "id": "c_CartItem_cartId_name",
+          "type": "node",
+          "parent": "row_c_CartItem_cartId",
+          "label": "cartId"
+        },
+        {
+          "id": "c_CartItem_cartId_type",
+          "type": "node",
+          "parent": "row_c_CartItem_cartId",
+          "label": "integer"
+        },
+        {
+          "id": "row_c_CartItem_listingId",
+          "type": "node",
+          "parent": "t_CartItem"
+        },
+        {
+          "id": "c_CartItem_listingId_pk",
+          "type": "node",
+          "parent": "row_c_CartItem_listingId",
+          "label": "FK "
+        },
+        {
+          "id": "c_CartItem_listingId_name",
+          "type": "node",
+          "parent": "row_c_CartItem_listingId",
+          "label": "listingId"
+        },
+        {
+          "id": "c_CartItem_listingId_type",
+          "type": "node",
+          "parent": "row_c_CartItem_listingId",
+          "label": "integer"
+        },
+        {
+          "id": "row_c_CartItem_quantity",
+          "type": "node",
+          "parent": "t_CartItem"
+        },
+        {
+          "id": "c_CartItem_quantity_pk",
+          "type": "node",
+          "parent": "row_c_CartItem_quantity"
+        },
+        {
+          "id": "c_CartItem_quantity_name",
+          "type": "node",
+          "parent": "row_c_CartItem_quantity",
+          "label": "quantity"
+        },
+        {
+          "id": "c_CartItem_quantity_type",
+          "type": "node",
+          "parent": "row_c_CartItem_quantity",
+          "label": "integer"
+        },
+        {
+          "id": "t_Wishlist",
+          "type": "node",
+          "parent": "1",
+          "label": "Wishlist"
+        },
+        {
+          "id": "row_c_Wishlist_id",
+          "type": "node",
+          "parent": "t_Wishlist"
+        },
+        {
+          "id": "c_Wishlist_id_pk",
+          "type": "node",
+          "parent": "row_c_Wishlist_id",
+          "label": "PK "
+        },
+        {
+          "id": "c_Wishlist_id_name",
+          "type": "node",
+          "parent": "row_c_Wishlist_id",
+          "label": "id"
+        },
+        {
+          "id": "c_Wishlist_id_type",
+          "type": "node",
+          "parent": "row_c_Wishlist_id",
+          "label": "integer"
+        },
+        {
+          "id": "row_c_Wishlist_userId",
+          "type": "node",
+          "parent": "t_Wishlist"
+        },
+        {
+          "id": "c_Wishlist_userId_pk",
+          "type": "node",
+          "parent": "row_c_Wishlist_userId",
+          "label": "FK "
+        },
+        {
+          "id": "c_Wishlist_userId_name",
+          "type": "node",
+          "parent": "row_c_Wishlist_userId",
+          "label": "userId"
+        },
+        {
+          "id": "c_Wishlist_userId_type",
+          "type": "node",
+          "parent": "row_c_Wishlist_userId",
+          "label": "integer"
+        },
+        {
+          "id": "row_c_Wishlist_name",
+          "type": "node",
+          "parent": "t_Wishlist"
+        },
+        {
+          "id": "c_Wishlist_name_pk",
+          "type": "node",
+          "parent": "row_c_Wishlist_name"
+        },
+        {
+          "id": "c_Wishlist_name_name",
+          "type": "node",
+          "parent": "row_c_Wishlist_name",
+          "label": "name"
+        },
+        {
+          "id": "c_Wishlist_name_type",
+          "type": "node",
+          "parent": "row_c_Wishlist_name",
+          "label": "varchar(255)"
+        },
+        {
+          "id": "t_WishlistItem",
+          "type": "node",
+          "parent": "1",
+          "label": "WishlistItem"
+        },
+        {
+          "id": "row_c_WishlistItem_id",
+          "type": "node",
+          "parent": "t_WishlistItem"
+        },
+        {
+          "id": "c_WishlistItem_id_pk",
+          "type": "node",
+          "parent": "row_c_WishlistItem_id",
+          "label": "PK "
+        },
+        {
+          "id": "c_WishlistItem_id_name",
+          "type": "node",
+          "parent": "row_c_WishlistItem_id",
+          "label": "id"
+        },
+        {
+          "id": "c_WishlistItem_id_type",
+          "type": "node",
+          "parent": "row_c_WishlistItem_id",
+          "label": "integer"
+        },
+        {
+          "id": "row_c_WishlistItem_wishlistId",
+          "type": "node",
+          "parent": "t_WishlistItem"
+        },
+        {
+          "id": "c_WishlistItem_wishlistId_pk",
+          "type": "node",
+          "parent": "row_c_WishlistItem_wishlistId",
+          "label": "FK "
+        },
+        {
+          "id": "c_WishlistItem_wishlistId_name",
+          "type": "node",
+          "parent": "row_c_WishlistItem_wishlistId",
+          "label": "wishlistId"
+        },
+        {
+          "id": "c_WishlistItem_wishlistId_type",
+          "type": "node",
+          "parent": "row_c_WishlistItem_wishlistId",
+          "label": "integer"
+        },
+        {
+          "id": "row_c_WishlistItem_variantId",
+          "type": "node",
+          "parent": "t_WishlistItem"
+        },
+        {
+          "id": "c_WishlistItem_variantId_pk",
+          "type": "node",
+          "parent": "row_c_WishlistItem_variantId",
+          "label": "FK "
+        },
+        {
+          "id": "c_WishlistItem_variantId_name",
+          "type": "node",
+          "parent": "row_c_WishlistItem_variantId",
+          "label": "variantId"
+        },
+        {
+          "id": "c_WishlistItem_variantId_type",
+          "type": "node",
+          "parent": "row_c_WishlistItem_variantId",
+          "label": "integer"
+        },
+        {
+          "id": "row_c_WishlistItem_addedAt",
+          "type": "node",
+          "parent": "t_WishlistItem"
+        },
+        {
+          "id": "c_WishlistItem_addedAt_pk",
+          "type": "node",
+          "parent": "row_c_WishlistItem_addedAt"
+        },
+        {
+          "id": "c_WishlistItem_addedAt_name",
+          "type": "node",
+          "parent": "row_c_WishlistItem_addedAt",
+          "label": "addedAt"
+        },
+        {
+          "id": "c_WishlistItem_addedAt_type",
+          "type": "node",
+          "parent": "row_c_WishlistItem_addedAt",
+          "label": "timestamp"
+        },
+        {
+          "id": "t_Order",
+          "type": "node",
+          "parent": "1",
+          "label": "Order"
+        },
+        {
+          "id": "row_c_Order_id",
+          "type": "node",
+          "parent": "t_Order"
+        },
+        {
+          "id": "c_Order_id_pk",
+          "type": "node",
+          "parent": "row_c_Order_id",
+          "label": "PK "
+        },
+        {
+          "id": "c_Order_id_name",
+          "type": "node",
+          "parent": "row_c_Order_id",
+          "label": "id"
+        },
+        {
+          "id": "c_Order_id_type",
+          "type": "node",
+          "parent": "row_c_Order_id",
+          "label": "integer"
+        },
+        {
+          "id": "row_c_Order_orderNumber",
+          "type": "node",
+          "parent": "t_Order"
+        },
+        {
+          "id": "c_Order_orderNumber_pk",
+          "type": "node",
+          "parent": "row_c_Order_orderNumber"
+        },
+        {
+          "id": "c_Order_orderNumber_name",
+          "type": "node",
+          "parent": "row_c_Order_orderNumber",
+          "label": "orderNumber"
+        },
+        {
+          "id": "c_Order_orderNumber_type",
+          "type": "node",
+          "parent": "row_c_Order_orderNumber",
+          "label": "varchar(100)"
+        },
+        {
+          "id": "row_c_Order_userId",
+          "type": "node",
+          "parent": "t_Order"
+        },
+        {
+          "id": "c_Order_userId_pk",
+          "type": "node",
+          "parent": "row_c_Order_userId",
+          "label": "FK "
+        },
+        {
+          "id": "c_Order_userId_name",
+          "type": "node",
+          "parent": "row_c_Order_userId",
+          "label": "userId"
+        },
+        {
+          "id": "c_Order_userId_type",
+          "type": "node",
+          "parent": "row_c_Order_userId",
+          "label": "integer"
+        },
+        {
+          "id": "row_c_Order_itemsTotal",
+          "type": "node",
+          "parent": "t_Order"
+        },
+        {
+          "id": "c_Order_itemsTotal_pk",
+          "type": "node",
+          "parent": "row_c_Order_itemsTotal"
+        },
+        {
+          "id": "c_Order_itemsTotal_name",
+          "type": "node",
+          "parent": "row_c_Order_itemsTotal",
+          "label": "itemsTotal"
+        },
+        {
+          "id": "c_Order_itemsTotal_type",
+          "type": "node",
+          "parent": "row_c_Order_itemsTotal",
+          "label": "numeric(12,2)"
+        },
+        {
+          "id": "row_c_Order_discountTotal",
+          "type": "node",
+          "parent": "t_Order"
+        },
+        {
+          "id": "c_Order_discountTotal_pk",
+          "type": "node",
+          "parent": "row_c_Order_discountTotal"
+        },
+        {
+          "id": "c_Order_discountTotal_name",
+          "type": "node",
+          "parent": "row_c_Order_discountTotal",
+          "label": "discountTotal"
+        },
+        {
+          "id": "c_Order_discountTotal_type",
+          "type": "node",
+          "parent": "row_c_Order_discountTotal",
+          "label": "numeric(12,2)"
+        },
+        {
+          "id": "row_c_Order_shippingTotal",
+          "type": "node",
+          "parent": "t_Order"
+        },
+        {
+          "id": "c_Order_shippingTotal_pk",
+          "type": "node",
+          "parent": "row_c_Order_shippingTotal"
+        },
+        {
+          "id": "c_Order_shippingTotal_name",
+          "type": "node",
+          "parent": "row_c_Order_shippingTotal",
+          "label": "shippingTotal"
+        },
+        {
+          "id": "c_Order_shippingTotal_type",
+          "type": "node",
+          "parent": "row_c_Order_shippingTotal",
+          "label": "numeric(12,2)"
+        },
+        {
+          "id": "row_c_Order_taxTotal",
+          "type": "node",
+          "parent": "t_Order"
+        },
+        {
+          "id": "c_Order_taxTotal_pk",
+          "type": "node",
+          "parent": "row_c_Order_taxTotal"
+        },
+        {
+          "id": "c_Order_taxTotal_name",
+          "type": "node",
+          "parent": "row_c_Order_taxTotal",
+          "label": "taxTotal"
+        },
+        {
+          "id": "c_Order_taxTotal_type",
+          "type": "node",
+          "parent": "row_c_Order_taxTotal",
+          "label": "numeric(12,2)"
+        },
+        {
+          "id": "row_c_Order_grandTotal",
+          "type": "node",
+          "parent": "t_Order"
+        },
+        {
+          "id": "c_Order_grandTotal_pk",
+          "type": "node",
+          "parent": "row_c_Order_grandTotal"
+        },
+        {
+          "id": "c_Order_grandTotal_name",
+          "type": "node",
+          "parent": "row_c_Order_grandTotal",
+          "label": "grandTotal"
+        },
+        {
+          "id": "c_Order_grandTotal_type",
+          "type": "node",
+          "parent": "row_c_Order_grandTotal",
+          "label": "numeric(12,2)"
+        },
+        {
+          "id": "row_c_Order_status",
+          "type": "node",
+          "parent": "t_Order"
+        },
+        {
+          "id": "c_Order_status_pk",
+          "type": "node",
+          "parent": "row_c_Order_status"
+        },
+        {
+          "id": "c_Order_status_name",
+          "type": "node",
+          "parent": "row_c_Order_status",
+          "label": "status"
+        },
+        {
+          "id": "c_Order_status_type",
+          "type": "node",
+          "parent": "row_c_Order_status",
+          "label": "varchar(50)"
+        },
+        {
+          "id": "row_c_Order_placedAt",
+          "type": "node",
+          "parent": "t_Order"
+        },
+        {
+          "id": "c_Order_placedAt_pk",
+          "type": "node",
+          "parent": "row_c_Order_placedAt"
+        },
+        {
+          "id": "c_Order_placedAt_name",
+          "type": "node",
+          "parent": "row_c_Order_placedAt",
+          "label": "placedAt"
+        },
+        {
+          "id": "c_Order_placedAt_type",
+          "type": "node",
+          "parent": "row_c_Order_placedAt",
+          "label": "timestamp"
+        },
+        {
+          "id": "t_OrderAddress",
+          "type": "node",
+          "parent": "1",
+          "label": "OrderAddress"
+        },
+        {
+          "id": "row_c_OrderAddress_id",
+          "type": "node",
+          "parent": "t_OrderAddress"
+        },
+        {
+          "id": "c_OrderAddress_id_pk",
+          "type": "node",
+          "parent": "row_c_OrderAddress_id",
+          "label": "PK "
+        },
+        {
+          "id": "c_OrderAddress_id_name",
+          "type": "node",
+          "parent": "row_c_OrderAddress_id",
+          "label": "id"
+        },
+        {
+          "id": "c_OrderAddress_id_type",
+          "type": "node",
+          "parent": "row_c_OrderAddress_id",
+          "label": "integer"
+        },
+        {
+          "id": "row_c_OrderAddress_orderId",
+          "type": "node",
+          "parent": "t_OrderAddress"
+        },
+        {
+          "id": "c_OrderAddress_orderId_pk",
+          "type": "node",
+          "parent": "row_c_OrderAddress_orderId",
+          "label": "FK "
+        },
+        {
+          "id": "c_OrderAddress_orderId_name",
+          "type": "node",
+          "parent": "row_c_OrderAddress_orderId",
+          "label": "orderId"
+        },
+        {
+          "id": "c_OrderAddress_orderId_type",
+          "type": "node",
+          "parent": "row_c_OrderAddress_orderId",
+          "label": "integer"
+        },
+        {
+          "id": "row_c_OrderAddress_addressType",
+          "type": "node",
+          "parent": "t_OrderAddress"
+        },
+        {
+          "id": "c_OrderAddress_addressType_pk",
+          "type": "node",
+          "parent": "row_c_OrderAddress_addressType"
+        },
+        {
+          "id": "c_OrderAddress_addressType_name",
+          "type": "node",
+          "parent": "row_c_OrderAddress_addressType",
+          "label": "addressType"
+        },
+        {
+          "id": "c_OrderAddress_addressType_type",
+          "type": "node",
+          "parent": "row_c_OrderAddress_addressType",
+          "label": "varchar(20)"
+        },
+        {
+          "id": "row_c_OrderAddress_fullName",
+          "type": "node",
+          "parent": "t_OrderAddress"
+        },
+        {
+          "id": "c_OrderAddress_fullName_pk",
+          "type": "node",
+          "parent": "row_c_OrderAddress_fullName"
+        },
+        {
+          "id": "c_OrderAddress_fullName_name",
+          "type": "node",
+          "parent": "row_c_OrderAddress_fullName",
+          "label": "fullName"
+        },
+        {
+          "id": "c_OrderAddress_fullName_type",
+          "type": "node",
+          "parent": "row_c_OrderAddress_fullName",
+          "label": "varchar(255)"
+        },
+        {
+          "id": "row_c_OrderAddress_phone",
+          "type": "node",
+          "parent": "t_OrderAddress"
+        },
+        {
+          "id": "c_OrderAddress_phone_pk",
+          "type": "node",
+          "parent": "row_c_OrderAddress_phone"
+        },
+        {
+          "id": "c_OrderAddress_phone_name",
+          "type": "node",
+          "parent": "row_c_OrderAddress_phone",
+          "label": "phone"
+        },
+        {
+          "id": "c_OrderAddress_phone_type",
+          "type": "node",
+          "parent": "row_c_OrderAddress_phone",
+          "label": "varchar(20)"
+        },
+        {
+          "id": "row_c_OrderAddress_addressLine1",
+          "type": "node",
+          "parent": "t_OrderAddress"
+        },
+        {
+          "id": "c_OrderAddress_addressLine1_pk",
+          "type": "node",
+          "parent": "row_c_OrderAddress_addressLine1"
+        },
+        {
+          "id": "c_OrderAddress_addressLine1_name",
+          "type": "node",
+          "parent": "row_c_OrderAddress_addressLine1",
+          "label": "addressLine1"
+        },
+        {
+          "id": "c_OrderAddress_addressLine1_type",
+          "type": "node",
+          "parent": "row_c_OrderAddress_addressLine1",
+          "label": "varchar(255)"
+        },
+        {
+          "id": "row_c_OrderAddress_addressLine2",
+          "type": "node",
+          "parent": "t_OrderAddress"
+        },
+        {
+          "id": "c_OrderAddress_addressLine2_pk",
+          "type": "node",
+          "parent": "row_c_OrderAddress_addressLine2"
+        },
+        {
+          "id": "c_OrderAddress_addressLine2_name",
+          "type": "node",
+          "parent": "row_c_OrderAddress_addressLine2",
+          "label": "addressLine2"
+        },
+        {
+          "id": "c_OrderAddress_addressLine2_type",
+          "type": "node",
+          "parent": "row_c_OrderAddress_addressLine2",
+          "label": "varchar(255)"
+        },
+        {
+          "id": "row_c_OrderAddress_city",
+          "type": "node",
+          "parent": "t_OrderAddress"
+        },
+        {
+          "id": "c_OrderAddress_city_pk",
+          "type": "node",
+          "parent": "row_c_OrderAddress_city"
+        },
+        {
+          "id": "c_OrderAddress_city_name",
+          "type": "node",
+          "parent": "row_c_OrderAddress_city",
+          "label": "city"
+        },
+        {
+          "id": "c_OrderAddress_city_type",
+          "type": "node",
+          "parent": "row_c_OrderAddress_city",
+          "label": "varchar(100)"
+        },
+        {
+          "id": "row_c_OrderAddress_state",
+          "type": "node",
+          "parent": "t_OrderAddress"
+        },
+        {
+          "id": "c_OrderAddress_state_pk",
+          "type": "node",
+          "parent": "row_c_OrderAddress_state"
+        },
+        {
+          "id": "c_OrderAddress_state_name",
+          "type": "node",
+          "parent": "row_c_OrderAddress_state",
+          "label": "state"
+        },
+        {
+          "id": "c_OrderAddress_state_type",
+          "type": "node",
+          "parent": "row_c_OrderAddress_state",
+          "label": "varchar(100)"
+        },
+        {
+          "id": "row_c_OrderAddress_pincode",
+          "type": "node",
+          "parent": "t_OrderAddress"
+        },
+        {
+          "id": "c_OrderAddress_pincode_pk",
+          "type": "node",
+          "parent": "row_c_OrderAddress_pincode"
+        },
+        {
+          "id": "c_OrderAddress_pincode_name",
+          "type": "node",
+          "parent": "row_c_OrderAddress_pincode",
+          "label": "pincode"
+        },
+        {
+          "id": "c_OrderAddress_pincode_type",
+          "type": "node",
+          "parent": "row_c_OrderAddress_pincode",
+          "label": "varchar(20)"
+        },
+        {
+          "id": "row_c_OrderAddress_country",
+          "type": "node",
+          "parent": "t_OrderAddress"
+        },
+        {
+          "id": "c_OrderAddress_country_pk",
+          "type": "node",
+          "parent": "row_c_OrderAddress_country"
+        },
+        {
+          "id": "c_OrderAddress_country_name",
+          "type": "node",
+          "parent": "row_c_OrderAddress_country",
+          "label": "country"
+        },
+        {
+          "id": "c_OrderAddress_country_type",
+          "type": "node",
+          "parent": "row_c_OrderAddress_country",
+          "label": "varchar(100)"
+        },
+        {
+          "id": "t_SubOrder",
+          "type": "node",
+          "parent": "1",
+          "label": "SubOrder"
+        },
+        {
+          "id": "row_c_SubOrder_id",
+          "type": "node",
+          "parent": "t_SubOrder"
+        },
+        {
+          "id": "c_SubOrder_id_pk",
+          "type": "node",
+          "parent": "row_c_SubOrder_id",
+          "label": "PK "
+        },
+        {
+          "id": "c_SubOrder_id_name",
+          "type": "node",
+          "parent": "row_c_SubOrder_id",
+          "label": "id"
+        },
+        {
+          "id": "c_SubOrder_id_type",
+          "type": "node",
+          "parent": "row_c_SubOrder_id",
+          "label": "integer"
+        },
+        {
+          "id": "row_c_SubOrder_subOrderNumber",
+          "type": "node",
+          "parent": "t_SubOrder"
+        },
+        {
+          "id": "c_SubOrder_subOrderNumber_pk",
+          "type": "node",
+          "parent": "row_c_SubOrder_subOrderNumber"
+        },
+        {
+          "id": "c_SubOrder_subOrderNumber_name",
+          "type": "node",
+          "parent": "row_c_SubOrder_subOrderNumber",
+          "label": "subOrderNumber"
+        },
+        {
+          "id": "c_SubOrder_subOrderNumber_type",
+          "type": "node",
+          "parent": "row_c_SubOrder_subOrderNumber",
+          "label": "varchar(100)"
+        },
+        {
+          "id": "row_c_SubOrder_orderId",
+          "type": "node",
+          "parent": "t_SubOrder"
+        },
+        {
+          "id": "c_SubOrder_orderId_pk",
+          "type": "node",
+          "parent": "row_c_SubOrder_orderId",
+          "label": "FK "
+        },
+        {
+          "id": "c_SubOrder_orderId_name",
+          "type": "node",
+          "parent": "row_c_SubOrder_orderId",
+          "label": "orderId"
+        },
+        {
+          "id": "c_SubOrder_orderId_type",
+          "type": "node",
+          "parent": "row_c_SubOrder_orderId",
+          "label": "integer"
+        },
+        {
+          "id": "row_c_SubOrder_sellerId",
+          "type": "node",
+          "parent": "t_SubOrder"
+        },
+        {
+          "id": "c_SubOrder_sellerId_pk",
+          "type": "node",
+          "parent": "row_c_SubOrder_sellerId",
+          "label": "FK "
+        },
+        {
+          "id": "c_SubOrder_sellerId_name",
+          "type": "node",
+          "parent": "row_c_SubOrder_sellerId",
+          "label": "sellerId"
+        },
+        {
+          "id": "c_SubOrder_sellerId_type",
+          "type": "node",
+          "parent": "row_c_SubOrder_sellerId",
+          "label": "integer"
+        },
+        {
+          "id": "row_c_SubOrder_subTotal",
+          "type": "node",
+          "parent": "t_SubOrder"
+        },
+        {
+          "id": "c_SubOrder_subTotal_pk",
+          "type": "node",
+          "parent": "row_c_SubOrder_subTotal"
+        },
+        {
+          "id": "c_SubOrder_subTotal_name",
+          "type": "node",
+          "parent": "row_c_SubOrder_subTotal",
+          "label": "subTotal"
+        },
+        {
+          "id": "c_SubOrder_subTotal_type",
+          "type": "node",
+          "parent": "row_c_SubOrder_subTotal",
+          "label": "numeric(12,2)"
+        },
+        {
+          "id": "row_c_SubOrder_shippingFee",
+          "type": "node",
+          "parent": "t_SubOrder"
+        },
+        {
+          "id": "c_SubOrder_shippingFee_pk",
+          "type": "node",
+          "parent": "row_c_SubOrder_shippingFee"
+        },
+        {
+          "id": "c_SubOrder_shippingFee_name",
+          "type": "node",
+          "parent": "row_c_SubOrder_shippingFee",
+          "label": "shippingFee"
+        },
+        {
+          "id": "c_SubOrder_shippingFee_type",
+          "type": "node",
+          "parent": "row_c_SubOrder_shippingFee",
+          "label": "numeric(12,2)"
+        },
+        {
+          "id": "row_c_SubOrder_taxAmount",
+          "type": "node",
+          "parent": "t_SubOrder"
+        },
+        {
+          "id": "c_SubOrder_taxAmount_pk",
+          "type": "node",
+          "parent": "row_c_SubOrder_taxAmount"
+        },
+        {
+          "id": "c_SubOrder_taxAmount_name",
+          "type": "node",
+          "parent": "row_c_SubOrder_taxAmount",
+          "label": "taxAmount"
+        },
+        {
+          "id": "c_SubOrder_taxAmount_type",
+          "type": "node",
+          "parent": "row_c_SubOrder_taxAmount",
+          "label": "numeric(12,2)"
+        },
+        {
+          "id": "row_c_SubOrder_status",
+          "type": "node",
+          "parent": "t_SubOrder"
+        },
+        {
+          "id": "c_SubOrder_status_pk",
+          "type": "node",
+          "parent": "row_c_SubOrder_status"
+        },
+        {
+          "id": "c_SubOrder_status_name",
+          "type": "node",
+          "parent": "row_c_SubOrder_status",
+          "label": "status"
+        },
+        {
+          "id": "c_SubOrder_status_type",
+          "type": "node",
+          "parent": "row_c_SubOrder_status",
+          "label": "varchar(50)"
+        },
+        {
+          "id": "t_OrderLineItem",
+          "type": "node",
+          "parent": "1",
+          "label": "OrderLineItem"
+        },
+        {
+          "id": "row_c_OrderLineItem_id",
+          "type": "node",
+          "parent": "t_OrderLineItem"
+        },
+        {
+          "id": "c_OrderLineItem_id_pk",
+          "type": "node",
+          "parent": "row_c_OrderLineItem_id",
+          "label": "PK "
+        },
+        {
+          "id": "c_OrderLineItem_id_name",
+          "type": "node",
+          "parent": "row_c_OrderLineItem_id",
+          "label": "id"
+        },
+        {
+          "id": "c_OrderLineItem_id_type",
+          "type": "node",
+          "parent": "row_c_OrderLineItem_id",
+          "label": "integer"
+        },
+        {
+          "id": "row_c_OrderLineItem_subOrderId",
+          "type": "node",
+          "parent": "t_OrderLineItem"
+        },
+        {
+          "id": "c_OrderLineItem_subOrderId_pk",
+          "type": "node",
+          "parent": "row_c_OrderLineItem_subOrderId",
+          "label": "FK "
+        },
+        {
+          "id": "c_OrderLineItem_subOrderId_name",
+          "type": "node",
+          "parent": "row_c_OrderLineItem_subOrderId",
+          "label": "subOrderId"
+        },
+        {
+          "id": "c_OrderLineItem_subOrderId_type",
+          "type": "node",
+          "parent": "row_c_OrderLineItem_subOrderId",
+          "label": "integer"
+        },
+        {
+          "id": "row_c_OrderLineItem_listingId",
+          "type": "node",
+          "parent": "t_OrderLineItem"
+        },
+        {
+          "id": "c_OrderLineItem_listingId_pk",
+          "type": "node",
+          "parent": "row_c_OrderLineItem_listingId",
+          "label": "FK "
+        },
+        {
+          "id": "c_OrderLineItem_listingId_name",
+          "type": "node",
+          "parent": "row_c_OrderLineItem_listingId",
+          "label": "listingId"
+        },
+        {
+          "id": "c_OrderLineItem_listingId_type",
+          "type": "node",
+          "parent": "row_c_OrderLineItem_listingId",
+          "label": "integer"
+        },
+        {
+          "id": "row_c_OrderLineItem_quantity",
+          "type": "node",
+          "parent": "t_OrderLineItem"
+        },
+        {
+          "id": "c_OrderLineItem_quantity_pk",
+          "type": "node",
+          "parent": "row_c_OrderLineItem_quantity"
+        },
+        {
+          "id": "c_OrderLineItem_quantity_name",
+          "type": "node",
+          "parent": "row_c_OrderLineItem_quantity",
+          "label": "quantity"
+        },
+        {
+          "id": "c_OrderLineItem_quantity_type",
+          "type": "node",
+          "parent": "row_c_OrderLineItem_quantity",
+          "label": "integer"
+        },
+        {
+          "id": "row_c_OrderLineItem_priceAtPurchase",
+          "type": "node",
+          "parent": "t_OrderLineItem"
+        },
+        {
+          "id": "c_OrderLineItem_priceAtPurchase_pk",
+          "type": "node",
+          "parent": "row_c_OrderLineItem_priceAtPurchase"
+        },
+        {
+          "id": "c_OrderLineItem_priceAtPurchase_name",
+          "type": "node",
+          "parent": "row_c_OrderLineItem_priceAtPurchase",
+          "label": "priceAtPurchase"
+        },
+        {
+          "id": "c_OrderLineItem_priceAtPurchase_type",
+          "type": "node",
+          "parent": "row_c_OrderLineItem_priceAtPurchase",
+          "label": "numeric(12,2)"
+        },
+        {
+          "id": "row_c_OrderLineItem_taxAmount",
+          "type": "node",
+          "parent": "t_OrderLineItem"
+        },
+        {
+          "id": "c_OrderLineItem_taxAmount_pk",
+          "type": "node",
+          "parent": "row_c_OrderLineItem_taxAmount"
+        },
+        {
+          "id": "c_OrderLineItem_taxAmount_name",
+          "type": "node",
+          "parent": "row_c_OrderLineItem_taxAmount",
+          "label": "taxAmount"
+        },
+        {
+          "id": "c_OrderLineItem_taxAmount_type",
+          "type": "node",
+          "parent": "row_c_OrderLineItem_taxAmount",
+          "label": "numeric(12,2)"
+        },
+        {
+          "id": "t_OrderStatusHistory",
+          "type": "node",
+          "parent": "1",
+          "label": "OrderStatusHistory"
+        },
+        {
+          "id": "row_c_OrderStatusHistory_id",
+          "type": "node",
+          "parent": "t_OrderStatusHistory"
+        },
+        {
+          "id": "c_OrderStatusHistory_id_pk",
+          "type": "node",
+          "parent": "row_c_OrderStatusHistory_id",
+          "label": "PK "
+        },
+        {
+          "id": "c_OrderStatusHistory_id_name",
+          "type": "node",
+          "parent": "row_c_OrderStatusHistory_id",
+          "label": "id"
+        },
+        {
+          "id": "c_OrderStatusHistory_id_type",
+          "type": "node",
+          "parent": "row_c_OrderStatusHistory_id",
+          "label": "integer"
+        },
+        {
+          "id": "row_c_OrderStatusHistory_subOrderId",
+          "type": "node",
+          "parent": "t_OrderStatusHistory"
+        },
+        {
+          "id": "c_OrderStatusHistory_subOrderId_pk",
+          "type": "node",
+          "parent": "row_c_OrderStatusHistory_subOrderId",
+          "label": "FK "
+        },
+        {
+          "id": "c_OrderStatusHistory_subOrderId_name",
+          "type": "node",
+          "parent": "row_c_OrderStatusHistory_subOrderId",
+          "label": "subOrderId"
+        },
+        {
+          "id": "c_OrderStatusHistory_subOrderId_type",
+          "type": "node",
+          "parent": "row_c_OrderStatusHistory_subOrderId",
+          "label": "integer"
+        },
+        {
+          "id": "row_c_OrderStatusHistory_status",
+          "type": "node",
+          "parent": "t_OrderStatusHistory"
+        },
+        {
+          "id": "c_OrderStatusHistory_status_pk",
+          "type": "node",
+          "parent": "row_c_OrderStatusHistory_status"
+        },
+        {
+          "id": "c_OrderStatusHistory_status_name",
+          "type": "node",
+          "parent": "row_c_OrderStatusHistory_status",
+          "label": "status"
+        },
+        {
+          "id": "c_OrderStatusHistory_status_type",
+          "type": "node",
+          "parent": "row_c_OrderStatusHistory_status",
+          "label": "varchar(50)"
+        },
+        {
+          "id": "row_c_OrderStatusHistory_changedAt",
+          "type": "node",
+          "parent": "t_OrderStatusHistory"
+        },
+        {
+          "id": "c_OrderStatusHistory_changedAt_pk",
+          "type": "node",
+          "parent": "row_c_OrderStatusHistory_changedAt"
+        },
+        {
+          "id": "c_OrderStatusHistory_changedAt_name",
+          "type": "node",
+          "parent": "row_c_OrderStatusHistory_changedAt",
+          "label": "changedAt"
+        },
+        {
+          "id": "c_OrderStatusHistory_changedAt_type",
+          "type": "node",
+          "parent": "row_c_OrderStatusHistory_changedAt",
+          "label": "timestamp"
+        },
+        {
+          "id": "t_ShippingCarrier",
+          "type": "node",
+          "parent": "1",
+          "label": "ShippingCarrier"
+        },
+        {
+          "id": "row_c_ShippingCarrier_id",
+          "type": "node",
+          "parent": "t_ShippingCarrier"
+        },
+        {
+          "id": "c_ShippingCarrier_id_pk",
+          "type": "node",
+          "parent": "row_c_ShippingCarrier_id",
+          "label": "PK "
+        },
+        {
+          "id": "c_ShippingCarrier_id_name",
+          "type": "node",
+          "parent": "row_c_ShippingCarrier_id",
+          "label": "id"
+        },
+        {
+          "id": "c_ShippingCarrier_id_type",
+          "type": "node",
+          "parent": "row_c_ShippingCarrier_id",
+          "label": "integer"
+        },
+        {
+          "id": "row_c_ShippingCarrier_name",
+          "type": "node",
+          "parent": "t_ShippingCarrier"
+        },
+        {
+          "id": "c_ShippingCarrier_name_pk",
+          "type": "node",
+          "parent": "row_c_ShippingCarrier_name"
+        },
+        {
+          "id": "c_ShippingCarrier_name_name",
+          "type": "node",
+          "parent": "row_c_ShippingCarrier_name",
+          "label": "name"
+        },
+        {
+          "id": "c_ShippingCarrier_name_type",
+          "type": "node",
+          "parent": "row_c_ShippingCarrier_name",
+          "label": "varchar(255)"
+        },
+        {
+          "id": "row_c_ShippingCarrier_code",
+          "type": "node",
+          "parent": "t_ShippingCarrier"
+        },
+        {
+          "id": "c_ShippingCarrier_code_pk",
+          "type": "node",
+          "parent": "row_c_ShippingCarrier_code"
+        },
+        {
+          "id": "c_ShippingCarrier_code_name",
+          "type": "node",
+          "parent": "row_c_ShippingCarrier_code",
+          "label": "code"
+        },
+        {
+          "id": "c_ShippingCarrier_code_type",
+          "type": "node",
+          "parent": "row_c_ShippingCarrier_code",
+          "label": "varchar(50)"
+        },
+        {
+          "id": "row_c_ShippingCarrier_trackingUrlTemplate",
+          "type": "node",
+          "parent": "t_ShippingCarrier"
+        },
+        {
+          "id": "c_ShippingCarrier_trackingUrlTemplate_pk",
+          "type": "node",
+          "parent": "row_c_ShippingCarrier_trackingUrlTemplate"
+        },
+        {
+          "id": "c_ShippingCarrier_trackingUrlTemplate_name",
+          "type": "node",
+          "parent": "row_c_ShippingCarrier_trackingUrlTemplate",
+          "label": "trackingUrlTemplate"
+        },
+        {
+          "id": "c_ShippingCarrier_trackingUrlTemplate_type",
+          "type": "node",
+          "parent": "row_c_ShippingCarrier_trackingUrlTemplate",
+          "label": "varchar(500)"
+        },
+        {
+          "id": "row_c_ShippingCarrier_isActive",
+          "type": "node",
+          "parent": "t_ShippingCarrier"
+        },
+        {
+          "id": "c_ShippingCarrier_isActive_pk",
+          "type": "node",
+          "parent": "row_c_ShippingCarrier_isActive"
+        },
+        {
+          "id": "c_ShippingCarrier_isActive_name",
+          "type": "node",
+          "parent": "row_c_ShippingCarrier_isActive",
+          "label": "isActive"
+        },
+        {
+          "id": "c_ShippingCarrier_isActive_type",
+          "type": "node",
+          "parent": "row_c_ShippingCarrier_isActive",
+          "label": "boolean"
+        },
+        {
+          "id": "t_Shipment",
+          "type": "node",
+          "parent": "1",
+          "label": "Shipment"
+        },
+        {
+          "id": "row_c_Shipment_id",
+          "type": "node",
+          "parent": "t_Shipment"
+        },
+        {
+          "id": "c_Shipment_id_pk",
+          "type": "node",
+          "parent": "row_c_Shipment_id",
+          "label": "PK "
+        },
+        {
+          "id": "c_Shipment_id_name",
+          "type": "node",
+          "parent": "row_c_Shipment_id",
+          "label": "id"
+        },
+        {
+          "id": "c_Shipment_id_type",
+          "type": "node",
+          "parent": "row_c_Shipment_id",
+          "label": "integer"
+        },
+        {
+          "id": "row_c_Shipment_subOrderId",
+          "type": "node",
+          "parent": "t_Shipment"
+        },
+        {
+          "id": "c_Shipment_subOrderId_pk",
+          "type": "node",
+          "parent": "row_c_Shipment_subOrderId",
+          "label": "FK "
+        },
+        {
+          "id": "c_Shipment_subOrderId_name",
+          "type": "node",
+          "parent": "row_c_Shipment_subOrderId",
+          "label": "subOrderId"
+        },
+        {
+          "id": "c_Shipment_subOrderId_type",
+          "type": "node",
+          "parent": "row_c_Shipment_subOrderId",
+          "label": "integer"
+        },
+        {
+          "id": "row_c_Shipment_carrierId",
+          "type": "node",
+          "parent": "t_Shipment"
+        },
+        {
+          "id": "c_Shipment_carrierId_pk",
+          "type": "node",
+          "parent": "row_c_Shipment_carrierId",
+          "label": "FK "
+        },
+        {
+          "id": "c_Shipment_carrierId_name",
+          "type": "node",
+          "parent": "row_c_Shipment_carrierId",
+          "label": "carrierId"
+        },
+        {
+          "id": "c_Shipment_carrierId_type",
+          "type": "node",
+          "parent": "row_c_Shipment_carrierId",
+          "label": "integer"
+        },
+        {
+          "id": "row_c_Shipment_deliveryAgentId",
+          "type": "node",
+          "parent": "t_Shipment"
+        },
+        {
+          "id": "c_Shipment_deliveryAgentId_pk",
+          "type": "node",
+          "parent": "row_c_Shipment_deliveryAgentId",
+          "label": "FK "
+        },
+        {
+          "id": "c_Shipment_deliveryAgentId_name",
+          "type": "node",
+          "parent": "row_c_Shipment_deliveryAgentId",
+          "label": "deliveryAgentId"
+        },
+        {
+          "id": "c_Shipment_deliveryAgentId_type",
+          "type": "node",
+          "parent": "row_c_Shipment_deliveryAgentId",
+          "label": "integer"
+        },
+        {
+          "id": "row_c_Shipment_awbNumber",
+          "type": "node",
+          "parent": "t_Shipment"
+        },
+        {
+          "id": "c_Shipment_awbNumber_pk",
+          "type": "node",
+          "parent": "row_c_Shipment_awbNumber"
+        },
+        {
+          "id": "c_Shipment_awbNumber_name",
+          "type": "node",
+          "parent": "row_c_Shipment_awbNumber",
+          "label": "awbNumber"
+        },
+        {
+          "id": "c_Shipment_awbNumber_type",
+          "type": "node",
+          "parent": "row_c_Shipment_awbNumber",
+          "label": "varchar(255)"
+        },
+        {
+          "id": "row_c_Shipment_trackingUrl",
+          "type": "node",
+          "parent": "t_Shipment"
+        },
+        {
+          "id": "c_Shipment_trackingUrl_pk",
+          "type": "node",
+          "parent": "row_c_Shipment_trackingUrl"
+        },
+        {
+          "id": "c_Shipment_trackingUrl_name",
+          "type": "node",
+          "parent": "row_c_Shipment_trackingUrl",
+          "label": "trackingUrl"
+        },
+        {
+          "id": "c_Shipment_trackingUrl_type",
+          "type": "node",
+          "parent": "row_c_Shipment_trackingUrl",
+          "label": "varchar(500)"
+        },
+        {
+          "id": "row_c_Shipment_status",
+          "type": "node",
+          "parent": "t_Shipment"
+        },
+        {
+          "id": "c_Shipment_status_pk",
+          "type": "node",
+          "parent": "row_c_Shipment_status"
+        },
+        {
+          "id": "c_Shipment_status_name",
+          "type": "node",
+          "parent": "row_c_Shipment_status",
+          "label": "status"
+        },
+        {
+          "id": "c_Shipment_status_type",
+          "type": "node",
+          "parent": "row_c_Shipment_status",
+          "label": "varchar(50)"
+        },
+        {
+          "id": "row_c_Shipment_shippedAt",
+          "type": "node",
+          "parent": "t_Shipment"
+        },
+        {
+          "id": "c_Shipment_shippedAt_pk",
+          "type": "node",
+          "parent": "row_c_Shipment_shippedAt"
+        },
+        {
+          "id": "c_Shipment_shippedAt_name",
+          "type": "node",
+          "parent": "row_c_Shipment_shippedAt",
+          "label": "shippedAt"
+        },
+        {
+          "id": "c_Shipment_shippedAt_type",
+          "type": "node",
+          "parent": "row_c_Shipment_shippedAt",
+          "label": "timestamp"
+        },
+        {
+          "id": "row_c_Shipment_estimatedDeliveryAt",
+          "type": "node",
+          "parent": "t_Shipment"
+        },
+        {
+          "id": "c_Shipment_estimatedDeliveryAt_pk",
+          "type": "node",
+          "parent": "row_c_Shipment_estimatedDeliveryAt"
+        },
+        {
+          "id": "c_Shipment_estimatedDeliveryAt_name",
+          "type": "node",
+          "parent": "row_c_Shipment_estimatedDeliveryAt",
+          "label": "estimatedDeliveryAt"
+        },
+        {
+          "id": "c_Shipment_estimatedDeliveryAt_type",
+          "type": "node",
+          "parent": "row_c_Shipment_estimatedDeliveryAt",
+          "label": "timestamp"
+        },
+        {
+          "id": "row_c_Shipment_deliveredAt",
+          "type": "node",
+          "parent": "t_Shipment"
+        },
+        {
+          "id": "c_Shipment_deliveredAt_pk",
+          "type": "node",
+          "parent": "row_c_Shipment_deliveredAt"
+        },
+        {
+          "id": "c_Shipment_deliveredAt_name",
+          "type": "node",
+          "parent": "row_c_Shipment_deliveredAt",
+          "label": "deliveredAt"
+        },
+        {
+          "id": "c_Shipment_deliveredAt_type",
+          "type": "node",
+          "parent": "row_c_Shipment_deliveredAt",
+          "label": "timestamp"
+        },
+        {
+          "id": "t_Payment",
+          "type": "node",
+          "parent": "1",
+          "label": "Payment"
+        },
+        {
+          "id": "row_c_Payment_id",
+          "type": "node",
+          "parent": "t_Payment"
+        },
+        {
+          "id": "c_Payment_id_pk",
+          "type": "node",
+          "parent": "row_c_Payment_id",
+          "label": "PK "
+        },
+        {
+          "id": "c_Payment_id_name",
+          "type": "node",
+          "parent": "row_c_Payment_id",
+          "label": "id"
+        },
+        {
+          "id": "c_Payment_id_type",
+          "type": "node",
+          "parent": "row_c_Payment_id",
+          "label": "integer"
+        },
+        {
+          "id": "row_c_Payment_orderId",
+          "type": "node",
+          "parent": "t_Payment"
+        },
+        {
+          "id": "c_Payment_orderId_pk",
+          "type": "node",
+          "parent": "row_c_Payment_orderId",
+          "label": "FK "
+        },
+        {
+          "id": "c_Payment_orderId_name",
+          "type": "node",
+          "parent": "row_c_Payment_orderId",
+          "label": "orderId"
+        },
+        {
+          "id": "c_Payment_orderId_type",
+          "type": "node",
+          "parent": "row_c_Payment_orderId",
+          "label": "integer"
+        },
+        {
+          "id": "row_c_Payment_transactionId",
+          "type": "node",
+          "parent": "t_Payment"
+        },
+        {
+          "id": "c_Payment_transactionId_pk",
+          "type": "node",
+          "parent": "row_c_Payment_transactionId"
+        },
+        {
+          "id": "c_Payment_transactionId_name",
+          "type": "node",
+          "parent": "row_c_Payment_transactionId",
+          "label": "transactionId"
+        },
+        {
+          "id": "c_Payment_transactionId_type",
+          "type": "node",
+          "parent": "row_c_Payment_transactionId",
+          "label": "varchar(255)"
+        },
+        {
+          "id": "row_c_Payment_amount",
+          "type": "node",
+          "parent": "t_Payment"
+        },
+        {
+          "id": "c_Payment_amount_pk",
+          "type": "node",
+          "parent": "row_c_Payment_amount"
+        },
+        {
+          "id": "c_Payment_amount_name",
+          "type": "node",
+          "parent": "row_c_Payment_amount",
+          "label": "amount"
+        },
+        {
+          "id": "c_Payment_amount_type",
+          "type": "node",
+          "parent": "row_c_Payment_amount",
+          "label": "numeric(12,2)"
+        },
+        {
+          "id": "row_c_Payment_method",
+          "type": "node",
+          "parent": "t_Payment"
+        },
+        {
+          "id": "c_Payment_method_pk",
+          "type": "node",
+          "parent": "row_c_Payment_method"
+        },
+        {
+          "id": "c_Payment_method_name",
+          "type": "node",
+          "parent": "row_c_Payment_method",
+          "label": "method"
+        },
+        {
+          "id": "c_Payment_method_type",
+          "type": "node",
+          "parent": "row_c_Payment_method",
+          "label": "varchar(50)"
+        },
+        {
+          "id": "row_c_Payment_status",
+          "type": "node",
+          "parent": "t_Payment"
+        },
+        {
+          "id": "c_Payment_status_pk",
+          "type": "node",
+          "parent": "row_c_Payment_status"
+        },
+        {
+          "id": "c_Payment_status_name",
+          "type": "node",
+          "parent": "row_c_Payment_status",
+          "label": "status"
+        },
+        {
+          "id": "c_Payment_status_type",
+          "type": "node",
+          "parent": "row_c_Payment_status",
+          "label": "varchar(50)"
+        },
+        {
+          "id": "row_c_Payment_createdAt",
+          "type": "node",
+          "parent": "t_Payment"
+        },
+        {
+          "id": "c_Payment_createdAt_pk",
+          "type": "node",
+          "parent": "row_c_Payment_createdAt"
+        },
+        {
+          "id": "c_Payment_createdAt_name",
+          "type": "node",
+          "parent": "row_c_Payment_createdAt",
+          "label": "createdAt"
+        },
+        {
+          "id": "c_Payment_createdAt_type",
+          "type": "node",
+          "parent": "row_c_Payment_createdAt",
+          "label": "timestamp"
+        },
+        {
+          "id": "t_ReturnRequest",
+          "type": "node",
+          "parent": "1",
+          "label": "ReturnRequest"
+        },
+        {
+          "id": "row_c_ReturnRequest_id",
+          "type": "node",
+          "parent": "t_ReturnRequest"
+        },
+        {
+          "id": "c_ReturnRequest_id_pk",
+          "type": "node",
+          "parent": "row_c_ReturnRequest_id",
+          "label": "PK "
+        },
+        {
+          "id": "c_ReturnRequest_id_name",
+          "type": "node",
+          "parent": "row_c_ReturnRequest_id",
+          "label": "id"
+        },
+        {
+          "id": "c_ReturnRequest_id_type",
+          "type": "node",
+          "parent": "row_c_ReturnRequest_id",
+          "label": "integer"
+        },
+        {
+          "id": "row_c_ReturnRequest_lineItemId",
+          "type": "node",
+          "parent": "t_ReturnRequest"
+        },
+        {
+          "id": "c_ReturnRequest_lineItemId_pk",
+          "type": "node",
+          "parent": "row_c_ReturnRequest_lineItemId",
+          "label": "FK "
+        },
+        {
+          "id": "c_ReturnRequest_lineItemId_name",
+          "type": "node",
+          "parent": "row_c_ReturnRequest_lineItemId",
+          "label": "lineItemId"
+        },
+        {
+          "id": "c_ReturnRequest_lineItemId_type",
+          "type": "node",
+          "parent": "row_c_ReturnRequest_lineItemId",
+          "label": "integer"
+        },
+        {
+          "id": "row_c_ReturnRequest_reason",
+          "type": "node",
+          "parent": "t_ReturnRequest"
+        },
+        {
+          "id": "c_ReturnRequest_reason_pk",
+          "type": "node",
+          "parent": "row_c_ReturnRequest_reason"
+        },
+        {
+          "id": "c_ReturnRequest_reason_name",
+          "type": "node",
+          "parent": "row_c_ReturnRequest_reason",
+          "label": "reason"
+        },
+        {
+          "id": "c_ReturnRequest_reason_type",
+          "type": "node",
+          "parent": "row_c_ReturnRequest_reason",
+          "label": "varchar(50)"
+        },
+        {
+          "id": "row_c_ReturnRequest_status",
+          "type": "node",
+          "parent": "t_ReturnRequest"
+        },
+        {
+          "id": "c_ReturnRequest_status_pk",
+          "type": "node",
+          "parent": "row_c_ReturnRequest_status"
+        },
+        {
+          "id": "c_ReturnRequest_status_name",
+          "type": "node",
+          "parent": "row_c_ReturnRequest_status",
+          "label": "status"
+        },
+        {
+          "id": "c_ReturnRequest_status_type",
+          "type": "node",
+          "parent": "row_c_ReturnRequest_status",
+          "label": "varchar(50)"
+        },
+        {
+          "id": "row_c_ReturnRequest_createdAt",
+          "type": "node",
+          "parent": "t_ReturnRequest"
+        },
+        {
+          "id": "c_ReturnRequest_createdAt_pk",
+          "type": "node",
+          "parent": "row_c_ReturnRequest_createdAt"
+        },
+        {
+          "id": "c_ReturnRequest_createdAt_name",
+          "type": "node",
+          "parent": "row_c_ReturnRequest_createdAt",
+          "label": "createdAt"
+        },
+        {
+          "id": "c_ReturnRequest_createdAt_type",
+          "type": "node",
+          "parent": "row_c_ReturnRequest_createdAt",
+          "label": "timestamp"
+        },
+        {
+          "id": "t_RefundTransaction",
+          "type": "node",
+          "parent": "1",
+          "label": "RefundTransaction"
+        },
+        {
+          "id": "row_c_RefundTransaction_id",
+          "type": "node",
+          "parent": "t_RefundTransaction"
+        },
+        {
+          "id": "c_RefundTransaction_id_pk",
+          "type": "node",
+          "parent": "row_c_RefundTransaction_id",
+          "label": "PK "
+        },
+        {
+          "id": "c_RefundTransaction_id_name",
+          "type": "node",
+          "parent": "row_c_RefundTransaction_id",
+          "label": "id"
+        },
+        {
+          "id": "c_RefundTransaction_id_type",
+          "type": "node",
+          "parent": "row_c_RefundTransaction_id",
+          "label": "integer"
+        },
+        {
+          "id": "row_c_RefundTransaction_paymentId",
+          "type": "node",
+          "parent": "t_RefundTransaction"
+        },
+        {
+          "id": "c_RefundTransaction_paymentId_pk",
+          "type": "node",
+          "parent": "row_c_RefundTransaction_paymentId",
+          "label": "FK "
+        },
+        {
+          "id": "c_RefundTransaction_paymentId_name",
+          "type": "node",
+          "parent": "row_c_RefundTransaction_paymentId",
+          "label": "paymentId"
+        },
+        {
+          "id": "c_RefundTransaction_paymentId_type",
+          "type": "node",
+          "parent": "row_c_RefundTransaction_paymentId",
+          "label": "integer"
+        },
+        {
+          "id": "row_c_RefundTransaction_returnRequestId",
+          "type": "node",
+          "parent": "t_RefundTransaction"
+        },
+        {
+          "id": "c_RefundTransaction_returnRequestId_pk",
+          "type": "node",
+          "parent": "row_c_RefundTransaction_returnRequestId",
+          "label": "FK "
+        },
+        {
+          "id": "c_RefundTransaction_returnRequestId_name",
+          "type": "node",
+          "parent": "row_c_RefundTransaction_returnRequestId",
+          "label": "returnRequestId"
+        },
+        {
+          "id": "c_RefundTransaction_returnRequestId_type",
+          "type": "node",
+          "parent": "row_c_RefundTransaction_returnRequestId",
+          "label": "integer"
+        },
+        {
+          "id": "row_c_RefundTransaction_amount",
+          "type": "node",
+          "parent": "t_RefundTransaction"
+        },
+        {
+          "id": "c_RefundTransaction_amount_pk",
+          "type": "node",
+          "parent": "row_c_RefundTransaction_amount"
+        },
+        {
+          "id": "c_RefundTransaction_amount_name",
+          "type": "node",
+          "parent": "row_c_RefundTransaction_amount",
+          "label": "amount"
+        },
+        {
+          "id": "c_RefundTransaction_amount_type",
+          "type": "node",
+          "parent": "row_c_RefundTransaction_amount",
+          "label": "numeric(12,2)"
+        },
+        {
+          "id": "row_c_RefundTransaction_status",
+          "type": "node",
+          "parent": "t_RefundTransaction"
+        },
+        {
+          "id": "c_RefundTransaction_status_pk",
+          "type": "node",
+          "parent": "row_c_RefundTransaction_status"
+        },
+        {
+          "id": "c_RefundTransaction_status_name",
+          "type": "node",
+          "parent": "row_c_RefundTransaction_status",
+          "label": "status"
+        },
+        {
+          "id": "c_RefundTransaction_status_type",
+          "type": "node",
+          "parent": "row_c_RefundTransaction_status",
+          "label": "varchar(50)"
+        },
+        {
+          "id": "row_c_RefundTransaction_processedAt",
+          "type": "node",
+          "parent": "t_RefundTransaction"
+        },
+        {
+          "id": "c_RefundTransaction_processedAt_pk",
+          "type": "node",
+          "parent": "row_c_RefundTransaction_processedAt"
+        },
+        {
+          "id": "c_RefundTransaction_processedAt_name",
+          "type": "node",
+          "parent": "row_c_RefundTransaction_processedAt",
+          "label": "processedAt"
+        },
+        {
+          "id": "c_RefundTransaction_processedAt_type",
+          "type": "node",
+          "parent": "row_c_RefundTransaction_processedAt",
+          "label": "timestamp"
+        },
+        {
+          "id": "t_Review",
+          "type": "node",
+          "parent": "1",
+          "label": "Review"
+        },
+        {
+          "id": "row_c_Review_id",
+          "type": "node",
+          "parent": "t_Review"
+        },
+        {
+          "id": "c_Review_id_pk",
+          "type": "node",
+          "parent": "row_c_Review_id",
+          "label": "PK "
+        },
+        {
+          "id": "c_Review_id_name",
+          "type": "node",
+          "parent": "row_c_Review_id",
+          "label": "id"
+        },
+        {
+          "id": "c_Review_id_type",
+          "type": "node",
+          "parent": "row_c_Review_id",
+          "label": "integer"
+        },
+        {
+          "id": "row_c_Review_userId",
+          "type": "node",
+          "parent": "t_Review"
+        },
+        {
+          "id": "c_Review_userId_pk",
+          "type": "node",
+          "parent": "row_c_Review_userId",
+          "label": "FK "
+        },
+        {
+          "id": "c_Review_userId_name",
+          "type": "node",
+          "parent": "row_c_Review_userId",
+          "label": "userId"
+        },
+        {
+          "id": "c_Review_userId_type",
+          "type": "node",
+          "parent": "row_c_Review_userId",
+          "label": "integer"
+        },
+        {
+          "id": "row_c_Review_productId",
+          "type": "node",
+          "parent": "t_Review"
+        },
+        {
+          "id": "c_Review_productId_pk",
+          "type": "node",
+          "parent": "row_c_Review_productId",
+          "label": "FK "
+        },
+        {
+          "id": "c_Review_productId_name",
+          "type": "node",
+          "parent": "row_c_Review_productId",
+          "label": "productId"
+        },
+        {
+          "id": "c_Review_productId_type",
+          "type": "node",
+          "parent": "row_c_Review_productId",
+          "label": "integer"
+        },
+        {
+          "id": "row_c_Review_lineItemId",
+          "type": "node",
+          "parent": "t_Review"
+        },
+        {
+          "id": "c_Review_lineItemId_pk",
+          "type": "node",
+          "parent": "row_c_Review_lineItemId",
+          "label": "FK "
+        },
+        {
+          "id": "c_Review_lineItemId_name",
+          "type": "node",
+          "parent": "row_c_Review_lineItemId",
+          "label": "lineItemId"
+        },
+        {
+          "id": "c_Review_lineItemId_type",
+          "type": "node",
+          "parent": "row_c_Review_lineItemId",
+          "label": "integer"
+        },
+        {
+          "id": "row_c_Review_rating",
+          "type": "node",
+          "parent": "t_Review"
+        },
+        {
+          "id": "c_Review_rating_pk",
+          "type": "node",
+          "parent": "row_c_Review_rating"
+        },
+        {
+          "id": "c_Review_rating_name",
+          "type": "node",
+          "parent": "row_c_Review_rating",
+          "label": "rating"
+        },
+        {
+          "id": "c_Review_rating_type",
+          "type": "node",
+          "parent": "row_c_Review_rating",
+          "label": "integer"
+        },
+        {
+          "id": "row_c_Review_comment",
+          "type": "node",
+          "parent": "t_Review"
+        },
+        {
+          "id": "c_Review_comment_pk",
+          "type": "node",
+          "parent": "row_c_Review_comment"
+        },
+        {
+          "id": "c_Review_comment_name",
+          "type": "node",
+          "parent": "row_c_Review_comment",
+          "label": "comment"
+        },
+        {
+          "id": "c_Review_comment_type",
+          "type": "node",
+          "parent": "row_c_Review_comment",
+          "label": "text"
+        },
+        {
+          "id": "row_c_Review_createdAt",
+          "type": "node",
+          "parent": "t_Review"
+        },
+        {
+          "id": "c_Review_createdAt_pk",
+          "type": "node",
+          "parent": "row_c_Review_createdAt"
+        },
+        {
+          "id": "c_Review_createdAt_name",
+          "type": "node",
+          "parent": "row_c_Review_createdAt",
+          "label": "createdAt"
+        },
+        {
+          "id": "c_Review_createdAt_type",
+          "type": "node",
+          "parent": "row_c_Review_createdAt",
+          "label": "timestamp"
+        },
+        {
+          "id": "t_Promotion",
+          "type": "node",
+          "parent": "1",
+          "label": "Promotion"
+        },
+        {
+          "id": "row_c_Promotion_id",
+          "type": "node",
+          "parent": "t_Promotion"
+        },
+        {
+          "id": "c_Promotion_id_pk",
+          "type": "node",
+          "parent": "row_c_Promotion_id",
+          "label": "PK "
+        },
+        {
+          "id": "c_Promotion_id_name",
+          "type": "node",
+          "parent": "row_c_Promotion_id",
+          "label": "id"
+        },
+        {
+          "id": "c_Promotion_id_type",
+          "type": "node",
+          "parent": "row_c_Promotion_id",
+          "label": "integer"
+        },
+        {
+          "id": "row_c_Promotion_code",
+          "type": "node",
+          "parent": "t_Promotion"
+        },
+        {
+          "id": "c_Promotion_code_pk",
+          "type": "node",
+          "parent": "row_c_Promotion_code"
+        },
+        {
+          "id": "c_Promotion_code_name",
+          "type": "node",
+          "parent": "row_c_Promotion_code",
+          "label": "code"
+        },
+        {
+          "id": "c_Promotion_code_type",
+          "type": "node",
+          "parent": "row_c_Promotion_code",
+          "label": "varchar(50)"
+        },
+        {
+          "id": "row_c_Promotion_type",
+          "type": "node",
+          "parent": "t_Promotion"
+        },
+        {
+          "id": "c_Promotion_type_pk",
+          "type": "node",
+          "parent": "row_c_Promotion_type"
+        },
+        {
+          "id": "c_Promotion_type_name",
+          "type": "node",
+          "parent": "row_c_Promotion_type",
+          "label": "type"
+        },
+        {
+          "id": "c_Promotion_type_type",
+          "type": "node",
+          "parent": "row_c_Promotion_type",
+          "label": "varchar(50)"
+        },
+        {
+          "id": "row_c_Promotion_discountValue",
+          "type": "node",
+          "parent": "t_Promotion"
+        },
+        {
+          "id": "c_Promotion_discountValue_pk",
+          "type": "node",
+          "parent": "row_c_Promotion_discountValue"
+        },
+        {
+          "id": "c_Promotion_discountValue_name",
+          "type": "node",
+          "parent": "row_c_Promotion_discountValue",
+          "label": "discountValue"
+        },
+        {
+          "id": "c_Promotion_discountValue_type",
+          "type": "node",
+          "parent": "row_c_Promotion_discountValue",
+          "label": "numeric(12,2)"
+        },
+        {
+          "id": "row_c_Promotion_minOrderValue",
+          "type": "node",
+          "parent": "t_Promotion"
+        },
+        {
+          "id": "c_Promotion_minOrderValue_pk",
+          "type": "node",
+          "parent": "row_c_Promotion_minOrderValue"
+        },
+        {
+          "id": "c_Promotion_minOrderValue_name",
+          "type": "node",
+          "parent": "row_c_Promotion_minOrderValue",
+          "label": "minOrderValue"
+        },
+        {
+          "id": "c_Promotion_minOrderValue_type",
+          "type": "node",
+          "parent": "row_c_Promotion_minOrderValue",
+          "label": "numeric(12,2)"
+        },
+        {
+          "id": "row_c_Promotion_maxUses",
+          "type": "node",
+          "parent": "t_Promotion"
+        },
+        {
+          "id": "c_Promotion_maxUses_pk",
+          "type": "node",
+          "parent": "row_c_Promotion_maxUses"
+        },
+        {
+          "id": "c_Promotion_maxUses_name",
+          "type": "node",
+          "parent": "row_c_Promotion_maxUses",
+          "label": "maxUses"
+        },
+        {
+          "id": "c_Promotion_maxUses_type",
+          "type": "node",
+          "parent": "row_c_Promotion_maxUses",
+          "label": "integer"
+        },
+        {
+          "id": "row_c_Promotion_startAt",
+          "type": "node",
+          "parent": "t_Promotion"
+        },
+        {
+          "id": "c_Promotion_startAt_pk",
+          "type": "node",
+          "parent": "row_c_Promotion_startAt"
+        },
+        {
+          "id": "c_Promotion_startAt_name",
+          "type": "node",
+          "parent": "row_c_Promotion_startAt",
+          "label": "startAt"
+        },
+        {
+          "id": "c_Promotion_startAt_type",
+          "type": "node",
+          "parent": "row_c_Promotion_startAt",
+          "label": "timestamp"
+        },
+        {
+          "id": "row_c_Promotion_endAt",
+          "type": "node",
+          "parent": "t_Promotion"
+        },
+        {
+          "id": "c_Promotion_endAt_pk",
+          "type": "node",
+          "parent": "row_c_Promotion_endAt"
+        },
+        {
+          "id": "c_Promotion_endAt_name",
+          "type": "node",
+          "parent": "row_c_Promotion_endAt",
+          "label": "endAt"
+        },
+        {
+          "id": "c_Promotion_endAt_type",
+          "type": "node",
+          "parent": "row_c_Promotion_endAt",
+          "label": "timestamp"
+        },
+        {
+          "id": "t_PromotionListing",
+          "type": "node",
+          "parent": "1",
+          "label": "PromotionListing"
+        },
+        {
+          "id": "row_c_PromotionListing_id",
+          "type": "node",
+          "parent": "t_PromotionListing"
+        },
+        {
+          "id": "c_PromotionListing_id_pk",
+          "type": "node",
+          "parent": "row_c_PromotionListing_id",
+          "label": "PK "
+        },
+        {
+          "id": "c_PromotionListing_id_name",
+          "type": "node",
+          "parent": "row_c_PromotionListing_id",
+          "label": "id"
+        },
+        {
+          "id": "c_PromotionListing_id_type",
+          "type": "node",
+          "parent": "row_c_PromotionListing_id",
+          "label": "integer"
+        },
+        {
+          "id": "row_c_PromotionListing_promotionId",
+          "type": "node",
+          "parent": "t_PromotionListing"
+        },
+        {
+          "id": "c_PromotionListing_promotionId_pk",
+          "type": "node",
+          "parent": "row_c_PromotionListing_promotionId",
+          "label": "FK "
+        },
+        {
+          "id": "c_PromotionListing_promotionId_name",
+          "type": "node",
+          "parent": "row_c_PromotionListing_promotionId",
+          "label": "promotionId"
+        },
+        {
+          "id": "c_PromotionListing_promotionId_type",
+          "type": "node",
+          "parent": "row_c_PromotionListing_promotionId",
+          "label": "integer"
+        },
+        {
+          "id": "row_c_PromotionListing_listingId",
+          "type": "node",
+          "parent": "t_PromotionListing"
+        },
+        {
+          "id": "c_PromotionListing_listingId_pk",
+          "type": "node",
+          "parent": "row_c_PromotionListing_listingId",
+          "label": "FK "
+        },
+        {
+          "id": "c_PromotionListing_listingId_name",
+          "type": "node",
+          "parent": "row_c_PromotionListing_listingId",
+          "label": "listingId"
+        },
+        {
+          "id": "c_PromotionListing_listingId_type",
+          "type": "node",
+          "parent": "row_c_PromotionListing_listingId",
+          "label": "integer"
+        },
+        {
+          "id": "t_OrderPromotion",
+          "type": "node",
+          "parent": "1",
+          "label": "OrderPromotion"
+        },
+        {
+          "id": "row_c_OrderPromotion_id",
+          "type": "node",
+          "parent": "t_OrderPromotion"
+        },
+        {
+          "id": "c_OrderPromotion_id_pk",
+          "type": "node",
+          "parent": "row_c_OrderPromotion_id",
+          "label": "PK "
+        },
+        {
+          "id": "c_OrderPromotion_id_name",
+          "type": "node",
+          "parent": "row_c_OrderPromotion_id",
+          "label": "id"
+        },
+        {
+          "id": "c_OrderPromotion_id_type",
+          "type": "node",
+          "parent": "row_c_OrderPromotion_id",
+          "label": "integer"
+        },
+        {
+          "id": "row_c_OrderPromotion_orderId",
+          "type": "node",
+          "parent": "t_OrderPromotion"
+        },
+        {
+          "id": "c_OrderPromotion_orderId_pk",
+          "type": "node",
+          "parent": "row_c_OrderPromotion_orderId",
+          "label": "FK "
+        },
+        {
+          "id": "c_OrderPromotion_orderId_name",
+          "type": "node",
+          "parent": "row_c_OrderPromotion_orderId",
+          "label": "orderId"
+        },
+        {
+          "id": "c_OrderPromotion_orderId_type",
+          "type": "node",
+          "parent": "row_c_OrderPromotion_orderId",
+          "label": "integer"
+        },
+        {
+          "id": "row_c_OrderPromotion_promotionId",
+          "type": "node",
+          "parent": "t_OrderPromotion"
+        },
+        {
+          "id": "c_OrderPromotion_promotionId_pk",
+          "type": "node",
+          "parent": "row_c_OrderPromotion_promotionId",
+          "label": "FK "
+        },
+        {
+          "id": "c_OrderPromotion_promotionId_name",
+          "type": "node",
+          "parent": "row_c_OrderPromotion_promotionId",
+          "label": "promotionId"
+        },
+        {
+          "id": "c_OrderPromotion_promotionId_type",
+          "type": "node",
+          "parent": "row_c_OrderPromotion_promotionId",
+          "label": "integer"
+        },
+        {
+          "id": "row_c_OrderPromotion_discountApplied",
+          "type": "node",
+          "parent": "t_OrderPromotion"
+        },
+        {
+          "id": "c_OrderPromotion_discountApplied_pk",
+          "type": "node",
+          "parent": "row_c_OrderPromotion_discountApplied"
+        },
+        {
+          "id": "c_OrderPromotion_discountApplied_name",
+          "type": "node",
+          "parent": "row_c_OrderPromotion_discountApplied",
+          "label": "discountApplied"
+        },
+        {
+          "id": "c_OrderPromotion_discountApplied_type",
+          "type": "node",
+          "parent": "row_c_OrderPromotion_discountApplied",
+          "label": "numeric(12,2)"
+        },
+        {
+          "id": "e_0",
+          "type": "edge",
+          "parent": "1",
+          "source": "row_c_UserRole_userId",
+          "target": "row_c_User_id"
+        },
+        {
+          "id": "e_1",
+          "type": "edge",
+          "parent": "1",
+          "source": "row_c_UserRole_roleId",
+          "target": "row_c_Role_id"
+        },
+        {
+          "id": "e_2",
+          "type": "edge",
+          "parent": "1",
+          "source": "row_c_Address_userId",
+          "target": "row_c_User_id"
+        },
+        {
+          "id": "e_3",
+          "type": "edge",
+          "parent": "1",
+          "source": "row_c_DeliveryAgentAccount_userId",
+          "target": "row_c_User_id"
+        },
+        {
+          "id": "e_4",
+          "type": "edge",
+          "parent": "1",
+          "source": "row_c_DeliveryAgentAccount_hubId",
+          "target": "row_c_Hub_id"
+        },
+        {
+          "id": "e_5",
+          "type": "edge",
+          "parent": "1",
+          "source": "row_c_SellerAccount_userId",
+          "target": "row_c_User_id"
+        },
+        {
+          "id": "e_6",
+          "type": "edge",
+          "parent": "1",
+          "source": "row_c_SellerPayoutAccount_sellerId",
+          "target": "row_c_SellerAccount_id"
+        },
+        {
+          "id": "e_7",
+          "type": "edge",
+          "parent": "1",
+          "source": "row_c_SellerPayout_sellerId",
+          "target": "row_c_SellerAccount_id"
+        },
+        {
+          "id": "e_8",
+          "type": "edge",
+          "parent": "1",
+          "source": "row_c_SellerPayout_payoutAccountId",
+          "target": "row_c_SellerPayoutAccount_id"
+        },
+        {
+          "id": "e_9",
+          "type": "edge",
+          "parent": "1",
+          "source": "row_c_SellerLedgerEntry_sellerId",
+          "target": "row_c_SellerAccount_id"
+        },
+        {
+          "id": "e_10",
+          "type": "edge",
+          "parent": "1",
+          "source": "row_c_SellerLedgerEntry_subOrderId",
+          "target": "row_c_SubOrder_id"
+        },
+        {
+          "id": "e_11",
+          "type": "edge",
+          "parent": "1",
+          "source": "row_c_SellerLedgerEntry_payoutId",
+          "target": "row_c_SellerPayout_id"
+        },
+        {
+          "id": "e_12",
+          "type": "edge",
+          "parent": "1",
+          "source": "row_c_Warehouse_sellerId",
+          "target": "row_c_SellerAccount_id"
+        },
+        {
+          "id": "e_13",
+          "type": "edge",
+          "parent": "1",
+          "source": "row_c_Category_parentId",
+          "target": "row_c_Category_id"
+        },
+        {
+          "id": "e_14",
+          "type": "edge",
+          "parent": "1",
+          "source": "row_c_Product_categoryId",
+          "target": "row_c_Category_id"
+        },
+        {
+          "id": "e_15",
+          "type": "edge",
+          "parent": "1",
+          "source": "row_c_Product_brandId",
+          "target": "row_c_Brand_id"
+        },
+        {
+          "id": "e_16",
+          "type": "edge",
+          "parent": "1",
+          "source": "row_c_ProductAttribute_productId",
+          "target": "row_c_Product_id"
+        },
+        {
+          "id": "e_17",
+          "type": "edge",
+          "parent": "1",
+          "source": "row_c_ProductVariant_productId",
+          "target": "row_c_Product_id"
+        },
+        {
+          "id": "e_18",
+          "type": "edge",
+          "parent": "1",
+          "source": "row_c_ProductImage_productId",
+          "target": "row_c_Product_id"
+        },
+        {
+          "id": "e_19",
+          "type": "edge",
+          "parent": "1",
+          "source": "row_c_ProductImage_variantId",
+          "target": "row_c_ProductVariant_id"
+        },
+        {
+          "id": "e_20",
+          "type": "edge",
+          "parent": "1",
+          "source": "row_c_Listing_variantId",
+          "target": "row_c_ProductVariant_id"
+        },
+        {
+          "id": "e_21",
+          "type": "edge",
+          "parent": "1",
+          "source": "row_c_Listing_sellerId",
+          "target": "row_c_SellerAccount_id"
+        },
+        {
+          "id": "e_22",
+          "type": "edge",
+          "parent": "1",
+          "source": "row_c_WarehouseStock_listingId",
+          "target": "row_c_Listing_id"
+        },
+        {
+          "id": "e_23",
+          "type": "edge",
+          "parent": "1",
+          "source": "row_c_WarehouseStock_warehouseId",
+          "target": "row_c_Warehouse_id"
+        },
+        {
+          "id": "e_24",
+          "type": "edge",
+          "parent": "1",
+          "source": "row_c_PriceHistory_listingId",
+          "target": "row_c_Listing_id"
+        },
+        {
+          "id": "e_25",
+          "type": "edge",
+          "parent": "1",
+          "source": "row_c_Cart_userId",
+          "target": "row_c_User_id"
+        },
+        {
+          "id": "e_26",
+          "type": "edge",
+          "parent": "1",
+          "source": "row_c_CartItem_cartId",
+          "target": "row_c_Cart_id"
+        },
+        {
+          "id": "e_27",
+          "type": "edge",
+          "parent": "1",
+          "source": "row_c_CartItem_listingId",
+          "target": "row_c_Listing_id"
+        },
+        {
+          "id": "e_28",
+          "type": "edge",
+          "parent": "1",
+          "source": "row_c_Wishlist_userId",
+          "target": "row_c_User_id"
+        },
+        {
+          "id": "e_29",
+          "type": "edge",
+          "parent": "1",
+          "source": "row_c_WishlistItem_wishlistId",
+          "target": "row_c_Wishlist_id"
+        },
+        {
+          "id": "e_30",
+          "type": "edge",
+          "parent": "1",
+          "source": "row_c_WishlistItem_variantId",
+          "target": "row_c_ProductVariant_id"
+        },
+        {
+          "id": "e_31",
+          "type": "edge",
+          "parent": "1",
+          "source": "row_c_Order_userId",
+          "target": "row_c_User_id"
+        },
+        {
+          "id": "e_32",
+          "type": "edge",
+          "parent": "1",
+          "source": "row_c_OrderAddress_orderId",
+          "target": "row_c_Order_id"
+        },
+        {
+          "id": "e_33",
+          "type": "edge",
+          "parent": "1",
+          "source": "row_c_SubOrder_orderId",
+          "target": "row_c_Order_id"
+        },
+        {
+          "id": "e_34",
+          "type": "edge",
+          "parent": "1",
+          "source": "row_c_SubOrder_sellerId",
+          "target": "row_c_SellerAccount_id"
+        },
+        {
+          "id": "e_35",
+          "type": "edge",
+          "parent": "1",
+          "source": "row_c_OrderLineItem_subOrderId",
+          "target": "row_c_SubOrder_id"
+        },
+        {
+          "id": "e_36",
+          "type": "edge",
+          "parent": "1",
+          "source": "row_c_OrderLineItem_listingId",
+          "target": "row_c_Listing_id"
+        },
+        {
+          "id": "e_37",
+          "type": "edge",
+          "parent": "1",
+          "source": "row_c_OrderStatusHistory_subOrderId",
+          "target": "row_c_SubOrder_id"
+        },
+        {
+          "id": "e_38",
+          "type": "edge",
+          "parent": "1",
+          "source": "row_c_Shipment_subOrderId",
+          "target": "row_c_SubOrder_id"
+        },
+        {
+          "id": "e_39",
+          "type": "edge",
+          "parent": "1",
+          "source": "row_c_Shipment_carrierId",
+          "target": "row_c_ShippingCarrier_id"
+        },
+        {
+          "id": "e_40",
+          "type": "edge",
+          "parent": "1",
+          "source": "row_c_Shipment_deliveryAgentId",
+          "target": "row_c_DeliveryAgentAccount_id"
+        },
+        {
+          "id": "e_41",
+          "type": "edge",
+          "parent": "1",
+          "source": "row_c_Payment_orderId",
+          "target": "row_c_Order_id"
+        },
+        {
+          "id": "e_42",
+          "type": "edge",
+          "parent": "1",
+          "source": "row_c_ReturnRequest_lineItemId",
+          "target": "row_c_OrderLineItem_id"
+        },
+        {
+          "id": "e_43",
+          "type": "edge",
+          "parent": "1",
+          "source": "row_c_RefundTransaction_paymentId",
+          "target": "row_c_Payment_id"
+        },
+        {
+          "id": "e_44",
+          "type": "edge",
+          "parent": "1",
+          "source": "row_c_RefundTransaction_returnRequestId",
+          "target": "row_c_ReturnRequest_id"
+        },
+        {
+          "id": "e_45",
+          "type": "edge",
+          "parent": "1",
+          "source": "row_c_Review_userId",
+          "target": "row_c_User_id"
+        },
+        {
+          "id": "e_46",
+          "type": "edge",
+          "parent": "1",
+          "source": "row_c_Review_productId",
+          "target": "row_c_Product_id"
+        },
+        {
+          "id": "e_47",
+          "type": "edge",
+          "parent": "1",
+          "source": "row_c_Review_lineItemId",
+          "target": "row_c_OrderLineItem_id"
+        },
+        {
+          "id": "e_48",
+          "type": "edge",
+          "parent": "1",
+          "source": "row_c_PromotionListing_promotionId",
+          "target": "row_c_Promotion_id"
+        },
+        {
+          "id": "e_49",
+          "type": "edge",
+          "parent": "1",
+          "source": "row_c_PromotionListing_listingId",
+          "target": "row_c_Listing_id"
+        },
+        {
+          "id": "e_50",
+          "type": "edge",
+          "parent": "1",
+          "source": "row_c_OrderPromotion_orderId",
+          "target": "row_c_Order_id"
+        },
+        {
+          "id": "e_51",
+          "type": "edge",
+          "parent": "1",
+          "source": "row_c_OrderPromotion_promotionId",
+          "target": "row_c_Promotion_id"
+        }
+      ]
+    }
+  ]
+}

@@ -16,7 +16,7 @@ export class CategoriesService {
   constructor(
     @InjectModel(Category)
     private readonly categoryModel: typeof Category,
-  ) { }
+  ) {}
 
   async create(createCategoryDto: CreateCategoryDto) {
     const existingCategory = await this.categoryModel.findOne({

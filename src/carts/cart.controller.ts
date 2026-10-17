@@ -15,15 +15,7 @@ import { CreateCartDto } from './dto/create-cart.dto';
 import { UpdateCartDto } from './dto/update-cart.dto';
 import { ApiBearerAuth, ApiOperation, ApiTags } from '@nestjs/swagger';
 import { JwtAuthGuard } from 'src/auth/guards/jwt-auth/jwt-auth.guard';
-import { Request as ExpressRequest } from 'express';
-
-interface RequestWithUser extends ExpressRequest {
-  user: {
-    sub: number;
-    email: string;
-    role: string;
-  };
-}
+import type { RequestWithUser } from 'src/common/interfaces/request-with-user.interface';
 
 @ApiTags('Cart')
 @ApiBearerAuth('access-token')

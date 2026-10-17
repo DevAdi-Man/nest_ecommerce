@@ -16,19 +16,11 @@ import {
   ApiResponse,
   ApiTags,
 } from '@nestjs/swagger';
-import type { Request as ExpressRequest } from 'express';
+import type { RequestWithUser } from 'src/common/interfaces/request-with-user.interface';
 import { JwtAuthGuard } from 'src/auth/guards/jwt-auth/jwt-auth.guard';
 import { AddressesService } from './addresses.service';
 import { CreateAddressDto } from './dto/create-address.dto';
 import { UpdateAddressDto } from './dto/update-address.dto';
-
-interface RequestWithUser extends ExpressRequest {
-  user: {
-    sub: number;
-    email: string;
-    role: string;
-  };
-}
 
 @ApiTags('Address')
 @Controller('addresses')

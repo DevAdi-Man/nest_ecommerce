@@ -22,23 +22,15 @@ import {
 import { SellerService } from './seller.service';
 import { CreateSellerDto } from './dto/create-seller.dto';
 import { UpdateSellerDto } from './dto/update-seller.dto';
-import { UpgradeSellerDto } from './dto/upgade-seller.dto';
+import { UpgradeSellerDto } from './dto/upgrade-seller.dto';
 
 import { JwtAuthGuard } from 'src/auth/guards/jwt-auth/jwt-auth.guard';
 import { RolesGuard } from 'src/auth/guards/roles/roles.guard';
 import { Roles } from 'src/auth/decorators/roles/roles.decorator';
 import { Role } from 'src/auth/enums/role.enum';
 
-import type { Request as ExpressRequest } from 'express';
 import { SellerQueryDto } from './dto/query-seller.dto';
-
-interface RequestWithUser extends ExpressRequest {
-  user: {
-    sub: number;
-    email: string;
-    role: string;
-  };
-}
+import type { RequestWithUser } from 'src/common/interfaces/request-with-user.interface';
 
 @ApiTags('Seller')
 @Controller('seller')
@@ -164,10 +156,12 @@ export class SellerController {
     return this.sellerService.findOne(id);
   }
 
+  @Roles(Role.Customer)
   @Post('upgrade')
   @ApiOperation({
-    summary: 'Upgrade seller',
-    description: 'Requests an upgrade for the currently authenticated seller.',
+    summary: 'Apply to become a seller',
+    description:
+      'Allows an authenticated customer to submit a seller onboarding application.',
   })
   @ApiResponse({
     status: 200,

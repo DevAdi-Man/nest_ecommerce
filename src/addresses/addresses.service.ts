@@ -32,7 +32,7 @@ export class AddressesService {
     if (isDefault) {
       await this.addressModel.update(
         { isDefault: false },
-        { where: { userId } }
+        { where: { userId } },
       );
     }
 
@@ -43,7 +43,7 @@ export class AddressesService {
     });
 
     return {
-      message: 'Creating address successfull.',
+      message: 'Address created successfully.',
       address,
     };
   }
@@ -55,12 +55,8 @@ export class AddressesService {
       },
     });
 
-    if (!address) {
-      throw new NotFoundException('Address not found.');
-    }
-
     return {
-      message: 'Fetching all the address successfull.',
+      message: 'Addresses fetched successfully.',
       address,
     };
   }
@@ -98,14 +94,14 @@ export class AddressesService {
     if (updateAddressDto.isDefault) {
       await this.addressModel.update(
         { isDefault: false },
-        { where: { userId } }
+        { where: { userId } },
       );
     }
 
     const newAddress = await address.update(updateAddressDto);
 
     return {
-      message: 'Updating address successfull.',
+      message: 'Address updated successfully.',
       address: newAddress,
     };
   }
@@ -119,7 +115,7 @@ export class AddressesService {
     await address.destroy();
 
     return {
-      message: 'Address deleting Successfull.',
+      message: 'Address deleted successfully.',
     };
   }
 }
