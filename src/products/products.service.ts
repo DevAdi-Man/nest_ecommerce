@@ -11,6 +11,10 @@ import { generateUniqueSlug } from 'src/common/utils/slug.utils';
 import { ProductQueryDto } from './dto/query-product.dto';
 import { Op } from 'sequelize';
 import { Category } from 'src/categories/entities/category.entity';
+import { Brand } from './entities/brand.entity';
+import { ProductAttribute } from './entities/product.attribute.entity';
+import { ProductVarient } from './entities/product.variant.entity';
+import { ProductImage } from './entities/product.image.entity';
 
 @Injectable()
 export class ProductsService {
@@ -21,14 +25,14 @@ export class ProductsService {
 
   async create(createProductDto: CreateProductDto) {
     const existingProduct = await this.productModel.findOne({
-      where: { name: createProductDto.name },
+      where: { name: createProductDto.title },
     });
 
     if (existingProduct) {
       throw new ConflictException('Product already exist.');
     }
     const slug = await generateUniqueSlug(
-      createProductDto.name,
+      createProductDto.title,
       async (slug) => {
         return !!(await this.productModel.findOne({ where: { slug } }));
       },
@@ -59,7 +63,7 @@ export class ProductsService {
     if (search) {
       where[Op.or] = [
         {
-          name: {
+          title: {
             [Op.iLike]: `%${search}%`,
           },
         },
@@ -83,6 +87,22 @@ export class ProductsService {
         {
           model: Category,
           attributes: ['id', 'name', 'slug'],
+        },
+        {
+          model: Brand,
+          attributes: ['id', 'name', 'slug', 'logoUrl'],
+        },
+        {
+          model: ProductAttribute,
+          attributes: ['id', 'attrName', 'attrValue'],
+        },
+        {
+          model: ProductVarient,
+          attributes: ['id', 'size', 'color', 'weight'],
+        },
+        {
+          model: ProductImage,
+          attributes: ['id', 'imageUrl', 'sortOrder'],
         },
       ],
     });
@@ -117,9 +137,9 @@ export class ProductsService {
 
     const updateData: Partial<Product> = { ...updateProductDto };
 
-    if (updateProductDto.name && updateProductDto.name !== product.title) {
+    if (updateProductDto.title && updateProductDto.title !== product.title) {
       const existingProduct = await this.productModel.findOne({
-        where: { name: updateProductDto.name },
+        where: { name: updateProductDto.title },
       });
 
       if (existingProduct) {
@@ -127,7 +147,7 @@ export class ProductsService {
       }
 
       updateData.slug = await generateUniqueSlug(
-        updateProductDto.name,
+        updateProductDto.title,
         async (slug) => {
           return !!(await this.productModel.findOne({ where: { slug } }));
         },

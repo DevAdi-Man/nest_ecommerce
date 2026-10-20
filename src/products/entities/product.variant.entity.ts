@@ -64,6 +64,6 @@ export class ProductVarient extends Model {
   @HasMany(() => ProductImage)
   declare productImage: ProductImage[];
 
-  @HasMany(() => Listing, 'varientId')
-  declare listing: Listing[];
+  @HasMany(() => Listing, 'variantId')
+  declare listings: Listing[];
 }

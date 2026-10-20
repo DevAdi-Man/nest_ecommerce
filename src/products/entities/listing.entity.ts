@@ -72,6 +72,13 @@ export class Listing extends Model {
   declare mrp: number;
 
   @Column({
+    type: DataType.INTEGER,
+    allowNull: false,
+    defaultValue: 0,
+  })
+  declare stock: number;
+
+  @Column({
     type: DataType.ENUM(...Object.values(ProductCondition)),
     allowNull: false,
     defaultValue: ProductCondition.NEW,

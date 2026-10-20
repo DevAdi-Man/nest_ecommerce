@@ -27,7 +27,7 @@ export class ProductQueryDto {
   limit = 10;
 
   @ApiPropertyOptional({
-    description: 'Search by product name or slug',
+    description: 'Search by product title or slug',
   })
   @IsOptional()
   @IsString()
@@ -35,11 +35,11 @@ export class ProductQueryDto {
   search?: string;
 
   @ApiPropertyOptional({
-    enum: ['createdAt', 'updatedAt', 'name'],
+    enum: ['createdAt', 'updatedAt', 'title'],
     default: 'createdAt',
   })
   @IsOptional()
-  @IsIn(['createdAt', 'updatedAt', 'name'])
+  @IsIn(['createdAt', 'updatedAt', 'title'])
   sortBy = 'createdAt';
 
   @ApiPropertyOptional({

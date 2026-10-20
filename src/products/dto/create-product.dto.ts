@@ -1,16 +1,13 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { Type } from 'class-transformer';
 import {
-  IsArray,
+  IsEnum,
   IsInt,
   IsNotEmpty,
-  IsNumber,
   IsOptional,
-  IsPositive,
   IsString,
   MaxLength,
   MinLength,
-  ArrayMinSize,
 } from 'class-validator';
 
 export class CreateProductDto {
@@ -19,15 +16,15 @@ export class CreateProductDto {
     example: 'Puma Pants',
     description: 'Product name',
   })
-  @IsNotEmpty({ message: 'Product name is required.' })
-  @IsString({ message: 'Product name should be string.' })
+  @IsNotEmpty({ message: 'Product title is required.' })
+  @IsString({ message: 'Product title should be string.' })
   @MinLength(2, {
-    message: 'Product name must be at least 2 characters long.',
+    message: 'Product title must be at least 2 characters long.',
   })
   @MaxLength(50, {
-    message: 'Procuct name cannot be longer than 50 characters.',
+    message: 'Procuct title cannot be longer than 50 characters.',
   })
-  name: string;
+  title: string;
 
   // decription chiye
   @ApiProperty({
@@ -44,26 +41,21 @@ export class CreateProductDto {
   })
   description: string;
 
-  // price chiye
   @ApiProperty({
-    example: 22.22,
-    description: 'Product price',
+    example: 1,
+    description: 'Brand Id which product is associated with.',
   })
-  @IsNotEmpty({ message: 'Product price is required.' })
-  @IsNumber({}, { message: 'Product price should be number.' })
-  @IsPositive({ message: "Price can't be negative." })
-  price: number;
-  // image chiye min 2 chiye
+  @IsOptional()
+  @IsInt()
+  brandId?: number;
 
   @ApiProperty({
-    example: ['img.jpg', 'img.png'],
-    description: 'Product Images',
+    example: 'DRAFT',
+    description: 'Is product still have to upload',
   })
-  @IsNotEmpty({ message: 'Product images is required.' })
-  @ArrayMinSize(2, { message: 'At least 2 images are required.' })
-  @IsArray({ message: 'Product images should be an Array.' })
-  @IsString({ each: true, message: 'Each image product should be an string.' })
-  images: string[];
+  @IsEnum(['DRAFT', 'PUBLISHED', 'ARCHIVED'])
+  @IsOptional()
+  status?: string;
 
   // categoryId chiye beacuse pta to chle kis category se match kr ta hai (Question ek product multiple ccategory se bhe ho skta hai kya)
   @ApiProperty({
