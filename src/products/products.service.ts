@@ -11,6 +11,10 @@ import { CreateProductDto } from './dto/create-product.dto';
 import { ProductQueryDto } from './dto/query-product.dto';
 import { UpdateProductDto } from './dto/update-product.dto';
 import { Product } from './entities/product.entity';
+import { Brand } from './entities/brand.entity';
+import { ProductAttribute } from './entities/product.attribute.entity';
+import { ProductVarient } from './entities/product.variant.entity';
+import { ProductImage } from './entities/product.image.entity';
 
 @Injectable()
 export class ProductsService {
@@ -21,14 +25,14 @@ export class ProductsService {
 
   async create(createProductDto: CreateProductDto) {
     const existingProduct = await this.productModel.findOne({
-      where: { name: createProductDto.name },
+      where: { title: createProductDto.title },
     });
 
     if (existingProduct) {
       throw new ConflictException('Product already exist.');
     }
     const slug = await generateUniqueSlug(
-      createProductDto.name,
+      createProductDto.title,
       async (slug) => {
         return !!(await this.productModel.findOne({ where: { slug } }));
       },
@@ -59,7 +63,7 @@ export class ProductsService {
     if (search) {
       where[Op.or] = [
         {
-          name: {
+          title: {
             [Op.iLike]: `%${search}%`,
           },
         },
@@ -84,6 +88,22 @@ export class ProductsService {
           model: Category,
           attributes: ['id', 'name', 'slug'],
         },
+        {
+          model: Brand,
+          attributes: ['id', 'name', 'slug', 'logoUrl'],
+        },
+        {
+          model: ProductAttribute,
+          attributes: ['id', 'attrName', 'attrValue'],
+        },
+        {
+          model: ProductVarient,
+          attributes: ['id', 'size', 'color', 'weight'],
+        },
+        {
+          model: ProductImage,
+          attributes: ['id', 'imageUrl', 'sortOrder'],
+        },
       ],
     });
 
@@ -101,7 +121,13 @@ export class ProductsService {
 
   async findOne(id: number) {
     const product = await this.productModel.findByPk(id, {
-      include: [Category],
+      include: [
+        Category,
+        Brand,
+        ProductAttribute,
+        ProductVarient,
+        ProductImage,
+      ],
     });
 
     if (!product) throw new NotFoundException('Product not found.');
@@ -117,9 +143,9 @@ export class ProductsService {
 
     const updateData: Partial<Product> = { ...updateProductDto };
 
-    if (updateProductDto.name && updateProductDto.name !== product.name) {
+    if (updateProductDto.title && updateProductDto.title !== product.title) {
       const existingProduct = await this.productModel.findOne({
-        where: { name: updateProductDto.name },
+        where: { title: updateProductDto.title },
       });
 
       if (existingProduct) {
@@ -127,7 +153,7 @@ export class ProductsService {
       }
 
       updateData.slug = await generateUniqueSlug(
-        updateProductDto.name,
+        updateProductDto.title,
         async (slug) => {
           return !!(await this.productModel.findOne({ where: { slug } }));
         },

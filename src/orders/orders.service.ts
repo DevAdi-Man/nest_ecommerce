@@ -58,7 +58,8 @@ export class OrdersService {
 
     // totalAmount calculate kro
     const totalAmount = cartItems.reduce(
-      (total, item) => total + item.product.price * item.quantity,
+      (total, item) =>
+        total + Number((item.product as any)?.price || 0) * item.quantity,
       0,
     );
 
@@ -101,7 +102,7 @@ export class OrdersService {
           orderId: order.id,
           productId: item.productId,
           quantity: item.quantity,
-          priceAtPurchase: item.product.price,
+          priceAtPurchase: Number((item.product as any)?.price || 0),
         });
       }),
     );
