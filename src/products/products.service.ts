@@ -3,14 +3,14 @@ import {
   Injectable,
   NotFoundException,
 } from '@nestjs/common';
-import { CreateProductDto } from './dto/create-product.dto';
-import { UpdateProductDto } from './dto/update-product.dto';
 import { InjectModel } from '@nestjs/sequelize';
-import { Product } from './entities/product.entity';
-import { generateUniqueSlug } from 'src/common/utils/slug.utils';
-import { ProductQueryDto } from './dto/query-product.dto';
 import { Op } from 'sequelize';
 import { Category } from 'src/categories/entities/category.entity';
+import { generateUniqueSlug } from 'src/common/utils/slug.utils';
+import { CreateProductDto } from './dto/create-product.dto';
+import { ProductQueryDto } from './dto/query-product.dto';
+import { UpdateProductDto } from './dto/update-product.dto';
+import { Product } from './entities/product.entity';
 import { Brand } from './entities/brand.entity';
 import { ProductAttribute } from './entities/product.attribute.entity';
 import { ProductVarient } from './entities/product.variant.entity';
@@ -25,7 +25,7 @@ export class ProductsService {
 
   async create(createProductDto: CreateProductDto) {
     const existingProduct = await this.productModel.findOne({
-      where: { name: createProductDto.title },
+      where: { title: createProductDto.title },
     });
 
     if (existingProduct) {
@@ -121,7 +121,13 @@ export class ProductsService {
 
   async findOne(id: number) {
     const product = await this.productModel.findByPk(id, {
-      include: [Category],
+      include: [
+        Category,
+        Brand,
+        ProductAttribute,
+        ProductVarient,
+        ProductImage,
+      ],
     });
 
     if (!product) throw new NotFoundException('Product not found.');
@@ -139,7 +145,7 @@ export class ProductsService {
 
     if (updateProductDto.title && updateProductDto.title !== product.title) {
       const existingProduct = await this.productModel.findOne({
-        where: { name: updateProductDto.title },
+        where: { title: updateProductDto.title },
       });
 
       if (existingProduct) {

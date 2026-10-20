@@ -16,19 +16,15 @@ import {
 } from '@nestjs/swagger';
 import { RegisterDto } from './dto/register.dto';
 import { LoginDto } from './dto/login.dto';
+import { RefreshTokenDto } from './dto/refreshToken.dto';
 import { RefreshAuthGuard } from './guards/refresh-auth/refresh-auth.guard';
-import { JwtPayload } from './interfaces/jwtPayload.interface';
-import { Request as ExpressRequest } from 'express';
 import { VerifyEmailDto } from './dto/verify-email.dto';
 import { ForgotPasswordDto } from './dto/forgot-password.dto';
 import { ResetPasswordDto } from './dto/reset-password.dto';
 import { JwtAuthGuard } from './guards/jwt-auth/jwt-auth.guard';
 import { ResendVerificationDto } from './dto/resend-verification.dto';
 import { ChangePasswordDto } from './dto/change-password.dto';
-
-interface AuthenticatedRequest extends ExpressRequest {
-  user: JwtPayload;
-}
+import type { RequestWithUser } from 'src/common/interfaces/request-with-user.interface';
 
 @ApiTags('Auth')
 @Controller('auth')
@@ -72,7 +68,10 @@ export class AuthController {
     description: 'Invalid or expired refresh token.',
   })
   @UseGuards(RefreshAuthGuard)
-  refresh(@Request() req: AuthenticatedRequest) {
+  refresh(
+    @Request() req: RequestWithUser,
+    @Body() _refreshTokenDto: RefreshTokenDto,
+  ) {
     return this.authService.refresh(req.user);
   }
 
@@ -118,7 +117,7 @@ export class AuthController {
   @ApiOperation({
     summary: 'Logout user',
   })
-  logout(@Request() req: AuthenticatedRequest) {
+  logout(@Request() req: RequestWithUser) {
     return this.authService.logOut(req.user.sub);
   }
   @Post('resend-verification')
@@ -139,7 +138,7 @@ export class AuthController {
   @Get('me')
   @UseGuards(JwtAuthGuard)
   @ApiBearerAuth('access-token')
-  me(@Request() req: AuthenticatedRequest) {
+  me(@Request() req: RequestWithUser) {
     return this.authService.me(req.user.sub);
   }
 
@@ -150,7 +149,7 @@ export class AuthController {
   })
   @ApiBearerAuth('access-token')
   changePassword(
-    @Request() req: AuthenticatedRequest,
+    @Request() req: RequestWithUser,
     @Body() changePasswordDto: ChangePasswordDto,
   ) {
     return this.authService.changePassword(req.user.sub, changePasswordDto);

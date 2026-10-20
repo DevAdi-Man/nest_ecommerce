@@ -61,6 +61,7 @@ export class CategoriesService {
     const offset = (page - 1) * limit;
 
     const where: any = {};
+
     if (search) {
       where[Op.or] = [
         {

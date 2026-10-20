@@ -19,6 +19,7 @@ import { ThrottlerGuard, ThrottlerModule } from '@nestjs/throttler';
 import { APP_GUARD } from '@nestjs/core';
 import { envValidationSchema } from './config/env.validation';
 import { MediaModule } from './media/media.module';
+import { SellerModule } from './seller/seller.module';
 
 @Module({
   imports: [
@@ -72,6 +73,7 @@ import { MediaModule } from './media/media.module';
     OtpModule,
     MailModule,
     MediaModule,
+    SellerModule,
   ],
   providers: [
     {

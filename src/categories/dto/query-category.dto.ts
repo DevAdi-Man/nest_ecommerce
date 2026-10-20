@@ -11,16 +11,26 @@ import {
 } from 'class-validator';
 
 export class CategoryQueryDto {
-  @ApiPropertyOptional({ default: 1 })
-  @Type(() => Number)
+  @ApiPropertyOptional({
+    example: 1,
+    description: 'Page number',
+    default: 1,
+    type: Number,
+  })
   @IsOptional()
+  @Type(() => Number)
   @IsInt()
   @Min(1)
   page = 1;
 
-  @ApiPropertyOptional({ default: 10 })
-  @Type(() => Number)
+  @ApiPropertyOptional({
+    example: 10,
+    description: 'Number of categories per page',
+    default: 10,
+    type: Number,
+  })
   @IsOptional()
+  @Type(() => Number)
   @IsInt()
   @Min(1)
   @Max(100)
@@ -28,6 +38,7 @@ export class CategoryQueryDto {
 
   @ApiPropertyOptional({
     description: 'Search by category name or slug',
+    type: String,
   })
   @IsOptional()
   @IsString()
@@ -37,6 +48,7 @@ export class CategoryQueryDto {
   @ApiPropertyOptional({
     enum: ['createdAt', 'updatedAt', 'name'],
     default: 'createdAt',
+    type: String,
   })
   @IsOptional()
   @IsIn(['createdAt', 'updatedAt', 'name'])
@@ -45,6 +57,7 @@ export class CategoryQueryDto {
   @ApiPropertyOptional({
     enum: ['ASC', 'DESC'],
     default: 'DESC',
+    type: String,
   })
   @IsOptional()
   @IsIn(['ASC', 'DESC'])
@@ -53,6 +66,7 @@ export class CategoryQueryDto {
   @ApiPropertyOptional({
     description: 'Filter by parent category',
     example: 1,
+    type: Number,
   })
   @Type(() => Number)
   @IsOptional()
