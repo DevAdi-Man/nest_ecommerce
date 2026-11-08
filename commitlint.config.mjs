@@ -28,6 +28,8 @@ export default {
         'orders',
         'payments',
         'categories',
+        'brands',
+        'recommendations',
         'coupons',
         'inventory',
         'reviews',
