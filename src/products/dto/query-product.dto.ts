@@ -58,4 +58,13 @@ export class ProductQueryDto {
   @IsOptional()
   @IsInt()
   categoryId?: number;
+
+  @ApiPropertyOptional({
+    description: 'Filter by brandId',
+    example: 1,
+  })
+  @Type(() => Number)
+  @IsOptional()
+  @IsInt()
+  brandId?: number;
 }

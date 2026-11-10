@@ -8,6 +8,7 @@ import {
   Table,
 } from 'sequelize-typescript';
 import { ProductVarient } from './product.variant.entity';
+import { Seller } from 'src/seller/entities/seller.entity';
 
 export enum ListingStatus {
   ACTIVE = 'ACTIVE',
@@ -47,11 +48,15 @@ export class Listing extends Model {
   declare variant: ProductVarient;
 
   @Index
+  @ForeignKey(() => Seller)
   @Column({
     type: DataType.INTEGER,
     allowNull: false,
   })
   declare sellerId: number;
+
+  @BelongsTo(() => Seller, 'sellerId')
+  declare seller: Seller;
 
   @Column({
     type: DataType.STRING,

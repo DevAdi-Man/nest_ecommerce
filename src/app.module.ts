@@ -2,6 +2,7 @@ import { Module } from '@nestjs/common';
 import { UsersModule } from './users/users.module';
 import { ProductsModule } from './products/products.module';
 import { CategoriesModule } from './categories/categories.module';
+import { BrandsModule } from './brands/brands.module';
 import { OrdersModule } from './orders/orders.module';
 import { CartModule } from './carts/cart.module';
 import { WishlistModule } from './wishlists/wishlist.module';
@@ -20,6 +21,7 @@ import { APP_GUARD } from '@nestjs/core';
 import { envValidationSchema } from './config/env.validation';
 import { MediaModule } from './media/media.module';
 import { SellerModule } from './seller/seller.module';
+import { RecommendationsModule } from './recommendations/recommendations.module';
 
 @Module({
   imports: [
@@ -63,6 +65,7 @@ import { SellerModule } from './seller/seller.module';
     RolesModule,
     ProductsModule,
     CategoriesModule,
+    BrandsModule,
     OrdersModule,
     CartModule,
     WishlistModule,
@@ -74,6 +77,7 @@ import { SellerModule } from './seller/seller.module';
     MailModule,
     MediaModule,
     SellerModule,
+    RecommendationsModule,
   ],
   providers: [
     {

@@ -10,7 +10,7 @@ import {
 } from 'sequelize-typescript';
 import { Category } from 'src/categories/entities/category.entity';
 import { OrderItem } from 'src/orders/entities/order-item.entity';
-import { Brand } from './brand.entity';
+import { Brand } from 'src/brands/entities/brand.entity';
 import { ProductAttribute } from './product.attribute.entity';
 import { ProductVarient } from './product.variant.entity';
 import { ProductImage } from './product.image.entity';

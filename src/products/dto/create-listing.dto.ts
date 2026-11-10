@@ -10,15 +10,8 @@ import {
   Min,
 } from 'class-validator';
 import { ProductCondition } from '../entities/listing.entity';
-export class CreateListingDto {
-  @ApiProperty({
-    example: 101,
-    description: 'ID of the product variant to sell',
-  })
-  @IsNotEmpty({ message: 'variantId is required.' })
-  @IsInt({ message: 'variantId must be an integer.' })
-  variantId: number;
 
+export class ProductListingInputDto {
   @ApiProperty({
     example: 'SELLER-B-IPHONE15-128',
     description: 'Seller internal SKU for this inventory item',
@@ -63,4 +56,24 @@ export class CreateListingDto {
   @IsOptional()
   @IsEnum(ProductCondition)
   condition?: ProductCondition = ProductCondition.NEW;
+
+  @ApiPropertyOptional({
+    example: 'MERCHANT',
+    description: 'Fulfillment type (e.g. MERCHANT or PLATFORM)',
+    default: 'MERCHANT',
+  })
+  @IsOptional()
+  @IsString({ message: 'fulfillmentType must be a string.' })
+  fulfillmentType?: string = 'MERCHANT';
+}
+
+export class CreateListingDto extends ProductListingInputDto {
+  @ApiPropertyOptional({
+    example: 101,
+    description:
+      'ID of the product variant to sell. Required if not provided in URL.',
+  })
+  @IsOptional()
+  @IsInt({ message: 'variantId must be an integer.' })
+  variantId?: number;
 }

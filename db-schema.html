@@ -423,13 +423,100 @@ const TABLES = [
   },
   {
     id: "products", name: "products", file: "products/entities/product.entity.ts",
-    done: false,
+    done: true,
     columns: [
-      { name: "id", type: "pk" }, { name: "name", type: "col" }, { name: "slug", type: "col" },
-      { name: "description", type: "col" }, { name: "price", type: "col" }, { name: "images", type: "col" },
+      { name: "id", type: "pk" }, { name: "title", type: "col" }, { name: "slug", type: "col" },
+      { name: "description", type: "col" }, { name: "status", type: "col" }, { name: "brandId", type: "fk" },
       { name: "categoryId", type: "fk" }
     ],
-    relations: ["BelongsTo → categories", "HasMany → reviews", "HasOne → inventory"]
+    relations: ["BelongsTo → categories", "BelongsTo → brands", "HasMany → product_variants", "HasMany → product_attributes", "HasMany → product_images"]
+  },
+  {
+    id: "brands", name: "brands", file: "brands/entities/brand.entity.ts",
+    done: true,
+    columns: [
+      { name: "id", type: "pk" }, { name: "name", type: "col" }, { name: "slug", type: "col" },
+      { name: "logoUrl", type: "col" }
+    ],
+    relations: ["HasMany → products"]
+  },
+  {
+    id: "seller", name: "seller", file: "seller/entities/seller.entity.ts",
+    done: true,
+    columns: [
+      { name: "id", type: "pk" }, { name: "userId", type: "fk" }, { name: "legalBusinessName", type: "col" },
+      { name: "gstin", type: "col" }, { name: "tier", type: "col" }, { name: "rating", type: "col" },
+      { name: "status", type: "col" }
+    ],
+    relations: ["BelongsTo → users", "HasMany → listings"]
+  },
+  {
+    id: "product_variants", name: "product_variants", file: "products/entities/product.variant.entity.ts",
+    done: true,
+    columns: [
+      { name: "id", type: "pk" }, { name: "productId", type: "fk" }, { name: "universalSku", type: "col" },
+      { name: "color", type: "col" }, { name: "size", type: "col" }, { name: "weight", type: "col" },
+      { name: "attributes", type: "col" }
+    ],
+    relations: ["BelongsTo → products", "HasMany → listings", "HasMany → product_images"]
+  },
+  {
+    id: "product_attributes", name: "product_attributes", file: "products/entities/product.attribute.entity.ts",
+    done: true,
+    columns: [
+      { name: "id", type: "pk" }, { name: "productId", type: "fk" }, { name: "attrName", type: "col" },
+      { name: "attrValue", type: "col" }
+    ],
+    relations: ["BelongsTo → products"]
+  },
+  {
+    id: "product_images", name: "product_images", file: "products/entities/product.image.entity.ts",
+    done: true,
+    columns: [
+      { name: "id", type: "pk" }, { name: "productId", type: "fk" }, { name: "varientId", type: "fk" },
+      { name: "imageUrl", type: "col" }, { name: "isPrimary", type: "col" }, { name: "sortOrder", type: "col" }
+    ],
+    relations: ["BelongsTo → products", "BelongsTo → product_variants"]
+  },
+  {
+    id: "listings", name: "listings", file: "products/entities/listing.entity.ts",
+    done: true,
+    columns: [
+      { name: "id", type: "pk" }, { name: "variantId", type: "fk" }, { name: "sellerId", type: "fk" },
+      { name: "sellerSku", type: "col" }, { name: "price", type: "col" }, { name: "mrp", type: "col" },
+      { name: "stock", type: "col" }, { name: "condition", type: "col" }, { name: "fulfillmentType", type: "col" },
+      { name: "status", type: "col" }
+    ],
+    relations: ["BelongsTo → product_variants", "BelongsTo → seller"]
+  },
+  {
+    id: "product_views", name: "product_views", file: "recommendations/entities/product-view-event.entity.ts",
+    done: true,
+    columns: [
+      { name: "id", type: "pk" }, { name: "userId", type: "fk" }, { name: "sessionId", type: "col" },
+      { name: "productId", type: "fk" }, { name: "categoryId", type: "fk" }, { name: "viewedAt", type: "col" },
+      { name: "durationSeconds", type: "col" }
+    ],
+    relations: ["BelongsTo → users", "BelongsTo → products", "BelongsTo → categories"]
+  },
+  {
+    id: "product_co_views", name: "product_co_views", file: "recommendations/entities/product-co-view.entity.ts",
+    done: true,
+    columns: [
+      { name: "id", type: "pk" }, { name: "productId", type: "fk" }, { name: "coViewedProductId", type: "fk" },
+      { name: "coViewCount", type: "col" }, { name: "lastViewedTogether", type: "col" }
+    ],
+    relations: ["BelongsTo → products", "BelongsTo → products (co-viewed)"]
+  },
+  {
+    id: "user_category_affinities", name: "user_category_affinities", file: "recommendations/entities/user-category-affinity.entity.ts",
+    done: true,
+    columns: [
+      { name: "id", type: "pk" }, { name: "userId", type: "fk" }, { name: "sessionId", type: "col" },
+      { name: "categoryId", type: "fk" }, { name: "viewCount", type: "col" }, { name: "affinityScore", type: "col" },
+      { name: "lastViewedAt", type: "col" }
+    ],
+    relations: ["BelongsTo → users", "BelongsTo → categories"]
   },
   {
     id: "addresses", name: "addresses", file: "addresses/entities/address.entity.ts",

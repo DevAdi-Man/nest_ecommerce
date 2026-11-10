@@ -27,15 +27,15 @@ export class ProductVarient extends Model {
 
   @Column({
     type: DataType.STRING,
-    allowNull: false,
+    allowNull: true,
   })
-  declare size: string;
+  declare size?: string;
 
   @Column({
     type: DataType.STRING,
-    allowNull: false,
+    allowNull: true,
   })
-  declare color: string;
+  declare color?: string;
 
   @Column({
     type: DataType.STRING,
@@ -46,9 +46,16 @@ export class ProductVarient extends Model {
 
   @Column({
     type: DataType.DECIMAL(8, 3),
-    allowNull: false,
+    allowNull: true,
   })
-  declare weight: number;
+  declare weight?: number;
+
+  @Column({
+    type: DataType.JSONB,
+    allowNull: true,
+    defaultValue: {},
+  })
+  declare attributes?: Record<string, any>;
 
   @Index
   @ForeignKey(() => Product)
@@ -61,7 +68,7 @@ export class ProductVarient extends Model {
   @BelongsTo(() => Product, 'productId')
   declare product: Product;
 
-  @HasMany(() => ProductImage)
+  @HasMany(() => ProductImage, 'varientId')
   declare productImage: ProductImage[];
 
   @HasMany(() => Listing, 'variantId')
