@@ -1,3 +1,4 @@
+import { CartItem } from 'src/carts/entities/cartItem-entity';
 import { Test, TestingModule } from '@nestjs/testing';
 import { getModelToken } from '@nestjs/sequelize';
 import { RecommendationsService } from './recommendations.service';
@@ -21,6 +22,10 @@ describe('RecommendationsService', () => {
   };
 
   const mockProductCoViewModel = {
+    sequelize: {
+      transaction: jest.fn(async (work) => work({})),
+      query: jest.fn().mockResolvedValue([]),
+    },
     create: jest.fn(),
     findAll: jest.fn().mockResolvedValue([]),
     findOne: jest.fn().mockResolvedValue(null),
@@ -57,6 +62,10 @@ describe('RecommendationsService', () => {
     const module: TestingModule = await Test.createTestingModule({
       providers: [
         RecommendationsService,
+        {
+          provide: getModelToken(CartItem),
+          useValue: { findAll: jest.fn().mockResolvedValue([]) },
+        },
         {
           provide: getModelToken(ProductViewEvent),
           useValue: mockProductViewModel,
@@ -239,6 +248,9 @@ describe('RecommendationsService', () => {
         },
       ]);
 
+      mockProductModel.findAll.mockResolvedValueOnce([
+        await mockProductModel.findByPk(2),
+      ]);
       const result = await service.getViewedTogether(1, { limit: 5 });
 
       expect(result.strategy).toBe('FREQUENTLY_VIEWED_TOGETHER');
@@ -246,5 +258,67 @@ describe('RecommendationsService', () => {
       expect(result.data[0].product.id).toBe(2);
       expect(result.data[0].recommendation.score).toBeGreaterThan(0);
     });
+  });
+  it('counts a product pair only once per distinct session', async () => {
+    const contributions = new Set<string>();
+    let aggregateWrites = 0;
+    mockProductCoViewModel.sequelize.query.mockImplementation(
+      async (sql, options) => {
+        if (sql.startsWith('INSERT INTO product_co_view_sessions')) {
+          const key = JSON.stringify(options.replacements);
+          if (contributions.has(key)) return [];
+          contributions.add(key);
+          return [{ productId: 1 }];
+        }
+        aggregateWrites++;
+        return [];
+      },
+    );
+    mockProductModel.findByPk.mockResolvedValue({ id: 1, categoryId: 10 });
+    mockProductViewModel.findAll.mockResolvedValue([{ productId: 2 }]);
+    mockProductViewModel.create.mockResolvedValue({
+      id: 1,
+      viewedAt: new Date(),
+    });
+    await service.recordProductView(1, 'session-A', { productId: 1 });
+    await service.recordProductView(1, 'session-A', { productId: 1 });
+    expect(aggregateWrites).toBe(2); // one write for each direction
+    await service.recordProductView(1, 'session-B', { productId: 1 });
+    expect(aggregateWrites).toBe(4);
+  });
+
+  it('filters exclusions again after merging similarity and co-view candidates', async () => {
+    mockProductViewModel.findOne.mockResolvedValueOnce({ productId: 1 });
+    mockProductViewModel.findAll.mockResolvedValueOnce([{ productId: 2 }]);
+    mockSellerModel.findOne.mockResolvedValueOnce({ id: 7 });
+    const candidate = (id: number, sellerId = 8) => ({
+      product: {
+        id,
+        variants: [
+          {
+            inStock: true,
+            listings: [{ stock: 1, status: 'ACTIVE', sellerId }],
+          },
+        ],
+      },
+      recommendation: { score: 80, explanation: 'candidate' },
+    });
+    jest
+      .spyOn(service, 'getFrequentlyViewedCategories')
+      .mockResolvedValueOnce({ strategy: 'A', total: 0, data: [] });
+    jest.spyOn(service, 'getSimilarProducts').mockResolvedValueOnce({
+      strategy: 'B',
+      total: 3,
+      data: [candidate(2), candidate(3, 7), candidate(4)] as any,
+    });
+    jest.spyOn(service, 'getViewedTogether').mockResolvedValueOnce({
+      strategy: 'C',
+      total: 1,
+      data: [candidate(5)] as any,
+    });
+    const result = await service.getPersonalizedRecommendations(1, 'session', {
+      excludeProductId: 5,
+    });
+    expect(result.data.map((item) => item.product.id)).toEqual([4]);
   });
 });

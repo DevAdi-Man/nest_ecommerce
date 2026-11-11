@@ -1,20 +1,15 @@
-import { Test, TestingModule } from '@nestjs/testing';
 import { CategoriesController } from './categories.controller';
 import { CategoriesService } from './categories.service';
 
 describe('CategoriesController', () => {
-  let controller: CategoriesController;
-
-  beforeEach(async () => {
-    const module: TestingModule = await Test.createTestingModule({
-      controllers: [CategoriesController],
-      providers: [CategoriesService],
-    }).compile();
-
-    controller = module.get<CategoriesController>(CategoriesController);
-  });
-
-  it('should be defined', () => {
-    expect(controller).toBeDefined();
+  it('passes request arguments to the service and returns its result', async () => {
+    const dto = { id: 7 };
+    const service = { findOne: jest.fn().mockResolvedValue(dto) };
+    const controller = new CategoriesController(
+      service as unknown as CategoriesService,
+    );
+    const result = await controller.findOne(7);
+    expect(service.findOne).toHaveBeenCalledWith(7);
+    expect(result).toEqual(dto);
   });
 });

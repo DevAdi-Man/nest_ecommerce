@@ -9,7 +9,6 @@ import {
   Table,
 } from 'sequelize-typescript';
 import { Category } from 'src/categories/entities/category.entity';
-import { OrderItem } from 'src/orders/entities/order-item.entity';
 import { Brand } from 'src/brands/entities/brand.entity';
 import { ProductAttribute } from './product.attribute.entity';
 import { ProductVarient } from './product.variant.entity';
@@ -89,7 +88,4 @@ export class Product extends Model {
 
   @HasMany(() => ProductImage)
   declare productImage: ProductImage[];
-
-  @HasMany(() => OrderItem)
-  declare orderItems: OrderItem[];
 }

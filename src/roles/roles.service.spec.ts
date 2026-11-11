@@ -1,18 +1,11 @@
-import { Test, TestingModule } from '@nestjs/testing';
 import { RolesService } from './roles.service';
+import { Role } from './entities/role.entity';
 
-describe('RolesService', () => {
-  let service: RolesService;
-
-  beforeEach(async () => {
-    const module: TestingModule = await Test.createTestingModule({
-      providers: [RolesService],
-    }).compile();
-
-    service = module.get<RolesService>(RolesService);
-  });
-
-  it('should be defined', () => {
-    expect(service).toBeDefined();
+describe('role lookup', () => {
+  it('returns 404 for an unknown role', async () => {
+    const service = new RolesService({
+      findByPk: jest.fn().mockResolvedValue(null),
+    } as unknown as typeof Role);
+    await expect(service.findOne(99)).rejects.toThrow('Role not found');
   });
 });

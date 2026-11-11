@@ -1,0 +1,157 @@
+[
+  {
+    "file": "/home/devadi/Projects/Work/My_work/Backend/nest_ecommerce/design/marketplace/assets/icons/search.svg",
+    "source": "https://raw.githubusercontent.com/lucide-icons/lucide/main/icons/search.svg",
+    "bytes": 275
+  },
+  {
+    "file": "/home/devadi/Projects/Work/My_work/Backend/nest_ecommerce/design/marketplace/assets/icons/shopping-bag.svg",
+    "source": "https://raw.githubusercontent.com/lucide-icons/lucide/main/icons/shopping-bag.svg",
+    "bytes": 422
+  },
+  {
+    "file": "/home/devadi/Projects/Work/My_work/Backend/nest_ecommerce/design/marketplace/assets/icons/heart.svg",
+    "source": "https://raw.githubusercontent.com/lucide-icons/lucide/main/icons/heart.svg",
+    "bytes": 373
+  },
+  {
+    "file": "/home/devadi/Projects/Work/My_work/Backend/nest_ecommerce/design/marketplace/assets/icons/user-round.svg",
+    "source": "https://raw.githubusercontent.com/lucide-icons/lucide/main/icons/user-round.svg",
+    "bytes": 279
+  },
+  {
+    "file": "/home/devadi/Projects/Work/My_work/Backend/nest_ecommerce/design/marketplace/assets/icons/house.svg",
+    "source": "https://raw.githubusercontent.com/lucide-icons/lucide/main/icons/house.svg",
+    "bytes": 383
+  },
+  {
+    "file": "/home/devadi/Projects/Work/My_work/Backend/nest_ecommerce/design/marketplace/assets/icons/compass.svg",
+    "source": "https://raw.githubusercontent.com/lucide-icons/lucide/main/icons/compass.svg",
+    "bytes": 351
+  },
+  {
+    "file": "/home/devadi/Projects/Work/My_work/Backend/nest_ecommerce/design/marketplace/assets/icons/sliders-horizontal.svg",
+    "source": "https://raw.githubusercontent.com/lucide-icons/lucide/main/icons/sliders-horizontal.svg",
+    "bytes": 422
+  },
+  {
+    "file": "/home/devadi/Projects/Work/My_work/Backend/nest_ecommerce/design/marketplace/assets/icons/chevron-down.svg",
+    "source": "https://raw.githubusercontent.com/lucide-icons/lucide/main/icons/chevron-down.svg",
+    "bytes": 236
+  },
+  {
+    "file": "/home/devadi/Projects/Work/My_work/Backend/nest_ecommerce/design/marketplace/assets/icons/arrow-left.svg",
+    "source": "https://raw.githubusercontent.com/lucide-icons/lucide/main/icons/arrow-left.svg",
+    "bytes": 262
+  },
+  {
+    "file": "/home/devadi/Projects/Work/My_work/Backend/nest_ecommerce/design/marketplace/assets/icons/arrow-right.svg",
+    "source": "https://raw.githubusercontent.com/lucide-icons/lucide/main/icons/arrow-right.svg",
+    "bytes": 261
+  },
+  {
+    "file": "/home/devadi/Projects/Work/My_work/Backend/nest_ecommerce/design/marketplace/assets/icons/star.svg",
+    "source": "https://raw.githubusercontent.com/lucide-icons/lucide/main/icons/star.svg",
+    "bytes": 588
+  },
+  {
+    "file": "/home/devadi/Projects/Work/My_work/Backend/nest_ecommerce/design/marketplace/assets/icons/map-pin.svg",
+    "source": "https://raw.githubusercontent.com/lucide-icons/lucide/main/icons/map-pin.svg",
+    "bytes": 359
+  },
+  {
+    "file": "/home/devadi/Projects/Work/My_work/Backend/nest_ecommerce/design/marketplace/assets/icons/check.svg",
+    "source": "https://raw.githubusercontent.com/lucide-icons/lucide/main/icons/check.svg",
+    "bytes": 239
+  },
+  {
+    "file": "/home/devadi/Projects/Work/My_work/Backend/nest_ecommerce/design/marketplace/assets/icons/shield-check.svg",
+    "source": "https://raw.githubusercontent.com/lucide-icons/lucide/main/icons/shield-check.svg",
+    "bytes": 415
+  },
+  {
+    "file": "/home/devadi/Projects/Work/My_work/Backend/nest_ecommerce/design/marketplace/assets/icons/truck.svg",
+    "source": "https://raw.githubusercontent.com/lucide-icons/lucide/main/icons/truck.svg",
+    "bytes": 469
+  },
+  {
+    "file": "/home/devadi/Projects/Work/My_work/Backend/nest_ecommerce/design/marketplace/assets/icons/minus.svg",
+    "source": "https://raw.githubusercontent.com/lucide-icons/lucide/main/icons/minus.svg",
+    "bytes": 232
+  },
+  {
+    "file": "/home/devadi/Projects/Work/My_work/Backend/nest_ecommerce/design/marketplace/assets/icons/plus.svg",
+    "source": "https://raw.githubusercontent.com/lucide-icons/lucide/main/icons/plus.svg",
+    "bytes": 256
+  },
+  {
+    "file": "/home/devadi/Projects/Work/My_work/Backend/nest_ecommerce/design/marketplace/assets/icons/trash-2.svg",
+    "source": "https://raw.githubusercontent.com/lucide-icons/lucide/main/icons/trash-2.svg",
+    "error": "HTTP Error 404: Not Found"
+  },
+  {
+    "file": "/home/devadi/Projects/Work/My_work/Backend/nest_ecommerce/design/marketplace/assets/icons/package.svg",
+    "source": "https://raw.githubusercontent.com/lucide-icons/lucide/main/icons/package.svg",
+    "bytes": 446
+  },
+  {
+    "file": "/home/devadi/Projects/Work/My_work/Backend/nest_ecommerce/design/marketplace/assets/icons/chart-column.svg",
+    "source": "https://raw.githubusercontent.com/lucide-icons/lucide/main/icons/chart-column.svg",
+    "bytes": 320
+  },
+  {
+    "file": "/home/devadi/Projects/Work/My_work/Backend/nest_ecommerce/design/marketplace/assets/icons/circle-alert.svg",
+    "source": "https://raw.githubusercontent.com/lucide-icons/lucide/main/icons/circle-alert.svg",
+    "error": "HTTP Error 404: Not Found"
+  },
+  {
+    "file": "/home/devadi/Projects/Work/My_work/Backend/nest_ecommerce/design/marketplace/assets/icons/x.svg",
+    "source": "https://raw.githubusercontent.com/lucide-icons/lucide/main/icons/x.svg",
+    "bytes": 260
+  },
+  {
+    "file": "/home/devadi/Projects/Work/My_work/Backend/nest_ecommerce/design/marketplace/assets/icons/headphones.svg",
+    "source": "https://raw.githubusercontent.com/lucide-icons/lucide/main/icons/headphones.svg",
+    "bytes": 347
+  },
+  {
+    "file": "/home/devadi/Projects/Work/My_work/Backend/nest_ecommerce/design/marketplace/assets/icons/smartphone.svg",
+    "source": "https://raw.githubusercontent.com/lucide-icons/lucide/main/icons/smartphone.svg",
+    "bytes": 294
+  },
+  {
+    "file": "/home/devadi/Projects/Work/My_work/Backend/nest_ecommerce/design/marketplace/assets/icons/lock-keyhole.svg",
+    "source": "https://raw.githubusercontent.com/lucide-icons/lucide/main/icons/lock-keyhole.svg",
+    "bytes": 337
+  },
+  {
+    "file": "/home/devadi/Projects/Work/My_work/Backend/nest_ecommerce/design/marketplace/assets/icons/menu.svg",
+    "source": "https://raw.githubusercontent.com/lucide-icons/lucide/main/icons/menu.svg",
+    "bytes": 279
+  },
+  {
+    "file": "/home/devadi/Projects/Work/My_work/Backend/nest_ecommerce/design/marketplace/assets/icons/LICENSE",
+    "source": "https://raw.githubusercontent.com/lucide-icons/lucide/main/LICENSE",
+    "bytes": 3208
+  },
+  {
+    "file": "/home/devadi/Projects/Work/My_work/Backend/nest_ecommerce/design/marketplace/assets/products/phone.jpg",
+    "source": "https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=800&q=85&fit=crop",
+    "bytes": 122624
+  },
+  {
+    "file": "/home/devadi/Projects/Work/My_work/Backend/nest_ecommerce/design/marketplace/assets/products/headphones.jpg",
+    "source": "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=800&q=85&fit=crop",
+    "bytes": 47245
+  },
+  {
+    "file": "/home/devadi/Projects/Work/My_work/Backend/nest_ecommerce/design/marketplace/assets/products/shoes.jpg",
+    "source": "https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=800&q=85&fit=crop",
+    "bytes": 59791
+  },
+  {
+    "file": "/home/devadi/Projects/Work/My_work/Backend/nest_ecommerce/design/marketplace/assets/products/backpack.jpg",
+    "source": "https://images.unsplash.com/photo-1553062407-98eeb64c6a62?w=800&q=85&fit=crop",
+    "bytes": 80503
+  }
+]

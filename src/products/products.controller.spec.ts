@@ -46,7 +46,7 @@ describe('ProductsController', () => {
     const req = { user: { sub: 10 } } as any;
 
     const res = await controller.create(req, dto);
-    expect(mockProductsService.create).toHaveBeenCalledWith(10, dto);
+    expect(mockProductsService.create).toHaveBeenCalledWith(10, dto, undefined);
     expect(res).toEqual({ message: 'Product processed successfully.' });
   });
 

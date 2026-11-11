@@ -1,0 +1,40 @@
+{
+  "method": "sRGB relative luminance; normal text minimum 4.5:1",
+  "checks": [
+    {
+      "foreground": "textPrimary",
+      "background": "surface",
+      "ratio": 14.22
+    },
+    {
+      "foreground": "textSecondary",
+      "background": "canvas",
+      "ratio": 5.8
+    },
+    {
+      "foreground": "surface",
+      "background": "brandPrimary",
+      "ratio": 12.03
+    },
+    {
+      "foreground": "brandPrimary",
+      "background": "actionPrimary",
+      "ratio": 7.69
+    },
+    {
+      "foreground": "link",
+      "background": "surface",
+      "ratio": 6.68
+    },
+    {
+      "foreground": "success",
+      "background": "surface",
+      "ratio": 6.76
+    },
+    {
+      "foreground": "danger",
+      "background": "surface",
+      "ratio": 6.48
+    }
+  ]
+}

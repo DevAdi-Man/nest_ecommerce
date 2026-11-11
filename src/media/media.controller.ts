@@ -38,7 +38,11 @@ export class MediaController {
     description: 'Invalid file type or size exceeded.',
   })
   @ApiResponse({ status: 401, description: 'Unauthorized.' })
-  @UseInterceptors(FileInterceptor('file'))
+  @UseInterceptors(
+    FileInterceptor('file', {
+      limits: { fileSize: 5 * 1024 * 1024, files: 1 },
+    }),
+  )
   upload(@UploadedFile() file: Express.Multer.File) {
     return this.mediaService.upload(file);
   }

@@ -1,18 +1,14 @@
-import { Test, TestingModule } from '@nestjs/testing';
 import { MailService } from './mail.service';
+import { MailerService } from '@nestjs-modules/mailer';
 
-describe('MailService', () => {
-  let service: MailService;
-
-  beforeEach(async () => {
-    const module: TestingModule = await Test.createTestingModule({
-      providers: [MailService],
-    }).compile();
-
-    service = module.get<MailService>(MailService);
-  });
-
-  it('should be defined', () => {
-    expect(service).toBeDefined();
+describe('mail delivery', () => {
+  it('propagates delivery failure to the caller', async () => {
+    const mailer = {
+      sendMail: jest.fn().mockRejectedValue(new Error('Mail unavailable')),
+    };
+    const service = new MailService(mailer as unknown as MailerService);
+    await expect(
+      service.sendEmail('test@example.com', 'Verify', 'Test'),
+    ).rejects.toThrow('Mail unavailable');
   });
 });

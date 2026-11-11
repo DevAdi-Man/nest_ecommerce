@@ -1,11 +1,15 @@
 import {
   BadRequestException,
   ConflictException,
+  ForbiddenException,
   Injectable,
   NotFoundException,
 } from '@nestjs/common';
 import { InjectModel } from '@nestjs/sequelize';
 import { Op } from 'sequelize';
+import { getProductInclude, formatProductDetails } from './product-projection';
+import { toMinorUnits } from 'src/common/utils/money';
+import { Role } from 'src/auth/enums/role.enum';
 import { Category } from 'src/categories/entities/category.entity';
 import { generateUniqueSlug } from 'src/common/utils/slug.utils';
 import { CreateProductDto } from './dto/create-product.dto';
@@ -21,7 +25,7 @@ import {
   ListingStatus,
   ProductCondition,
 } from './entities/listing.entity';
-import { Seller } from 'src/seller/entities/seller.entity';
+import { Seller, SellerStatus } from 'src/seller/entities/seller.entity';
 import { UpdateListingDto } from './dto/update-listing.dto';
 import { CreateListingDto } from './dto/create-listing.dto';
 import { QueryListingDto } from './dto/query-listing.dto';
@@ -54,442 +58,260 @@ export class ProductsService {
     private readonly imageModel: typeof ProductImage,
   ) {}
 
-  async create(sellerId: number, dto: CreateProductDto) {
-    // 1. Resolve seller ID from user ID
-    const seller = await this.sellerModel.findOne({
-      where: { userId: sellerId },
-    });
-    const resolvedSellerId = seller ? seller.id : sellerId;
-
-    // 2. Product Level (Find or Create)
-    const existingProduct = await this.productModel.findOne({
-      where: {
-        title: dto.title,
-      },
-    });
-
-    let product = existingProduct;
-    if (!product) {
-      if (dto.brandId) {
-        const brand = await this.brandModel.findByPk(dto.brandId);
-        if (!brand) {
-          throw new NotFoundException(
-            `Brand with ID ${dto.brandId} not found.`,
-          );
-        }
-      }
-
-      if (dto.categoryId) {
-        const category = await this.categoryModel.findByPk(dto.categoryId);
-        if (!category) {
-          throw new NotFoundException(
-            `Category with ID ${dto.categoryId} not found.`,
-          );
-        }
-      }
-
-      const slug = await generateUniqueSlug(
-        dto.slug || dto.title,
-        async (s) => {
-          return !!(await this.productModel.findOne({ where: { slug: s } }));
-        },
-      );
-      product = await this.productModel.create({
-        title: dto.title,
-        description: dto.description,
-        slug,
-        brandId: dto.brandId,
-        categoryId: dto.categoryId,
-        status: dto.status || 'DRAFT',
-      });
+  async create(
+    sellerId: number,
+    dto: CreateProductDto,
+    actorRole: string = Role.Seller,
+  ) {
+    if (
+      dto.listing &&
+      toMinorUnits(dto.listing.price) > toMinorUnits(dto.listing.mrp)
+    ) {
+      throw new BadRequestException('Selling price cannot exceed MRP.');
     }
+    if (dto.listing && !dto.variant)
+      throw new BadRequestException('An initial listing requires a variant.');
+    return this.productModel.sequelize!.transaction(async (transaction) => {
+      const seller =
+        dto.listing || actorRole !== Role.Admin
+          ? await this.resolveSeller(sellerId)
+          : null;
+      const resolvedSellerId = seller?.id;
 
-    // 3. Product Attributes (Specs)
-    if (dto.attributes && dto.attributes.length > 0) {
-      for (const attr of dto.attributes) {
-        const existingAttr = await this.attributeModel.findOne({
+      // 2. Product Level (Find or Create)
+      const existingProduct = await this.productModel.findOne({
+        transaction,
+        where: {
+          title: dto.title,
+        },
+      });
+
+      if (existingProduct && actorRole !== Role.Admin) {
+        throw new ForbiddenException(
+          'Shared catalog changes require an administrator. Use POST /products/listings for an existing variant.',
+        );
+      }
+      let product = existingProduct;
+      if (!product) {
+        if (dto.brandId) {
+          const brand = await this.brandModel.findByPk(dto.brandId, {
+            transaction,
+          });
+          if (!brand) {
+            throw new NotFoundException(
+              `Brand with ID ${dto.brandId} not found.`,
+            );
+          }
+        }
+
+        if (dto.categoryId) {
+          const category = await this.categoryModel.findByPk(dto.categoryId, {
+            transaction,
+          });
+          if (!category) {
+            throw new NotFoundException(
+              `Category with ID ${dto.categoryId} not found.`,
+            );
+          }
+        }
+
+        const slug = await generateUniqueSlug(
+          dto.slug || dto.title,
+          async (s) => {
+            return !!(await this.productModel.findOne({
+              transaction,
+              where: { slug: s },
+            }));
+          },
+        );
+        product = await this.productModel.create(
+          {
+            title: dto.title,
+            description: dto.description,
+            slug,
+            brandId: dto.brandId,
+            categoryId: dto.categoryId,
+            status: dto.status || 'DRAFT',
+          },
+          { transaction },
+        );
+      }
+
+      // 3. Product Attributes (Specs)
+      if (dto.attributes && dto.attributes.length > 0) {
+        for (const attr of dto.attributes) {
+          const existingAttr = await this.attributeModel.findOne({
+            transaction,
+            where: {
+              productId: product.id,
+              attrName: attr.attrName,
+            },
+          });
+          if (!existingAttr) {
+            await this.attributeModel.create(
+              {
+                productId: product.id,
+                attrName: attr.attrName,
+                attrValue: attr.attrValue,
+              },
+              { transaction },
+            );
+          }
+        }
+      }
+
+      // 4. Variant Level (Find or Create)
+      const variantDto = dto.variant || (dto as any).productVarient;
+      let variant: ProductVarient | null = null;
+
+      if (variantDto) {
+        const existingVariant = await this.variantModel.findOne({
+          transaction,
           where: {
-            productId: product.id,
-            attrName: attr.attrName,
+            universalSku: variantDto.universalSku,
           },
         });
-        if (!existingAttr) {
-          await this.attributeModel.create({
-            productId: product.id,
-            attrName: attr.attrName,
-            attrValue: attr.attrValue,
-          });
+
+        if (existingVariant && existingVariant.productId !== product.id) {
+          throw new ConflictException(
+            `Variant with SKU '${variantDto.universalSku}' belongs to another product.`,
+          );
+        }
+
+        variant = existingVariant;
+
+        if (!variant) {
+          variant = await this.variantModel.create(
+            {
+              productId: product.id,
+              universalSku: variantDto.universalSku,
+              size: variantDto.size,
+              color: variantDto.color,
+              weight: variantDto.weight,
+              attributes: variantDto.attributes || {},
+            },
+            { transaction },
+          );
         }
       }
-    }
 
-    // 4. Variant Level (Find or Create)
-    const variantDto = dto.variant || (dto as any).productVarient;
-    let variant: ProductVarient | null = null;
+      // 5. Listing Level (Seller Inventory & Offer)
+      let listing: Listing | null = null;
 
-    if (variantDto) {
-      const existingVariant = await this.variantModel.findOne({
-        where: {
-          universalSku: variantDto.universalSku,
-        },
-      });
+      if (dto.listing && variant) {
+        const existingListing = await this.listingModel.findOne({
+          transaction,
+          where: {
+            variantId: variant.id,
+            sellerId: resolvedSellerId,
+          },
+        });
 
-      if (existingVariant && existingVariant.productId !== product.id) {
-        throw new ConflictException(
-          `Variant with SKU '${variantDto.universalSku}' belongs to another product.`,
-        );
+        if (existingListing) {
+          await existingListing.update(
+            {
+              price: dto.listing.price,
+              mrp: dto.listing.mrp,
+              stock: dto.listing.stock ?? existingListing.stock,
+              sellerSku: dto.listing.sellerSku || existingListing.sellerSku,
+              condition: dto.listing.condition || existingListing.condition,
+            },
+            { transaction },
+          );
+          listing = existingListing;
+        } else {
+          listing = await this.listingModel.create(
+            {
+              variantId: variant.id,
+              sellerId: resolvedSellerId,
+              sellerSku: dto.listing.sellerSku,
+              price: dto.listing.price,
+              mrp: dto.listing.mrp,
+              stock: dto.listing.stock ?? 1,
+              condition: dto.listing.condition || ProductCondition.NEW,
+            },
+            { transaction },
+          );
+        }
       }
 
-      variant = existingVariant;
+      // 6. Product Images & Thumbnail
+      const createdImages: ProductImage[] = [];
 
-      if (!variant) {
-        variant = await this.variantModel.create({
-          productId: product.id,
-          universalSku: variantDto.universalSku,
-          size: variantDto.size,
-          color: variantDto.color,
-          weight: variantDto.weight,
-          attributes: variantDto.attributes || {},
+      if (dto.thumbnailUrl) {
+        const existingThumb = await this.imageModel.findOne({
+          transaction,
+          where: {
+            productId: product.id,
+            imageUrl: dto.thumbnailUrl,
+          },
         });
-      }
-    }
-
-    // 5. Listing Level (Seller Inventory & Offer)
-    let listing: Listing | null = null;
-
-    if (dto.listing && variant) {
-      const existingListing = await this.listingModel.findOne({
-        where: {
-          variantId: variant.id,
-          sellerId: resolvedSellerId,
-        },
-      });
-
-      if (existingListing) {
-        await existingListing.update({
-          price: dto.listing.price,
-          mrp: dto.listing.mrp,
-          stock: dto.listing.stock ?? existingListing.stock,
-          sellerSku: dto.listing.sellerSku || existingListing.sellerSku,
-          condition: dto.listing.condition || existingListing.condition,
-        });
-        listing = existingListing;
-      } else {
-        listing = await this.listingModel.create({
-          variantId: variant.id,
-          sellerId: resolvedSellerId,
-          sellerSku: dto.listing.sellerSku,
-          price: dto.listing.price,
-          mrp: dto.listing.mrp,
-          stock: dto.listing.stock ?? 1,
-          condition: dto.listing.condition || ProductCondition.NEW,
-        });
-      }
-    }
-
-    // 6. Product Images & Thumbnail
-    const createdImages: ProductImage[] = [];
-
-    if (dto.thumbnailUrl) {
-      const existingThumb = await this.imageModel.findOne({
-        where: {
-          productId: product.id,
-          imageUrl: dto.thumbnailUrl,
-        },
-      });
-      if (!existingThumb) {
-        await this.imageModel.update(
-          { isPrimary: false },
-          { where: { productId: product.id } },
-        );
-        const thumb = await this.imageModel.create({
-          productId: product.id,
-          varientId: variant ? variant.id : null,
-          imageUrl: dto.thumbnailUrl,
-          isPrimary: true,
-          sortOrder: 0,
-        });
-        createdImages.push(thumb);
-      }
-    }
-
-    if (dto.images && dto.images.length > 0) {
-      const hasPrimary =
-        dto.thumbnailUrl || dto.images.some((img) => img.isPrimary);
-      for (let i = 0; i < dto.images.length; i++) {
-        const img = dto.images[i];
-        const isPrimary = img.isPrimary ?? (!hasPrimary && i === 0);
-        if (isPrimary) {
+        if (!existingThumb) {
           await this.imageModel.update(
             { isPrimary: false },
-            { where: { productId: product.id } },
+            { transaction, where: { productId: product.id } },
           );
+          const thumb = await this.imageModel.create(
+            {
+              productId: product.id,
+              varientId: variant ? variant.id : null,
+              imageUrl: dto.thumbnailUrl,
+              isPrimary: true,
+              sortOrder: 0,
+            },
+            { transaction },
+          );
+          createdImages.push(thumb);
         }
-        const existingImg = await this.imageModel.findOne({
-          where: {
-            productId: product.id,
-            imageUrl: img.imageUrl,
-          },
-        });
-        if (!existingImg) {
-          const imageRecord = await this.imageModel.create({
-            productId: product.id,
-            varientId: img.varientId || (variant ? variant.id : null),
-            imageUrl: img.imageUrl,
-            isPrimary,
-            sortOrder: img.sortOrder ?? i,
+      }
+
+      if (dto.images && dto.images.length > 0) {
+        const hasPrimary =
+          dto.thumbnailUrl || dto.images.some((img) => img.isPrimary);
+        for (let i = 0; i < dto.images.length; i++) {
+          const img = dto.images[i];
+          const isPrimary = img.isPrimary ?? (!hasPrimary && i === 0);
+          if (isPrimary) {
+            await this.imageModel.update(
+              { isPrimary: false },
+              { transaction, where: { productId: product.id } },
+            );
+          }
+          const existingImg = await this.imageModel.findOne({
+            transaction,
+            where: {
+              productId: product.id,
+              imageUrl: img.imageUrl,
+            },
           });
-          createdImages.push(imageRecord);
-        }
-      }
-    }
-
-    return {
-      message: 'Product processed successfully.',
-      product,
-      ...(variant && { variant }),
-      ...(listing && { listing }),
-      ...(createdImages.length > 0 && { images: createdImages }),
-    };
-  }
-
-  private getProductInclude() {
-    return [
-      {
-        model: Category,
-        attributes: ['id', 'name', 'slug'],
-      },
-      {
-        model: Brand,
-        attributes: ['id', 'name', 'slug', 'logoUrl'],
-      },
-      {
-        model: ProductAttribute,
-        attributes: ['id', 'attrName', 'attrValue'],
-      },
-      {
-        model: ProductImage,
-        attributes: ['id', 'imageUrl', 'isPrimary', 'sortOrder', 'varientId'],
-      },
-      {
-        model: ProductVarient,
-        attributes: [
-          'id',
-          'universalSku',
-          'size',
-          'color',
-          'weight',
-          'attributes',
-        ],
-        include: [
-          {
-            model: Listing,
-            where: { status: ListingStatus.ACTIVE },
-            required: false,
-            attributes: [
-              'id',
-              'sellerId',
-              'sellerSku',
-              'price',
-              'mrp',
-              'stock',
-              'condition',
-              'fulfillmentType',
-              'status',
-            ],
-            include: [
+          if (!existingImg) {
+            const imageRecord = await this.imageModel.create(
               {
-                model: Seller,
-                attributes: [
-                  'id',
-                  'legalBusinessName',
-                  'rating',
-                  'tier',
-                  'status',
-                ],
+                productId: product.id,
+                varientId: img.varientId || (variant ? variant.id : null),
+                imageUrl: img.imageUrl,
+                isPrimary,
+                sortOrder: img.sortOrder ?? i,
               },
-            ],
-          },
-        ],
-      },
-    ];
-  }
-
-  public formatProductDetails(productInstance: any) {
-    const raw =
-      typeof productInstance.toJSON === 'function'
-        ? productInstance.toJSON()
-        : productInstance;
-
-    const attributes = raw.productAttribute || [];
-    const specifications: Record<string, string> = {};
-    for (const attr of attributes) {
-      if (attr.attrName) {
-        specifications[attr.attrName] = attr.attrValue;
-      }
-    }
-
-    const images = raw.productImage || [];
-    const primaryImg =
-      images.find((img: any) => img.isPrimary) || images[0] || null;
-    const thumbnail = primaryImg ? primaryImg.imageUrl : null;
-
-    const rawVariants = raw.productVarient || [];
-    let globalMinPrice: number | null = null;
-    let globalMaxPrice: number | null = null;
-    let globalHasStock = false;
-    let globalBestOffer: any = null;
-
-    const formattedVariants = rawVariants.map((v: any) => {
-      const variantListings = (v.listings || []).map((l: any) => ({
-        id: l.id,
-        sellerId: l.sellerId,
-        sellerSku: l.sellerSku,
-        price: Number(l.price),
-        mrp: Number(l.mrp),
-        stock: Number(l.stock),
-        condition: l.condition,
-        fulfillmentType: l.fulfillmentType,
-        status: l.status,
-        seller: l.seller
-          ? {
-              id: l.seller.id,
-              legalBusinessName: l.seller.legalBusinessName,
-              rating: l.seller.rating,
-              tier: l.seller.tier,
-            }
-          : null,
-      }));
-
-      const inStockListings = variantListings
-        .filter((l: any) => l.stock > 0 && l.status === ListingStatus.ACTIVE)
-        .sort((a: any, b: any) => a.price - b.price);
-
-      const winningListing = inStockListings[0] || null;
-      const otherListings = inStockListings.slice(1);
-
-      if (inStockListings.length > 0) {
-        globalHasStock = true;
-        for (const l of inStockListings) {
-          if (globalMinPrice === null || l.price < globalMinPrice) {
-            globalMinPrice = l.price;
-          }
-          if (globalMaxPrice === null || l.price > globalMaxPrice) {
-            globalMaxPrice = l.price;
-          }
-          if (!globalBestOffer || l.price < globalBestOffer.price) {
-            globalBestOffer = {
-              listingId: l.id,
-              variantId: v.id,
-              universalSku: v.universalSku,
-              price: l.price,
-              mrp: l.mrp,
-              discountPercentage:
-                l.mrp > l.price
-                  ? Math.round(((l.mrp - l.price) / l.mrp) * 100)
-                  : 0,
-              stock: l.stock,
-              condition: l.condition,
-              seller: l.seller,
-            };
+              { transaction },
+            );
+            createdImages.push(imageRecord);
           }
         }
       }
-
-      const variantImages = images.filter((img: any) => img.varientId === v.id);
 
       return {
-        id: v.id,
-        universalSku: v.universalSku,
-        size: v.size,
-        color: v.color,
-        weight: v.weight ? Number(v.weight) : null,
-        attributes: v.attributes || {},
-        images: variantImages,
-        inStock: inStockListings.length > 0,
-        buyBox: winningListing
-          ? {
-              winningOffer: {
-                listingId: winningListing.id,
-                price: winningListing.price,
-                mrp: winningListing.mrp,
-                discountPercentage:
-                  winningListing.mrp > winningListing.price
-                    ? Math.round(
-                        ((winningListing.mrp - winningListing.price) /
-                          winningListing.mrp) *
-                          100,
-                      )
-                    : 0,
-                stock: winningListing.stock,
-                condition: winningListing.condition,
-                seller: winningListing.seller,
-              },
-              otherOffersCount: otherListings.length,
-              otherOffers: otherListings.map((ol: any) => ({
-                listingId: ol.id,
-                price: ol.price,
-                mrp: ol.mrp,
-                stock: ol.stock,
-                condition: ol.condition,
-                seller: ol.seller,
-              })),
-            }
-          : null,
-        listings: variantListings,
+        message: 'Product processed successfully.',
+        product,
+        ...(variant && { variant }),
+        ...(listing && { listing }),
+        ...(createdImages.length > 0 && { images: createdImages }),
       };
     });
+  }
 
-    return {
-      id: raw.id,
-      title: raw.title,
-      slug: raw.slug,
-      description: raw.description,
-      status: raw.status,
-      createdAt: raw.createdAt,
-      updatedAt: raw.updatedAt,
-      brand: raw.brand
-        ? {
-            id: raw.brand.id,
-            name: raw.brand.name,
-            slug: raw.brand.slug,
-            logoUrl: raw.brand.logoUrl,
-          }
-        : null,
-      category: raw.category
-        ? {
-            id: raw.category.id,
-            name: raw.category.name,
-            slug: raw.category.slug,
-          }
-        : null,
-      thumbnail,
-      images: images.map((img: any) => ({
-        id: img.id,
-        imageUrl: img.imageUrl,
-        isPrimary: img.isPrimary,
-        sortOrder: img.sortOrder,
-        varientId: img.varientId,
-      })),
-      attributes: attributes.map((a: any) => ({
-        id: a.id,
-        attrName: a.attrName,
-        attrValue: a.attrValue,
-      })),
-      specifications,
-      priceSummary: {
-        minPrice: globalMinPrice,
-        maxPrice: globalMaxPrice,
-        inStock: globalHasStock,
-        currency: 'INR',
-      },
-      buyBox: globalBestOffer
-        ? {
-            winningOffer: globalBestOffer,
-          }
-        : null,
-      variants: formattedVariants,
-    };
+  public formatProductDetails(product: Product) {
+    return formatProductDetails(product);
   }
 
   async findAll(query: ProductQueryDto) {
@@ -523,7 +345,7 @@ export class ProductsService {
       limit,
       offset,
       order: [[sortBy, order]],
-      include: this.getProductInclude(),
+      include: getProductInclude(),
       distinct: true,
     });
 
@@ -543,7 +365,7 @@ export class ProductsService {
 
   async findOne(id: number) {
     const product = await this.productModel.findByPk(id, {
-      include: this.getProductInclude(),
+      include: getProductInclude(),
     });
 
     if (!product)
@@ -557,7 +379,7 @@ export class ProductsService {
   async findBySlug(slug: string) {
     const product = await this.productModel.findOne({
       where: { slug },
-      include: this.getProductInclude(),
+      include: getProductInclude(),
     });
 
     if (!product) {
@@ -729,6 +551,8 @@ export class ProductsService {
         `Seller profile not found for user ID ${userId}. You must be registered as a seller.`,
       );
     }
+    if (seller.status !== SellerStatus.APPROVED)
+      throw new ForbiddenException('An approved seller account is required.');
     return seller;
   }
 
@@ -761,7 +585,7 @@ export class ProductsService {
       );
     }
 
-    if (dto.price > dto.mrp) {
+    if (toMinorUnits(dto.price) > toMinorUnits(dto.mrp)) {
       throw new BadRequestException(
         'Selling price cannot exceed Maximum Retail Price (MRP).',
       );
@@ -876,7 +700,7 @@ export class ProductsService {
 
     const targetPrice = dto.price ?? listing.price;
     const targetMrp = dto.mrp ?? listing.mrp;
-    if (targetPrice > targetMrp) {
+    if (toMinorUnits(targetPrice) > toMinorUnits(targetMrp)) {
       throw new BadRequestException(
         'Selling price cannot exceed Maximum Retail Price (MRP).',
       );

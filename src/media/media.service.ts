@@ -43,6 +43,26 @@ export class MediaService {
       );
     }
 
+    const bytes = file.buffer;
+    const matchesContent = {
+      'image/jpeg': bytes
+        ?.subarray(0, 3)
+        .equals(Buffer.from([0xff, 0xd8, 0xff])),
+      'image/png': bytes
+        ?.subarray(0, 8)
+        .equals(Buffer.from([137, 80, 78, 71, 13, 10, 26, 10])),
+      'image/gif': ['GIF87a', 'GIF89a'].includes(
+        bytes?.subarray(0, 6).toString('ascii'),
+      ),
+      'image/webp':
+        bytes?.subarray(0, 4).toString('ascii') === 'RIFF' &&
+        bytes?.subarray(8, 12).toString('ascii') === 'WEBP',
+    }[file.mimetype];
+    if (!matchesContent)
+      throw new BadRequestException(
+        'File contents do not match the declared image type.',
+      );
+
     let uploadResult: Awaited<ReturnType<MinioService['uploadFile']>>;
 
     try {

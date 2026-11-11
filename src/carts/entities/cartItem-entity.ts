@@ -7,7 +7,7 @@ import {
   Model,
   Table,
 } from 'sequelize-typescript';
-import { Product } from 'src/products/entities/product.entity';
+import { Listing } from 'src/products/entities/listing.entity';
 import { Cart } from './cart.entity';
 
 @Table({
@@ -42,13 +42,13 @@ export class CartItem extends Model {
   declare cart: Cart;
 
   @Index
-  @ForeignKey(() => Product)
+  @ForeignKey(() => Listing)
   @Column({
     type: DataType.INTEGER,
     allowNull: false,
   })
-  declare productId: number;
+  declare listingId: number;
 
-  @BelongsTo(() => Product)
-  declare product: Product;
+  @BelongsTo(() => Listing)
+  declare listing: Listing;
 }

@@ -41,15 +41,17 @@ export class UsersService implements OnModuleInit {
     });
     if (adminExists) return;
 
-    const hashedPassword = await this.hashPassword(
-      process.env.ADMIN_PASSWORD ?? 'Admin@123',
-    );
+    // Bootstrap is opt-in. A deployment without credentials must not create an administrator.
+    const email = process.env.ADMIN_EMAIL;
+    const password = process.env.ADMIN_PASSWORD;
+    if (!email || !password) return;
+    const hashedPassword = await this.hashPassword(password);
 
     await this.userModel.create({
       firstName: process.env.ADMIN_FIRST_NAME ?? 'Admin',
       lastName: process.env.ADMIN_LAST_NAME ?? 'User',
       dateOfBirth: process.env.ADMIN_DATE_OF_BIRTH ?? '2000-01-01',
-      email: process.env.ADMIN_EMAIL ?? 'admin@example.com',
+      email,
       password: hashedPassword,
       roleId: adminRole.id,
       isVerifiedEmail: true,

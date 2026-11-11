@@ -5,6 +5,8 @@ import {
   IsOptional,
   IsPositive,
   IsString,
+  MaxLength,
+  MinLength,
   Max,
   Min,
 } from 'class-validator';
@@ -29,6 +31,8 @@ export class QueryRecommendationDto {
   })
   @IsOptional()
   @IsString({ message: 'sessionId must be a string.' })
+  @MaxLength(128)
+  @MinLength(1)
   sessionId?: string;
 
   @ApiPropertyOptional({

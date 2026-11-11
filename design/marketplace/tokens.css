@@ -1,0 +1,16 @@
+:root {
+  --color-brand-primary: #0D3D3A;
+  --color-action-primary: #FFC47A;
+  --color-link: #00685F;
+  --color-text-primary: #162F2C;
+  --color-text-secondary: #546561;
+  --color-surface: #FFFFFF;
+  --color-canvas: #FAF8F4;
+  --color-border: #D7E2DC;
+  --color-success: #176846;
+  --color-danger: #B32632;
+  --font-sans: Inter, system-ui, sans-serif;
+  --radius-control: 8px;
+  --radius-card: 12px;
+  --space-unit: 8px;
+}

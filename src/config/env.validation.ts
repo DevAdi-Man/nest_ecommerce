@@ -1,8 +1,20 @@
 import * as Joi from 'joi';
 
 export const envValidationSchema = Joi.object({
+  NODE_ENV: Joi.string()
+    .valid('development', 'test', 'production')
+    .default('production'),
+  ADMIN_EMAIL: Joi.string().email().optional(),
+  ADMIN_PASSWORD: Joi.string()
+    .when('NODE_ENV', {
+      is: 'development',
+      then: Joi.string().min(8),
+      otherwise: Joi.string().min(12),
+    })
+    .optional(),
   PORT: Joi.number().default(3000),
 
+  DB_SYNCHRONIZE: Joi.boolean().default(false),
   DB_HOST: Joi.string().required(),
   DB_PORT: Joi.number().required(),
   DB_USER: Joi.string().required(),
@@ -33,4 +45,6 @@ export const envValidationSchema = Joi.object({
   MINIO_SECRET_KEY: Joi.string().required(),
   MINIO_BUCKET: Joi.string().required(),
   MINIO_USE_SSL: Joi.boolean().default(false),
-}).unknown(true);
+})
+  .and('ADMIN_EMAIL', 'ADMIN_PASSWORD')
+  .unknown(true);

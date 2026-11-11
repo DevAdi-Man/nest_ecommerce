@@ -28,7 +28,7 @@ This backend is engineered to handle complex e-commerce workflows with security 
 - 🔐 **Robust Authentication** — JWT-based authentication (Access & Refresh tokens) with Role-Based Access Control (RBAC).
 - ✉️ **Secure Onboarding** — OTP-based email verification & password resets powered by Nodemailer & MJML.
 - 📦 **Advanced Catalog** — Infinite-depth nested categories with soft-deletion and slug-based routing.
-- 🛒 **Smart Checkout Flow** — Persistent shopping carts converting seamlessly into Orders with history tracking.
+- 🛒 **Shopping Cart** — Persistent carts using seller listing IDs. Orders and checkout are planned for later development.
 - 🖼️ **Media Management** — S3-compatible object storage integration (MinIO) for secure product image uploads.
 - 🛡️ **Bulletproof Data** — Strict DTO validations, safe DB transactions, and comprehensive error handling.
 
@@ -69,12 +69,13 @@ The architecture is strictly modular. Below are the core domains driving the bus
 </details>
 
 <details>
-<summary><strong>📦 Cart, Address & Orders</strong></summary>
+<summary><strong>📦 Cart & Addresses</strong></summary>
 
 - `POST /cart` - Add/Update items
 - `POST /addresses` - Multiple address book entries
-- `POST /orders` - Atomic checkout converting Cart to Order
 </details>
+
+Deferred modules and unused payout entities have been removed. See [current scope](docs/CURRENT_SCOPE.md) for what is implemented and what will be built later.
 
 *(Check the Swagger UI at `/api` for full documentation of all endpoints!)*
 
