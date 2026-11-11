@@ -5,17 +5,17 @@ import {
   NotFoundException,
 } from '@nestjs/common';
 import { InjectModel } from '@nestjs/sequelize';
-import { Op } from 'sequelize';
+import { Op, QueryTypes } from 'sequelize';
+import { getProductInclude } from 'src/products/product-projection';
+import { Cart } from 'src/carts/entities/cart.entity';
+import { CartItem } from 'src/carts/entities/cartItem-entity';
 import { ProductViewEvent } from './entities/product-view-event.entity';
 import { ProductCoView } from './entities/product-co-view.entity';
 import { UserCategoryAffinity } from './entities/user-category-affinity.entity';
 import { Product } from 'src/products/entities/product.entity';
 import { Category } from 'src/categories/entities/category.entity';
 import { Listing, ListingStatus } from 'src/products/entities/listing.entity';
-import { Brand } from 'src/brands/entities/brand.entity';
 import { ProductVarient } from 'src/products/entities/product.variant.entity';
-import { ProductAttribute } from 'src/products/entities/product.attribute.entity';
-import { ProductImage } from 'src/products/entities/product.image.entity';
 import { Seller } from 'src/seller/entities/seller.entity';
 import { ProductsService } from 'src/products/products.service';
 import { RecordViewDto } from './dto/record-view.dto';
@@ -52,7 +52,7 @@ export class RecommendationsService {
   // Recency half-life in hours (3 days)
   private readonly RECENCY_HALF_LIFE_HOURS = 72;
   // Maximum session window in hours to cluster co-views
-  private readonly CO_VIEW_SESSION_WINDOW_HOURS = 3;
+  private readonly CO_VIEW_SESSION_WINDOW_HOURS = 0.5;
 
   constructor(
     @InjectModel(ProductViewEvent)
@@ -70,6 +70,7 @@ export class RecommendationsService {
     @InjectModel(Seller)
     private readonly sellerModel: typeof Seller,
     private readonly productsService: ProductsService,
+    @InjectModel(CartItem) private readonly cartItemModel: typeof CartItem,
   ) {}
 
   /**
@@ -90,68 +91,6 @@ export class RecommendationsService {
   /**
    * Common Sequelize include tree for complete product details.
    */
-  private getProductIncludeTree() {
-    return [
-      {
-        model: Brand,
-        attributes: ['id', 'name', 'slug', 'logoUrl'],
-      },
-      {
-        model: Category,
-        attributes: ['id', 'name', 'slug'],
-      },
-      {
-        model: ProductAttribute,
-        attributes: ['id', 'attrName', 'attrValue'],
-      },
-      {
-        model: ProductImage,
-        attributes: ['id', 'imageUrl', 'isPrimary', 'sortOrder', 'varientId'],
-      },
-      {
-        model: ProductVarient,
-        attributes: [
-          'id',
-          'universalSku',
-          'size',
-          'color',
-          'weight',
-          'attributes',
-        ],
-        include: [
-          {
-            model: Listing,
-            where: { status: ListingStatus.ACTIVE },
-            required: false,
-            attributes: [
-              'id',
-              'sellerId',
-              'sellerSku',
-              'price',
-              'mrp',
-              'stock',
-              'condition',
-              'fulfillmentType',
-              'status',
-            ],
-            include: [
-              {
-                model: Seller,
-                attributes: [
-                  'id',
-                  'legalBusinessName',
-                  'rating',
-                  'tier',
-                  'status',
-                ],
-              },
-            ],
-          },
-        ],
-      },
-    ];
-  }
-
   /**
    * Strict filter: Product must have at least one active listing with stock > 0.
    */
@@ -312,58 +251,81 @@ export class RecommendationsService {
     sessionId: string,
     currentProductId: number,
   ) {
-    try {
-      const windowCutoff = new Date(
-        Date.now() - this.CO_VIEW_SESSION_WINDOW_HOURS * 60 * 60 * 1000,
-      );
-
-      // Find other products viewed in this session within active window
-      const otherViews = await this.productViewModel.findAll({
-        where: {
-          sessionId,
-          productId: { [Op.ne]: currentProductId },
-          viewedAt: { [Op.gte]: windowCutoff },
-        },
-        attributes: ['productId'],
-        group: ['productId'],
-      });
-
-      const now = new Date();
-      for (const item of otherViews) {
-        const otherId = item.productId;
-
-        // Upsert pair (current -> other)
-        await this.upsertCoViewPair(currentProductId, otherId, now);
-        // Upsert pair (other -> current) for bidirectional co-occurrence
-        await this.upsertCoViewPair(otherId, currentProductId, now);
-      }
-    } catch (err: any) {
-      this.logger.warn(`Failed to update session co-views: ${err.message}`);
-    }
+    const windowCutoff = new Date(
+      Date.now() - this.CO_VIEW_SESSION_WINDOW_HOURS * 60 * 60 * 1000,
+    );
+    const otherViews = await this.productViewModel.findAll({
+      where: {
+        sessionId,
+        productId: { [Op.ne]: currentProductId },
+        viewedAt: { [Op.gte]: windowCutoff },
+      },
+      attributes: ['productId'],
+      group: ['productId'],
+      limit: 100,
+    });
+    await this.productCoViewModel.sequelize!.transaction(
+      async (transaction) => {
+        // The pair/session primary key makes repeated clicks and concurrent requests contribute once.
+        for (const item of otherViews.sort(
+          (a, b) => a.productId - b.productId,
+        )) {
+          const [first, second] = [currentProductId, item.productId].sort(
+            (a, b) => a - b,
+          );
+          const inserted = await this.productCoViewModel.sequelize!.query<{
+            productId: number;
+          }>(
+            'INSERT INTO product_co_view_sessions ("sessionId", "productId", "coViewedProductId") VALUES (:sessionId, :first, :second) ON CONFLICT DO NOTHING RETURNING "productId"',
+            {
+              replacements: { sessionId, first, second },
+              transaction,
+              type: QueryTypes.SELECT,
+            },
+          );
+          if (!inserted.length) continue;
+          for (const [productId, coViewedProductId] of [
+            [first, second],
+            [second, first],
+          ]) {
+            await this.productCoViewModel.sequelize!.query(
+              'INSERT INTO product_co_views ("productId", "coViewedProductId", "coViewCount", "lastViewedTogether", "createdAt", "updatedAt") VALUES (:productId, :coViewedProductId, 1, NOW(), NOW(), NOW()) ON CONFLICT ("productId", "coViewedProductId") DO UPDATE SET "coViewCount" = product_co_views."coViewCount" + 1, "lastViewedTogether" = NOW(), "updatedAt" = NOW()',
+              { replacements: { productId, coViewedProductId }, transaction },
+            );
+          }
+        }
+      },
+    );
   }
 
-  private async upsertCoViewPair(
-    prodA: number,
-    prodB: number,
-    timestamp: Date,
+  private async getExcludedProducts(
+    userId?: number,
+    sessionId?: string,
+    excludeProductId?: number,
   ) {
-    const existing = await this.productCoViewModel.findOne({
-      where: { productId: prodA, coViewedProductId: prodB },
-    });
-
-    if (existing) {
-      await existing.update({
-        coViewCount: existing.coViewCount + 1,
-        lastViewedTogether: timestamp,
+    const ids = await this.getRecentViewedProductIds(userId, sessionId);
+    if (excludeProductId) ids.add(excludeProductId);
+    if (userId) {
+      const cartItems = await this.cartItemModel.findAll({
+        include: [
+          { model: Cart, where: { userId }, attributes: [] },
+          { model: Listing, include: [ProductVarient] },
+        ],
       });
-    } else {
-      await this.productCoViewModel.create({
-        productId: prodA,
-        coViewedProductId: prodB,
-        coViewCount: 1,
-        lastViewedTogether: timestamp,
-      });
+      for (const item of cartItems)
+        if (item.listing?.variant?.productId)
+          ids.add(item.listing.variant.productId);
     }
+    return ids;
+  }
+
+  private isOwnInventory(product: any, sellerId: number | null): boolean {
+    return (
+      sellerId !== null &&
+      product.variants?.some((v: any) =>
+        v.listings?.some((listing: any) => listing.sellerId === sellerId),
+      )
+    );
   }
 
   // APPROACH A: Frequently Viewed Categories Recommendations
@@ -385,7 +347,11 @@ export class RecommendationsService {
   }> {
     const limit = Math.min(50, Math.max(1, query?.limit || 10));
     const sellerIdToExclude = await this.resolveSellerId(userId);
-    const viewedIds = await this.getRecentViewedProductIds(userId, sessionId);
+    const viewedIds = await this.getExcludedProducts(
+      userId,
+      sessionId,
+      query?.excludeProductId,
+    );
     if (query?.excludeProductId) {
       viewedIds.add(query.excludeProductId);
     }
@@ -445,7 +411,7 @@ export class RecommendationsService {
         categoryId: { [Op.in]: candidateCategoryIds },
         deletedAt: null,
       },
-      include: this.getProductIncludeTree(),
+      include: getProductInclude(),
       limit: 60,
     });
 
@@ -465,10 +431,7 @@ export class RecommendationsService {
       }
 
       // Guardrail 3: Seller shield - never recommend seller's own listings to themselves
-      if (
-        sellerIdToExclude &&
-        formatted.buyBox?.winningOffer?.seller?.id === sellerIdToExclude
-      ) {
+      if (this.isOwnInventory(formatted, sellerIdToExclude)) {
         continue;
       }
 
@@ -556,7 +519,7 @@ export class RecommendationsService {
 
     // 1. Fetch source product
     const targetRaw = await this.productModel.findByPk(productId, {
-      include: this.getProductIncludeTree(),
+      include: getProductInclude(),
     });
 
     if (!targetRaw) {
@@ -586,7 +549,7 @@ export class RecommendationsService {
 
     const candidatesRaw = await this.productModel.findAll({
       where: candidateWhere,
-      include: this.getProductIncludeTree(),
+      include: getProductInclude(),
       limit: 60,
     });
 
@@ -707,6 +670,7 @@ export class RecommendationsService {
     const coViews = await this.productCoViewModel.findAll({
       where: {
         productId,
+        coViewCount: { [Op.gte]: 2 },
         coViewedProductId: { [Op.ne]: productId },
       },
       order: [['coViewCount', 'DESC']],
@@ -716,14 +680,17 @@ export class RecommendationsService {
     const recommendations: RecommendedProductItem[] = [];
     const maxCoView = coViews.length > 0 ? coViews[0].coViewCount : 1;
 
+    const candidates = await this.productModel.findAll({
+      where: {
+        id: { [Op.in]: coViews.map((entry) => entry.coViewedProductId) },
+      },
+      include: getProductInclude(),
+    });
+    const candidatesById = new Map(
+      candidates.map((product) => [product.id, product]),
+    );
     for (const entry of coViews) {
-      const candidateRaw = await this.productModel.findByPk(
-        entry.coViewedProductId,
-        {
-          include: this.getProductIncludeTree(),
-        },
-      );
-
+      const candidateRaw = candidatesById.get(entry.coViewedProductId);
       if (!candidateRaw) continue;
 
       const formatted = this.productsService.formatProductDetails(candidateRaw);
@@ -918,9 +885,21 @@ export class RecommendationsService {
       }
     }
 
+    const excludedIds = await this.getExcludedProducts(
+      userId,
+      sessionId,
+      query?.excludeProductId,
+    );
+    const sellerId = await this.resolveSellerId(userId);
     const recommendations: RecommendedProductItem[] = [];
 
     for (const [, entry] of candidateMap.entries()) {
+      if (
+        excludedIds.has(entry.product.id) ||
+        this.isOwnInventory(entry.product, sellerId) ||
+        !this.isProductInStock(entry.product)
+      )
+        continue;
       const compositeScore = Number(
         (
           0.4 * entry.catScore +

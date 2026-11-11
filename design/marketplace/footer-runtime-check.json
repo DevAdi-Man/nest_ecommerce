@@ -1,0 +1,10 @@
+[
+  {
+    "screen": 110,
+    "footerBackToTopReachable": true
+  },
+  {
+    "screen": 270,
+    "footerBackToTopReachable": true
+  }
+]

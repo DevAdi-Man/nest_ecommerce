@@ -1,3 +1,5 @@
+import { Cart } from 'src/carts/entities/cart.entity';
+import { CartItem } from 'src/carts/entities/cartItem-entity';
 import { Module } from '@nestjs/common';
 import { SequelizeModule } from '@nestjs/sequelize';
 import { RecommendationsController } from './recommendations.controller';
@@ -18,6 +20,8 @@ import { ProductsModule } from 'src/products/products.module';
 @Module({
   imports: [
     SequelizeModule.forFeature([
+      Cart,
+      CartItem,
       ProductViewEvent,
       ProductCoView,
       UserCategoryAffinity,

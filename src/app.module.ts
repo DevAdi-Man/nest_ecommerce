@@ -3,12 +3,7 @@ import { UsersModule } from './users/users.module';
 import { ProductsModule } from './products/products.module';
 import { CategoriesModule } from './categories/categories.module';
 import { BrandsModule } from './brands/brands.module';
-import { OrdersModule } from './orders/orders.module';
 import { CartModule } from './carts/cart.module';
-import { WishlistModule } from './wishlists/wishlist.module';
-import { CouponsModule } from './coupons/coupons.module';
-import { PaymentsModule } from './payments/payments.module';
-import { ReviewsModule } from './reviews/reviews.module';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { SequelizeModule } from '@nestjs/sequelize';
 import { AddressesModule } from './addresses/addresses.module';
@@ -56,7 +51,7 @@ import { RecommendationsModule } from './recommendations/recommendations.module'
           password: config.get('DB_PASSWORD'),
           database: config.get('DB_NAME'),
           autoLoadModels: true,
-          synchronize: true,
+          synchronize: config.get<boolean>('DB_SYNCHRONIZE')!,
         };
       },
     }),
@@ -66,12 +61,7 @@ import { RecommendationsModule } from './recommendations/recommendations.module'
     ProductsModule,
     CategoriesModule,
     BrandsModule,
-    OrdersModule,
     CartModule,
-    WishlistModule,
-    CouponsModule,
-    PaymentsModule,
-    ReviewsModule,
     AddressesModule,
     OtpModule,
     MailModule,

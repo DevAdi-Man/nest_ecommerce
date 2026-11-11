@@ -5,7 +5,7 @@ import { InjectModel } from '@nestjs/sequelize';
 import { ExtractJwt, Strategy } from 'passport-jwt';
 import { JwtPayload } from 'src/auth/interfaces/jwtPayload.interface';
 import { User } from 'src/users/entities/user.entity';
-import * as bcrypt from 'bcrypt';
+import { createHash, timingSafeEqual } from 'node:crypto';
 
 @Injectable()
 export class RefreshStrategy extends PassportStrategy(Strategy, 'jwt-refresh') {
@@ -28,8 +28,15 @@ export class RefreshStrategy extends PassportStrategy(Strategy, 'jwt-refresh') {
       throw new UnauthorizedException('Invalid Refresh token.');
     }
 
-    const incommingToken = req.body.refreshToken;
-    const isMatch = await bcrypt.compare(incommingToken, user.refreshToken);
+    const incomingToken: unknown = req.body?.refreshToken;
+    if (typeof incomingToken !== 'string')
+      throw new UnauthorizedException('Invalid refresh token.');
+    const digest = Buffer.from(
+      createHash('sha256').update(incomingToken).digest('hex'),
+    );
+    const stored = Buffer.from(user.refreshToken);
+    const isMatch =
+      digest.length === stored.length && timingSafeEqual(digest, stored);
     if (!isMatch) {
       throw new UnauthorizedException('Invalid refresh token.');
     }

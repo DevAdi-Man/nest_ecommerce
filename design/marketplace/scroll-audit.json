@@ -1,0 +1,380 @@
+[
+  {
+    "frame": "Web / Create account",
+    "id": 1071,
+    "viewportHeight": 900,
+    "scrollViewportHeight": 764,
+    "contentHeight": 888.0,
+    "hasOverflow": true,
+    "rootBarsStayOutsideScroller": true
+  },
+  {
+    "frame": "Web / Verify email",
+    "id": 1099,
+    "viewportHeight": 900,
+    "scrollViewportHeight": 764,
+    "contentHeight": 888.0,
+    "hasOverflow": true,
+    "rootBarsStayOutsideScroller": true
+  },
+  {
+    "frame": "Web / Home",
+    "id": 110,
+    "viewportHeight": 900,
+    "scrollViewportHeight": 764,
+    "contentHeight": 1240.0,
+    "hasOverflow": true,
+    "rootBarsStayOutsideScroller": true
+  },
+  {
+    "frame": "Web / Forgot password",
+    "id": 1119,
+    "viewportHeight": 900,
+    "scrollViewportHeight": 764,
+    "contentHeight": 888.0,
+    "hasOverflow": true,
+    "rootBarsStayOutsideScroller": true
+  },
+  {
+    "frame": "Web / Reset password",
+    "id": 1138,
+    "viewportHeight": 900,
+    "scrollViewportHeight": 764,
+    "contentHeight": 888.0,
+    "hasOverflow": true,
+    "rootBarsStayOutsideScroller": true
+  },
+  {
+    "frame": "Web / Addresses",
+    "id": 1163,
+    "viewportHeight": 900,
+    "scrollViewportHeight": 764,
+    "contentHeight": 552.0,
+    "hasOverflow": false,
+    "rootBarsStayOutsideScroller": true
+  },
+  {
+    "frame": "Web / Compare seller offers",
+    "id": 1183,
+    "viewportHeight": 900,
+    "scrollViewportHeight": 764,
+    "contentHeight": 832.0,
+    "hasOverflow": true,
+    "rootBarsStayOutsideScroller": true
+  },
+  {
+    "frame": "Mobile / Create account",
+    "id": 1215,
+    "viewportHeight": 844,
+    "scrollViewportHeight": 676,
+    "contentHeight": 784.0,
+    "hasOverflow": true,
+    "rootBarsStayOutsideScroller": true
+  },
+  {
+    "frame": "Mobile / Verify email",
+    "id": 1238,
+    "viewportHeight": 844,
+    "scrollViewportHeight": 676,
+    "contentHeight": 460.0,
+    "hasOverflow": false,
+    "rootBarsStayOutsideScroller": true
+  },
+  {
+    "frame": "Mobile / Addresses",
+    "id": 1254,
+    "viewportHeight": 844,
+    "scrollViewportHeight": 676,
+    "contentHeight": 912.0,
+    "hasOverflow": true,
+    "rootBarsStayOutsideScroller": true
+  },
+  {
+    "frame": "Mobile / Filters",
+    "id": 1274,
+    "viewportHeight": 844,
+    "scrollViewportHeight": 676,
+    "contentHeight": 864.0,
+    "hasOverflow": true,
+    "rootBarsStayOutsideScroller": true
+  },
+  {
+    "frame": "Mobile / Seller application",
+    "id": 1295,
+    "viewportHeight": 844,
+    "scrollViewportHeight": 676,
+    "contentHeight": 784.0,
+    "hasOverflow": true,
+    "rootBarsStayOutsideScroller": true
+  },
+  {
+    "frame": "Mobile / My listings",
+    "id": 1318,
+    "viewportHeight": 844,
+    "scrollViewportHeight": 676,
+    "contentHeight": 912.0,
+    "hasOverflow": true,
+    "rootBarsStayOutsideScroller": true
+  },
+  {
+    "frame": "Responsive home / 320 px",
+    "id": 1339,
+    "viewportHeight": 844,
+    "scrollViewportHeight": 676,
+    "contentHeight": 1232.0,
+    "hasOverflow": true,
+    "rootBarsStayOutsideScroller": true
+  },
+  {
+    "frame": "Responsive home / 768 px",
+    "id": 1372,
+    "viewportHeight": 900,
+    "scrollViewportHeight": 812,
+    "contentHeight": 1240.0,
+    "hasOverflow": true,
+    "rootBarsStayOutsideScroller": true
+  },
+  {
+    "frame": "Responsive home / 1024 px",
+    "id": 1446,
+    "viewportHeight": 900,
+    "scrollViewportHeight": 812,
+    "contentHeight": 1240.0,
+    "hasOverflow": true,
+    "rootBarsStayOutsideScroller": true
+  },
+  {
+    "frame": "Web / Search results",
+    "id": 191,
+    "viewportHeight": 900,
+    "scrollViewportHeight": 764,
+    "contentHeight": 1032.0,
+    "hasOverflow": true,
+    "rootBarsStayOutsideScroller": true
+  },
+  {
+    "frame": "Web / Product detail",
+    "id": 270,
+    "viewportHeight": 900,
+    "scrollViewportHeight": 764,
+    "contentHeight": 999.0,
+    "hasOverflow": true,
+    "rootBarsStayOutsideScroller": true
+  },
+  {
+    "frame": "Web / Bag",
+    "id": 308,
+    "viewportHeight": 900,
+    "scrollViewportHeight": 764,
+    "contentHeight": 616.0,
+    "hasOverflow": false,
+    "rootBarsStayOutsideScroller": true
+  },
+  {
+    "frame": "Web / Checkout",
+    "id": 343,
+    "viewportHeight": 900,
+    "scrollViewportHeight": 764,
+    "contentHeight": 760.0,
+    "hasOverflow": false,
+    "rootBarsStayOutsideScroller": true
+  },
+  {
+    "frame": "Web / Order confirmed",
+    "id": 369,
+    "viewportHeight": 900,
+    "scrollViewportHeight": 764,
+    "contentHeight": 528.0,
+    "hasOverflow": false,
+    "rootBarsStayOutsideScroller": true
+  },
+  {
+    "frame": "Web / Orders",
+    "id": 386,
+    "viewportHeight": 900,
+    "scrollViewportHeight": 764,
+    "contentHeight": 696.0,
+    "hasOverflow": false,
+    "rootBarsStayOutsideScroller": true
+  },
+  {
+    "frame": "Web / Order detail",
+    "id": 418,
+    "viewportHeight": 900,
+    "scrollViewportHeight": 764,
+    "contentHeight": 696.0,
+    "hasOverflow": false,
+    "rootBarsStayOutsideScroller": true
+  },
+  {
+    "frame": "Web / Wishlist",
+    "id": 450,
+    "viewportHeight": 900,
+    "scrollViewportHeight": 764,
+    "contentHeight": 560.0,
+    "hasOverflow": false,
+    "rootBarsStayOutsideScroller": true
+  },
+  {
+    "frame": "Web / Account",
+    "id": 503,
+    "viewportHeight": 900,
+    "scrollViewportHeight": 764,
+    "contentHeight": 808.0,
+    "hasOverflow": true,
+    "rootBarsStayOutsideScroller": true
+  },
+  {
+    "frame": "Web / Sign in",
+    "id": 527,
+    "viewportHeight": 900,
+    "scrollViewportHeight": 764,
+    "contentHeight": 728.0,
+    "hasOverflow": false,
+    "rootBarsStayOutsideScroller": true
+  },
+  {
+    "frame": "Mobile / Home",
+    "id": 550,
+    "viewportHeight": 844,
+    "scrollViewportHeight": 676,
+    "contentHeight": 736.0,
+    "hasOverflow": true,
+    "rootBarsStayOutsideScroller": true
+  },
+  {
+    "frame": "Mobile / Search",
+    "id": 587,
+    "viewportHeight": 844,
+    "scrollViewportHeight": 676,
+    "contentHeight": 824.0,
+    "hasOverflow": true,
+    "rootBarsStayOutsideScroller": true
+  },
+  {
+    "frame": "Mobile / Product detail",
+    "id": 638,
+    "viewportHeight": 844,
+    "scrollViewportHeight": 604,
+    "contentHeight": 720.0,
+    "hasOverflow": true,
+    "rootBarsStayOutsideScroller": true
+  },
+  {
+    "frame": "Mobile / Seller offers",
+    "id": 663,
+    "viewportHeight": 844,
+    "scrollViewportHeight": 676,
+    "contentHeight": 752.0,
+    "hasOverflow": true,
+    "rootBarsStayOutsideScroller": true
+  },
+  {
+    "frame": "Mobile / Bag",
+    "id": 688,
+    "viewportHeight": 844,
+    "scrollViewportHeight": 604,
+    "contentHeight": 608.0,
+    "hasOverflow": true,
+    "rootBarsStayOutsideScroller": true
+  },
+  {
+    "frame": "Mobile / Checkout",
+    "id": 706,
+    "viewportHeight": 844,
+    "scrollViewportHeight": 604,
+    "contentHeight": 608.0,
+    "hasOverflow": true,
+    "rootBarsStayOutsideScroller": true
+  },
+  {
+    "frame": "Mobile / Order confirmed",
+    "id": 724,
+    "viewportHeight": 844,
+    "scrollViewportHeight": 676,
+    "contentHeight": 552.0,
+    "hasOverflow": false,
+    "rootBarsStayOutsideScroller": true
+  },
+  {
+    "frame": "Mobile / Orders",
+    "id": 738,
+    "viewportHeight": 844,
+    "scrollViewportHeight": 676,
+    "contentHeight": 640.0,
+    "hasOverflow": false,
+    "rootBarsStayOutsideScroller": true
+  },
+  {
+    "frame": "Mobile / Order detail",
+    "id": 757,
+    "viewportHeight": 844,
+    "scrollViewportHeight": 676,
+    "contentHeight": 640.0,
+    "hasOverflow": false,
+    "rootBarsStayOutsideScroller": true
+  },
+  {
+    "frame": "Mobile / Wishlist",
+    "id": 776,
+    "viewportHeight": 844,
+    "scrollViewportHeight": 676,
+    "contentHeight": 824.0,
+    "hasOverflow": true,
+    "rootBarsStayOutsideScroller": true
+  },
+  {
+    "frame": "Mobile / Account",
+    "id": 827,
+    "viewportHeight": 844,
+    "scrollViewportHeight": 676,
+    "contentHeight": 736.0,
+    "hasOverflow": true,
+    "rootBarsStayOutsideScroller": true
+  },
+  {
+    "frame": "Mobile / Sign in",
+    "id": 848,
+    "viewportHeight": 844,
+    "scrollViewportHeight": 676,
+    "contentHeight": 605.0,
+    "hasOverflow": false,
+    "rootBarsStayOutsideScroller": true
+  },
+  {
+    "frame": "Seller / Seller dashboard",
+    "id": 866,
+    "viewportHeight": 900,
+    "scrollViewportHeight": 764,
+    "contentHeight": 664.0,
+    "hasOverflow": false,
+    "rootBarsStayOutsideScroller": true
+  },
+  {
+    "frame": "Seller / My listings",
+    "id": 899,
+    "viewportHeight": 900,
+    "scrollViewportHeight": 764,
+    "contentHeight": 816.0,
+    "hasOverflow": true,
+    "rootBarsStayOutsideScroller": true
+  },
+  {
+    "frame": "Seller / Add an offer",
+    "id": 928,
+    "viewportHeight": 900,
+    "scrollViewportHeight": 764,
+    "contentHeight": 808.0,
+    "hasOverflow": true,
+    "rootBarsStayOutsideScroller": true
+  },
+  {
+    "frame": "Seller / Apply to sell",
+    "id": 954,
+    "viewportHeight": 900,
+    "scrollViewportHeight": 764,
+    "contentHeight": 808.0,
+    "hasOverflow": true,
+    "rootBarsStayOutsideScroller": true
+  }
+]

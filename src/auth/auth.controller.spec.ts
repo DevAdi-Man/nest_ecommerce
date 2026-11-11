@@ -1,20 +1,19 @@
-import { Test, TestingModule } from '@nestjs/testing';
 import { AuthController } from './auth.controller';
 import { AuthService } from './auth.service';
 
 describe('AuthController', () => {
-  let controller: AuthController;
-
-  beforeEach(async () => {
-    const module: TestingModule = await Test.createTestingModule({
-      controllers: [AuthController],
-      providers: [AuthService],
-    }).compile();
-
-    controller = module.get<AuthController>(AuthController);
-  });
-
-  it('should be defined', () => {
-    expect(controller).toBeDefined();
+  it('passes request arguments to the service and returns its result', async () => {
+    const dto = {
+      email: 'test@example.com',
+      password: 'Password123!',
+      firstName: 'Test',
+      lastName: 'User',
+      dateOfBirth: '2000-01-01',
+    };
+    const service = { register: jest.fn().mockResolvedValue(dto) };
+    const controller = new AuthController(service as unknown as AuthService);
+    const result = await controller.register(dto);
+    expect(service.register).toHaveBeenCalledWith(dto);
+    expect(result).toEqual(dto);
   });
 });

@@ -1,3 +1,4 @@
+import type { RequestWithUser } from 'src/common/interfaces/request-with-user.interface';
 import { Test, TestingModule } from '@nestjs/testing';
 import { RecommendationsController } from './recommendations.controller';
 import { RecommendationsService } from './recommendations.service';
@@ -53,7 +54,9 @@ describe('RecommendationsController', () => {
   });
 
   it('should call recordProductView', async () => {
-    const req = { user: { sub: 10 } };
+    const req = {
+      user: { sub: 10, email: 'test@example.com', role: 'Customer' },
+    } as RequestWithUser;
     const res = await controller.recordView(
       req,
       { productId: 1, durationSeconds: 20 },
@@ -67,7 +70,9 @@ describe('RecommendationsController', () => {
   });
 
   it('should call getFrequentlyViewedCategories', async () => {
-    const req = { user: { sub: 10 } };
+    const req = {
+      user: { sub: 10, email: 'test@example.com', role: 'Customer' },
+    } as RequestWithUser;
     const res = await controller.getFrequentlyViewedCategories(
       req,
       { limit: 5 },
@@ -98,7 +103,9 @@ describe('RecommendationsController', () => {
   });
 
   it('should call getPersonalizedRecommendations', async () => {
-    const req = { user: { sub: 10 } };
+    const req = {
+      user: { sub: 10, email: 'test@example.com', role: 'Customer' },
+    } as RequestWithUser;
     const res = await controller.getPersonalizedRecommendations(
       req,
       { limit: 5 },

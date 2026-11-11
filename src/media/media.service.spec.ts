@@ -23,7 +23,7 @@ const mockFile = (
     originalname: 'test.jpg',
     mimetype: 'image/jpeg',
     size: 1024,
-    buffer: Buffer.from('test'),
+    buffer: Buffer.from([0xff, 0xd8, 0xff, 0xe0]),
     ...overrides,
   }) as Express.Multer.File;
 
@@ -62,6 +62,15 @@ describe('MediaService', () => {
     it('should throw BadRequestException if file exceeds 5MB', async () => {
       const file = mockFile({ size: 6 * 1024 * 1024 });
       await expect(service.upload(file)).rejects.toThrow(BadRequestException);
+    });
+
+    it('rejects a file whose contents do not match its declared image type', async () => {
+      await expect(
+        service.upload(
+          mockFile({ buffer: Buffer.from('<script>test</script>') }),
+        ),
+      ).rejects.toThrow(BadRequestException);
+      expect(mockMinioService.uploadFile).not.toHaveBeenCalled();
     });
 
     it('should throw InternalServerErrorException if MinIO upload fails', async () => {

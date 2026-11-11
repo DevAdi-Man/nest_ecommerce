@@ -159,6 +159,18 @@ export class CategoriesService {
         updateCategoryDto.parentId,
       );
       if (!parent) throw new NotFoundException('Parent category not found.');
+      const visited = new Set<number>([id]);
+      let ancestor: Category | null = parent;
+      while (ancestor) {
+        if (visited.has(ancestor.id))
+          throw new ConflictException(
+            'Category hierarchy cannot contain a cycle.',
+          );
+        visited.add(ancestor.id);
+        ancestor = ancestor.parentId
+          ? await this.categoryModel.findByPk(ancestor.parentId)
+          : null;
+      }
     }
 
     await category.update(updateData);

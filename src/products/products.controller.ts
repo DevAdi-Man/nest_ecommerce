@@ -45,7 +45,7 @@ export class ProductsController {
   @ApiOperation({
     summary: 'Create or onboard a Product [Admin, Seller]',
     description:
-      'Creates a new catalog product or attaches new variant/listing for an existing product.',
+      'Sellers create new catalog products; only admins may extend an existing master. Use POST /products/listings to offer an existing variant.',
   })
   @ApiResponse({ status: 201, description: 'Product processed successfully.' })
   @ApiResponse({ status: 400, description: 'Validation failed.' })
@@ -56,7 +56,11 @@ export class ProductsController {
     @Request() req: RequestWithUser,
     @Body() createProductDto: CreateProductDto,
   ) {
-    return this.productsService.create(req.user.sub, createProductDto);
+    return this.productsService.create(
+      req.user.sub,
+      createProductDto,
+      req.user.role,
+    );
   }
 
   // Seller Listing & Inventory Management
@@ -298,12 +302,12 @@ export class ProductsController {
 
   @Patch(':id')
   @UseGuards(JwtAuthGuard, RolesGuard)
-  @Roles(Role.Admin, Role.Seller)
+  @Roles(Role.Admin)
   @ApiBearerAuth('access-token')
   @ApiOperation({
-    summary: 'Update a product [Admin,Seller]',
+    summary: 'Update a product [Admin]',
     description:
-      'Updates name, image of a product. Slug is auto-regenerated on name change. Requires Admin role and Seller role.',
+      'Updates name, image of a product. Slug is auto-regenerated on name change. Requires Admin role.',
   })
   @ApiParam({ name: 'id', type: Number, example: 1 })
   @ApiResponse({ status: 200, description: 'Product updated successfully.' })
@@ -313,7 +317,7 @@ export class ProductsController {
     status: 409,
     description: 'Product name already exists.',
   })
-  @ApiForbiddenResponse({ description: 'Requires Admin role and Seller role.' })
+  @ApiForbiddenResponse({ description: 'Requires Admin role.' })
   update(
     @Param('id', ParseIntPipe) id: number,
     @Body() updateProductDto: UpdateProductDto,
@@ -323,11 +327,11 @@ export class ProductsController {
 
   @Delete(':id')
   @UseGuards(JwtAuthGuard, RolesGuard)
-  @Roles(Role.Admin, Role.Seller)
+  @Roles(Role.Admin)
   @ApiBearerAuth('access-token')
   @ApiOperation({
-    summary: 'Delete a product [Admin,Seller]',
-    description: 'Soft-deletes a product. Requires Admin role or Seller role.',
+    summary: 'Delete a product [Admin]',
+    description: 'Soft-deletes a product. Requires Admin role.',
   })
   @ApiParam({ name: 'id', type: Number, example: 1 })
   @ApiResponse({ status: 200, description: 'Product deleted successfully.' })
@@ -339,10 +343,10 @@ export class ProductsController {
 
   @Delete(':id/images/:imageId')
   @UseGuards(JwtAuthGuard, RolesGuard)
-  @Roles(Role.Admin, Role.Seller)
+  @Roles(Role.Admin)
   @ApiBearerAuth('access-token')
   @ApiOperation({
-    summary: 'Delete a product image [Admin, Seller]',
+    summary: 'Delete a product image [Admin]',
     description: 'Deletes a specific image from a product.',
   })
   @ApiParam({ name: 'id', type: Number, example: 1 })

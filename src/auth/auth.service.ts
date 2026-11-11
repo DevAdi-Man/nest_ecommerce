@@ -10,6 +10,7 @@ import { User } from 'src/users/entities/user.entity';
 import { RegisterDto } from './dto/register.dto';
 import * as bcrypt from 'bcrypt';
 import { CreationAttributes } from 'sequelize';
+import { createHash, randomUUID } from 'node:crypto';
 import { LoginDto } from './dto/login.dto';
 import { JwtService } from '@nestjs/jwt';
 import { ConfigService } from '@nestjs/config';
@@ -121,7 +122,9 @@ export class AuthService {
     const accessToken = await this.generateAccessToken(user);
     const newRefreshToken = await this.generateRefreshToken(user);
 
-    const hashedRefreshToken = await this.hashPassword(newRefreshToken);
+    const hashedRefreshToken = createHash('sha256')
+      .update(newRefreshToken)
+      .digest('hex');
     await user.update({
       refreshToken: hashedRefreshToken,
     });
@@ -132,7 +135,7 @@ export class AuthService {
     };
   }
 
-  async refresh(payload: JwtPayload) {
+  async refresh(payload: JwtPayload, refreshToken: string) {
     const user = await this.userModel.findByPk(payload.sub, {
       include: [Role],
     });
@@ -143,10 +146,20 @@ export class AuthService {
     const accessToken = await this.generateAccessToken(user);
     const newRefreshToken = await this.generateRefreshToken(user);
 
-    const hashedRefreshToken = await this.hashPassword(newRefreshToken);
-    await user.update({
-      refreshToken: hashedRefreshToken,
-    });
+    const previousHash = createHash('sha256')
+      .update(refreshToken)
+      .digest('hex');
+    const hashedRefreshToken = createHash('sha256')
+      .update(newRefreshToken)
+      .digest('hex');
+    const [updated] = await this.userModel.update(
+      { refreshToken: hashedRefreshToken },
+      { where: { id: user.id, refreshToken: previousHash } },
+    );
+    if (updated !== 1)
+      throw new UnauthorizedException(
+        'Refresh token has already been used or revoked.',
+      );
 
     return {
       accessToken,
@@ -395,6 +408,7 @@ export class AuthService {
       role: user.role.name,
     };
     return this.jwtService.signAsync(payload, {
+      jwtid: randomUUID(),
       secret: this.configService.get<string>('JWT_REFRESH_SECRET'),
       expiresIn: this.configService.get<string>(
         'JWT_REFRESH_EXPIRES_IN',

@@ -70,9 +70,9 @@ export class AuthController {
   @UseGuards(RefreshAuthGuard)
   refresh(
     @Request() req: RequestWithUser,
-    @Body() _refreshTokenDto: RefreshTokenDto,
+    @Body() refreshTokenDto: RefreshTokenDto,
   ) {
-    return this.authService.refresh(req.user);
+    return this.authService.refresh(req.user, refreshTokenDto.refreshToken);
   }
 
   @Post('verify-email')

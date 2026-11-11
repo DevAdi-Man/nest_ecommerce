@@ -1,5 +1,7 @@
+import { randomUUID } from 'node:crypto';
 import {
   Body,
+  BadRequestException,
   Controller,
   Get,
   Headers,
@@ -27,6 +29,14 @@ import type { RequestWithUser } from 'src/common/interfaces/request-with-user.in
 @ApiTags('Recommendations')
 @Controller('recommendations')
 export class RecommendationsController {
+  private sessionId(value?: string): string | undefined {
+    if (value !== undefined && (!value.trim() || value.length > 128))
+      throw new BadRequestException(
+        'Session id must contain 1 to 128 characters.',
+      );
+    return value;
+  }
+
   constructor(
     private readonly recommendationsService: RecommendationsService,
   ) {}
@@ -56,9 +66,7 @@ export class RecommendationsController {
   ) {
     const userId = req.user?.sub;
     const sessionId =
-      dto.sessionId ||
-      headerSessionId ||
-      `anon-${Math.random().toString(36).substring(2, 12)}`;
+      dto.sessionId || this.sessionId(headerSessionId) || randomUUID();
 
     return this.recommendationsService.recordProductView(
       userId,
@@ -91,7 +99,7 @@ export class RecommendationsController {
     @Headers('x-session-id') headerSessionId?: string,
   ) {
     const userId = req.user?.sub;
-    const sessionId = query.sessionId || headerSessionId;
+    const sessionId = query.sessionId || this.sessionId(headerSessionId);
 
     return this.recommendationsService.getFrequentlyViewedCategories(
       userId,
@@ -163,7 +171,7 @@ export class RecommendationsController {
     @Headers('x-session-id') headerSessionId?: string,
   ) {
     const userId = req.user?.sub;
-    const sessionId = query.sessionId || headerSessionId;
+    const sessionId = query.sessionId || this.sessionId(headerSessionId);
 
     return this.recommendationsService.getPersonalizedRecommendations(
       userId,
